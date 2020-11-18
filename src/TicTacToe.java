@@ -18,13 +18,14 @@ public class TicTacToe {
         System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
                            "\nBy Rodrigo De Lama - Nov 2020\n\n");
         
+        //
         String explanationAns;
+        //Boolean to check the while condition- if true, loops
         boolean status = true;
         while (status) {
 
             System.out.println("Would you like a quick explanation on how to play?");
                 explanationAns = input.nextLine().toLowerCase();
-
 
             switch (explanationAns) {
                 case "yes" -> {
@@ -47,22 +48,23 @@ public class TicTacToe {
         }
 
         System.out.println("In which mode would you like to play?");
-    
     }
 
 
     //reRun is used to ak if the user wants to restart the game
     public static void reRun() {
         
-        //Asking the user to 
-        System.out.println("Would you like to play another game?" + "\nType in Yes or No");
-            //used toLowerCase() to format the users answer
-            String userAnswer = input.nextLine().toLowerCase();
-        
+        //Declared
+        String userAnswer;
         boolean status = true;
 
         //Try to fix, if not make a switch
         while (status) {
+
+            //Asking the user to 
+            System.out.println("Would you like to play another game?" + "\nType in Yes or No");
+            //used toLowerCase() to format the users answer
+                userAnswer = input.nextLine().toLowerCase();
 
             if (userAnswer == "yes") {
                 //re-runs the game
