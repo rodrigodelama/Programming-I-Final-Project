@@ -27,26 +27,35 @@ public class TicTacToe {
             //used toLowerCase() to format the users answer
             String userAnswer = input.nextLine().toLowerCase();
         
-        if (userAnswer == "yes") {
-            //re-runs the game
-            game();
-        }
-        else if (userAnswer == "no") {
-            //Thank the user and end the program
-            System.out.print("Okay, thanks for playing!");
-        }
-        else {
-            System.out.println("Sorry, I didn't catch that. Please try again:");
-        }
+        boolean status = true;
 
+        //Try to fix, if not make a switch
+        while (status) {
+
+            if (userAnswer == "yes") {
+                //re-runs the game
+                game();
+
+                status = false;
+            }
+            else if (userAnswer == "no") {
+                //Thank the user and end the program
+                System.out.print("Okay, thanks for playing!");
+
+                status = true;
+            }
+            else {
+
+                status = true;
+                System.out.println("Sorry, I didn't catch that. Please try again:");
+            }
+        }
     }
 
     public static void main(String[] args) {
 
-        //game();
+        game();
         //runCount();
         reRun();
-
     }
-
 }
