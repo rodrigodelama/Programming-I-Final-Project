@@ -17,13 +17,14 @@ public class TicTacToe {
         //Game Intro
         System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
                            "\nBy Rodrigo De Lama - Nov 2020\n\n");
-                           
-        System.out.println("Would you like a quick explanation on how to play?");
-            String explanationAns = input.nextLine().toLowerCase();
-
+        
+        String explanationAns;
         boolean status = true;
-
         while (status) {
+
+            System.out.println("Would you like a quick explanation on how to play?");
+                explanationAns = input.nextLine().toLowerCase();
+
 
             switch (explanationAns) {
                 case "yes" -> {
@@ -38,8 +39,8 @@ public class TicTacToe {
                 }
 
                 default -> {
-                    status = true;
                     System.out.println("Sorry, I didn't catch that. Please type yes or no");
+                    status = true;
                 break;
                 }
             }
