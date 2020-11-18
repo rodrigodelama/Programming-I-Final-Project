@@ -1,11 +1,8 @@
 # RodrigoDeLamaFinalProject
- Final Programming I project - uc3m
+Final Programming I project - uc3m
 
- This is the final project of my course Programming I at uc3m
+This is the final project of my course Programming I at uc3m
 
- Rodrigo De Lama
+The project will be a simple game of TicTacToe, written in java, implementing a variety of conditionals, arrays and functions.
 
-
- Presentation of the final project:
-
- Tic-Tac-Toe
+Rodrigo De Lama
