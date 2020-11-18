@@ -12,9 +12,40 @@ public class TicTacToe {
     //Declared static Scanner for permament usage, avoiding a resouse leak (if not closed)
     static Scanner input = new Scanner(System.in);
 
-    public static void game() {
+    public static void mainMenu() {
 
-        System.out.println("Hello!");
+        //Game Intro
+        System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
+                           "\nBy Rodrigo De Lama - Nov 2020\n\n");
+                           
+        System.out.println("Would you like a quick explanation on how to play?");
+            String explanationAns = input.nextLine().toLowerCase();
+
+        boolean status = true;
+
+        while (status) {
+
+            switch (explanationAns) {
+                case "yes" -> {
+                    status = false;
+                    System.out.println("It works!");
+                break;
+                }
+
+                case "no" -> {
+                    status = false;
+                break;
+                }
+
+                default -> {
+                    status = true;
+                    System.out.println("Sorry, I didn't catch that. Please type yes or no");
+                break;
+                }
+            }
+        }
+
+        System.out.println("In which mode would you like to play?");
     
     }
 
@@ -34,7 +65,7 @@ public class TicTacToe {
 
             if (userAnswer == "yes") {
                 //re-runs the game
-                game();
+                mainMenu();
 
                 status = false;
             }
@@ -54,8 +85,8 @@ public class TicTacToe {
 
     public static void main(String[] args) {
 
-        game();
+        mainMenu();
         //runCount();
-        reRun();
+        //reRun();
     }
 }
