@@ -6,36 +6,50 @@
 import java.util.Scanner;
 
 //We're going for CPU mode bois - gonna get a 100%
+//CPU Mode is AI Mode in my game
 
 public class TicTacToe {
 
     //Declared static Scanner for permament usage, avoiding a resouse leak (if not closed)
     static Scanner input = new Scanner(System.in);
 
+    //Declared static boolean for global use in while loops
+    //Boolean to check the while condition- if true, loops
+    static boolean status = true;
+
     public static void mainMenu() {
 
         //Game Intro
         System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
-                           "\nBy Rodrigo De Lama - Nov 2020\n\n");
+                           "\nBy Rodrigo De Lama - Nov 2020\n");
         
-        //
+        //Declaring the user explanation answer before the loop to not redeclare the variable every time the while loop runs
         String explanationAns;
-        //Boolean to check the while condition- if true, loops
-        boolean status = true;
+        
         while (status) {
 
-            System.out.println("Would you like a quick explanation on how to play?");
+            //Asking the user if they want an explanation as to how the game works
+            System.out.println("\nWould you like a quick explanation on how to play?");
                 explanationAns = input.nextLine().toLowerCase();
 
             switch (explanationAns) {
                 case "yes" -> {
+                    
+                    //status to false because we want to break off from the while loop
+                    //after a valid input has been detected
                     status = false;
-                    System.out.println("It works!");
+                    System.out.println("\nIt works!");
+
+
+
+
                 break;
                 }
 
                 case "no" -> {
                     status = false;
+                    System.out.println("\nOkay, lets get onto it!");
+
                 break;
                 }
 
@@ -45,18 +59,55 @@ public class TicTacToe {
                 break;
                 }
             }
+
         }
 
-        System.out.println("In which mode would you like to play?");
+        System.out.println("\nIn which mode would you like to play?");
+
+        //Present the available game modes
+        System.out.println("(A) Multiplayer: 1 versus 1\n" +
+                           "(B) AI: a game against a random dumb computer");
+        
+        //Declared out of the loop to avoid redeclaration
+        String gameModeAns;
+        //Reusing the same status variable
+        while (status) {
+
+            //Asking the user if they want an explanation as to how the game works
+            System.out.println("\nWould you like a quick explanation on how to play?");
+                gameModeAns = input.nextLine().toLowerCase();
+
+
+
+        }
+    
+    }
+
+    //Declared a global static variables 
+    //game board array
+    static int[] gameBoard = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    static byte p1Position, p2Position, aiPosition;
+
+    //Multiplayer mode is for 1v1
+    public static void multiplayer() {
+
+
+
+
+    }
+    
+    //ai mode is to play a game against a dumb (random) machine
+    public static void ai() {
+
+        
     }
 
 
     //reRun is used to ak if the user wants to restart the game
     public static void reRun() {
         
-        //Declared
+        //Declared beforehand to avoid looped string declaration
         String userAnswer;
-        boolean status = true;
 
         //Try to fix, if not make a switch
         while (status) {
@@ -73,10 +124,10 @@ public class TicTacToe {
                 status = false;
             }
             else if (userAnswer == "no") {
-                //Thank the user and end the program
+                //Thank the user and ends the program
                 System.out.print("Okay, thanks for playing!");
 
-                status = true;
+                status = false;
             }
             else {
 
@@ -84,12 +135,16 @@ public class TicTacToe {
                 System.out.println("Sorry, I didn't catch that. Please try again:");
             }
         }
+    
     }
 
     public static void main(String[] args) {
 
         mainMenu();
+        multiplayer();
+        //ai();
         //runCount();
         //reRun();
     }
+
 }
