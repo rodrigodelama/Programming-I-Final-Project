@@ -9,7 +9,7 @@ import java.util.Scanner;
 //CPU Mode is AI Mode in my game
 
 public class TicTacToe {
-    
+
 
     //Declared static Scanner for permament usage, avoiding a resouse leak (if not closed)
     static Scanner input = new Scanner(System.in);
@@ -42,7 +42,7 @@ public class TicTacToe {
                 explanationAns = input.nextLine().toLowerCase();
 
             switch (explanationAns) {
-                case "yes" -> {
+                case "yes", "y" -> {
                     
                     //status to false because we want to break off from the while loop
                     //after a valid input has been detected
@@ -66,7 +66,7 @@ public class TicTacToe {
                 break;
                 }
 
-                case "no" -> {
+                case "no", "n" -> {
                     status = false;
                     System.out.println("\nOkay, lets get onto it!\n");
 
@@ -107,18 +107,28 @@ public class TicTacToe {
                 case "a" -> {
                     status = false;
                     System.out.print("Some one on one action comming your way!\n\n\n");
+
+                    //https://stackoverflow.com/questions/2517022/wait-function-in-java
+                    try {Thread.sleep(1000);} catch(InterruptedException intrx) {/* handle the exception */}
+                    
                     multiplayer();
 
                 break;
                 }
+
                 //AI mode
                 case "b" -> {
                     status = false;
                     System.out.println("Get ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
+
+                    //https://stackoverflow.com/questions/2517022/wait-function-in-java
+                    try {Thread.sleep(1000);} catch(InterruptedException intrx) {/* handle the exception */}
+
                     ai();
 
                 break;
                 }
+
                 default -> {
                     status = true;
                     System.out.println("Sorry, I didn't catch that. Please type A or B");
@@ -159,6 +169,9 @@ public class TicTacToe {
         //Command used to clear the console-- for later use to reload the game board
         System.out.print("\033[H\033[2J");  
         System.out.flush();
+
+        //Game mode salections  
+        System.out.println("Multiplayer: 1v1\n");
 
         char[][] gameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
@@ -209,6 +222,9 @@ public class TicTacToe {
                 System.out.print("\033[H\033[2J");  
                 System.out.flush();
 
+                //Placing the game mode once again
+                System.out.println("Multiplayer: 1v1\n");
+
                 for (int r = 0; r < gameBoard.length; r++) {
                     for (int c = 0; c < gameBoard[0].length; c++) {
                         //+ "(" + r + "," + c + ")" + "\t"
@@ -216,6 +232,11 @@ public class TicTacToe {
                     }
                     System.out.println();
                 }
+
+                //Implement code for a 3-in-a-row check or for a full board
+
+                //Check for 3-in-a-row
+                 
             }
 
         //}
@@ -243,6 +264,18 @@ public class TicTacToe {
     }
 
 
+
+
+
+
+
+
+
+    
+
+
+
+
     //reRun is used to ak if the user wants to restart the game
     public static void reRun() {
         
@@ -260,21 +293,33 @@ public class TicTacToe {
 
             switch (userAns) {
 
-                case "yes" -> {
+                case "yes", "y" -> {
                     status = false;
 
                     System.out.println("\nOkay, comming right up!");
+
+                    //https://stackoverflow.com/questions/2517022/wait-function-in-java
+                    try {Thread.sleep(1500);} catch(InterruptedException intrx) {/* handle the exception */}
                     
+                    System.out.print("\033[H\033[2J");  
+                    System.out.flush();
+
                     //re-runs the game
                     launcher();
 
                 break;
                 }
 
-                case "no" -> {
+                case "no", "n" -> {
                     status = false;
                     //Thank the user and ends the program
                     System.out.println("\nOkay, thanks for playing!");
+
+                    //https://stackoverflow.com/questions/2517022/wait-function-in-java
+                    try {Thread.sleep(1500);} catch(InterruptedException intrx) {/* handle the exception */}
+
+                    System.out.print("\033[H\033[2J");  
+                    System.out.flush();
 
                 break;
                 }
