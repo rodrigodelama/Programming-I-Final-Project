@@ -96,29 +96,29 @@ public class TicTacToe {
             System.out.println("\nType A or B to select the game mode:");
                 gameModeAns = input.nextLine().toLowerCase();
             
-                switch (gameModeAns) {
+            switch (gameModeAns) {
                     
-                    case "a": {
-                        status = false;
-                        System.out.print("Some one on one action comming your way!\n\n\n");
-                        multiplayer();
+                case "a": {
+                    status = false;
+                    System.out.print("Some one on one action comming your way!\n\n\n");
+                    multiplayer();
 
-                    break;
-                    }
-                    case "b": {
-                        status = false;
-                        System.out.println("Get ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
-                        ai();
-
-                    break;
-                    }
-                    default: {
-                        status = true;
-                        System.out.println("Sorry, I didn't catch that. Please type A or B");
-
-                    break;
-                    }
+                break;
                 }
+                case "b": {
+                    status = false;
+                    System.out.println("Get ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
+                    ai();
+
+                break;
+                }
+                default: {
+                    status = true;
+                    System.out.println("Sorry, I didn't catch that. Please type A or B");
+
+                break;
+                }
+            }
 
         }
     
