@@ -162,6 +162,9 @@ public class TicTacToe {
     static int[] gameBoard = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     static byte p1Position, p2Position, aiPosition;
 
+    //
+    static byte p1Wins, p2Wins;
+
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
 
@@ -236,7 +239,13 @@ public class TicTacToe {
                 //Implement code for a 3-in-a-row check or for a full board
 
                 //Check for 3-in-a-row
-                 
+                
+
+                //Print the wins
+                if (p1Wins > 0 || p2Wins > 0) {
+
+                    System.out.println("Player 1 has won " + p1Wins + " time");
+                }
             }
 
         //}
@@ -271,7 +280,7 @@ public class TicTacToe {
 
 
 
-    
+
 
 
 
