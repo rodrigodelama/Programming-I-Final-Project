@@ -16,6 +16,9 @@ public class TicTacToe {
     //Declared static boolean for global use in while loops
     //Boolean to check the while condition- if true, loops
     static boolean status = true;
+    
+    //Scondary status for deeply nested loops
+    //static boolean status2 = true;
 
     public static void mainMenu() {
 
@@ -23,8 +26,9 @@ public class TicTacToe {
         System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
                            "\nBy Rodrigo De Lama - Nov 2020\n");
         
-        //Declaring the user explanation answer before the loop to not redeclare the variable every time the while loop runs
+        //Declaring before the loop to not redeclare the variables every time the while loop runs
         String explanationAns;
+        String enter;
         
         while (status) {
 
@@ -38,17 +42,26 @@ public class TicTacToe {
                     //status to false because we want to break off from the while loop
                     //after a valid input has been detected
                     status = false;
-                    System.out.println("\nIt works!");
+                    System.out.println("\nThis is how the board game looks:\n");
 
+                    System.out.println("╔═════╦═════╦═════╗" + 
+                                     "\n║  1  ║  2  ║  3  ║" +
+                                     "\n╠═════╬═════╬═════╣" +
+                                     "\n║  4  ║  5  ║  6  ║" +
+                                     "\n╠═════╬═════╬═════╣" +
+                                     "\n║  7  ║  8  ║  9  ║" +
+                                     "\n╚═════╩═════╩═════╝" );
 
-
+                    //Press enter when the user is ready to continue
+                    System.out.println("Press \"Enter\" when you're ready");
+                        enter = input.nextLine();
 
                 break;
                 }
 
                 case "no" -> {
                     status = false;
-                    System.out.println("\nOkay, lets get onto it!");
+                    System.out.println("\nOkay, lets get onto it!\n");
 
                 break;
                 }
@@ -62,7 +75,7 @@ public class TicTacToe {
 
         }
 
-        System.out.println("\nIn which mode would you like to play?");
+        System.out.println("In which mode would you like to play?");
 
         //Present the available game modes
         System.out.println("(A) Multiplayer: 1 versus 1\n" +
