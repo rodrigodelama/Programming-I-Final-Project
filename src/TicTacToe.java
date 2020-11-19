@@ -97,7 +97,8 @@ public class TicTacToe {
                 gameModeAns = input.nextLine().toLowerCase();
             
             switch (gameModeAns) {
-                    
+                
+                //Multiplayer
                 case "a": {
                     status = false;
                     System.out.print("Some one on one action comming your way!\n\n\n");
@@ -105,6 +106,7 @@ public class TicTacToe {
 
                 break;
                 }
+                //AI mode
                 case "b": {
                     status = false;
                     System.out.println("Get ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
@@ -132,27 +134,28 @@ public class TicTacToe {
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
 
+        //https://www.edureka.co/community/4668/how-to-clear-the-console-in-java
         //Command used to clear the console-- for later use to reload the game board
         System.out.print("\033[H\033[2J");  
-        System.out.flush(); 
-
-
+        System.out.flush();
 
         //edu 7x13
         char[][] gameBoard = {
-                                {'╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
-                                {'║', ' ', ' ', '1', ' ', ' ', '║', ' ', ' ', '2', ' ', ' ', '║', ' ', ' ', '3', ' ', ' ', '║'},
-                                {'║', ' ', ' ', ' ', ' ', ' ', '╬', ' ', ' ', ' ', ' ', ' ', '╬', ' ', ' ', ' ', ' ', ' ', '║'},
-                                {'║', ' ', ' ', '4', ' ', ' ', '║', ' ', ' ', '5', ' ', ' ', '║', ' ', ' ', '6', ' ', ' ', '║'},
-                                {'║', ' ', ' ', ' ', ' ', ' ', '╬', ' ', ' ', ' ', ' ', ' ', '╬', ' ', ' ', ' ', ' ', ' ', '║'},
-                                {'║', ' ', ' ', '7', ' ', ' ', '║', ' ', ' ', '8', ' ', ' ', '║', ' ', ' ', '9', ' ', ' ', '║'},
-                                {'╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
+                                { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
+                                { '║', ' ', ' ', '1', ' ', ' ', '║', ' ', ' ', '2', ' ', ' ', '║', ' ', ' ', '3', ' ', ' ', '║'},
+                                { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
+                                { '║', ' ', ' ', '4', ' ', ' ', '║', ' ', ' ', '5', ' ', ' ', '║', ' ', ' ', '6', ' ', ' ', '║'},
+                                { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
+                                { '║', ' ', ' ', '7', ' ', ' ', '║', ' ', ' ', '8', ' ', ' ', '║', ' ', ' ', '9', ' ', ' ', '║'},
+                                { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
         };
 
         for (int r = 0; r < gameBoard.length; r++) {
             for (int c = 0; c < gameBoard[0].length; c++) {
-
+                //+ "(" + r + "," + c + ")" + "\t"
+                System.out.print(gameBoard[r][c]);
             }
+            System.out.println();
         }
 
         int userIput;
@@ -177,7 +180,8 @@ public class TicTacToe {
         //Declared beforehand to avoid looped string declaration
         String userAnswer;
 
-        //Try to fix, if not make a switch
+        //status to true again to enable while loop
+        status = true;
         while (status) {
 
             //Asking the user if they would like to play another game
