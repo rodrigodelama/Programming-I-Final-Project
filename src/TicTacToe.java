@@ -9,6 +9,7 @@ import java.util.Scanner;
 //CPU Mode is AI Mode in my game
 
 public class TicTacToe {
+    
 
     //Declared static Scanner for permament usage, avoiding a resouse leak (if not closed)
     static Scanner input = new Scanner(System.in);
@@ -16,11 +17,16 @@ public class TicTacToe {
     //Declared static boolean for global use in while loops
     //Boolean to check the while condition- if true, loops
     static boolean status = true;
-    
-    //Scondary status for deeply nested loops
-    //static boolean status2 = true;
 
-    public static void mainMenu() {
+    //global enter value
+    static String enter;
+
+
+    public static void launcher() {
+
+        //Clear the users console before runtime
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
 
         //Game Intro
         System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
@@ -28,7 +34,6 @@ public class TicTacToe {
         
         //Declaring before the loop to not redeclare the variables every time the while loop runs
         String explanationAns;
-        String enter;
         
         while (status) {
 
@@ -99,7 +104,7 @@ public class TicTacToe {
             switch (gameModeAns) {
                 
                 //Multiplayer
-                case "a": {
+                case "a" -> {
                     status = false;
                     System.out.print("Some one on one action comming your way!\n\n\n");
                     multiplayer();
@@ -107,14 +112,14 @@ public class TicTacToe {
                 break;
                 }
                 //AI mode
-                case "b": {
+                case "b" -> {
                     status = false;
                     System.out.println("Get ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
                     ai();
 
                 break;
                 }
-                default: {
+                default -> {
                     status = true;
                     System.out.println("Sorry, I didn't catch that. Please type A or B");
 
@@ -125,6 +130,22 @@ public class TicTacToe {
         }
     
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //Declared a global static variables 
     //game board array
@@ -139,14 +160,13 @@ public class TicTacToe {
         System.out.print("\033[H\033[2J");  
         System.out.flush();
 
-        //edu 7x13
         char[][] gameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
-                                { '║', ' ', ' ', '1', ' ', ' ', '║', ' ', ' ', '2', ' ', ' ', '║', ' ', ' ', '3', ' ', ' ', '║'},
+                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
                                 { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
-                                { '║', ' ', ' ', '4', ' ', ' ', '║', ' ', ' ', '5', ' ', ' ', '║', ' ', ' ', '6', ' ', ' ', '║'},
+                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
                                 { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
-                                { '║', ' ', ' ', '7', ' ', ' ', '║', ' ', ' ', '8', ' ', ' ', '║', ' ', ' ', '9', ' ', ' ', '║'},
+                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
                                 { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
         };
 
@@ -158,14 +178,63 @@ public class TicTacToe {
             System.out.println();
         }
 
-        int userIput;
+        char userInput;
+        //status = true;
+        //while (status) {
 
-        System.out.println("In what square would you like to place your chip?");
+            for (int count = 0; count < 9; count++) {
+                System.out.println("\nIn what square would you like to place your chip?");
+                    userInput = input.next().charAt(0);
 
-        System.out.println("It works!");
+                switch (userInput) {
 
+                    case '1': gameBoard[1][3]  = 'X'; break;
+                    case '2': gameBoard[1][9]  = 'X'; break;
+                    case '3': gameBoard[1][15] = 'X'; break;
+                    case '4': gameBoard[3][3]  = 'X'; break;
+                    case '5': gameBoard[3][9]  = 'X'; break;
+                    case '6': gameBoard[3][15] = 'X'; break;
+                    case '7': gameBoard[5][3]  = 'X'; break;
+                    case '8': gameBoard[5][9]  = 'X'; break;
+                    case '9': gameBoard[5][15] = 'X'; break;
+                    default: {
+                        System.out.println("Please input a valid location, 1-9");
+                        System.out.println("Press \"Enter\" to try again:");
+                            enter = input.nextLine();
+                    break;
+                    }
+            
+                }
+
+                System.out.print("\033[H\033[2J");  
+                System.out.flush();
+
+                for (int r = 0; r < gameBoard.length; r++) {
+                    for (int c = 0; c < gameBoard[0].length; c++) {
+                        //+ "(" + r + "," + c + ")" + "\t"
+                        System.out.print(gameBoard[r][c]);
+                    }
+                    System.out.println();
+                }
+            }
+
+        //}
+        
     }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
     //ai mode is to play a game against a dumb (random) machine
     public static void ai() {
 
@@ -178,41 +247,53 @@ public class TicTacToe {
     public static void reRun() {
         
         //Declared beforehand to avoid looped string declaration
-        String userAnswer;
+        String userAns;
 
         //status to true again to enable while loop
         status = true;
         while (status) {
 
             //Asking the user if they would like to play another game
-            System.out.println("Would you like to play another game?" + "\nType in Yes or No");
+            System.out.println("\n\nWould you like to play another game?" + "\nType in Yes or No");
             //used toLowerCase() to format the users answer
-                userAnswer = input.nextLine().toLowerCase();
+                userAns = input.nextLine().toLowerCase();
 
-            if (userAnswer == "yes") {
-                //re-runs the game
-                mainMenu();
+            switch (userAns) {
 
-                status = false;
+                case "yes" -> {
+                    status = false;
+
+                    System.out.println("\nOkay, comming right up!");
+                    
+                    //re-runs the game
+                    launcher();
+
+                break;
+                }
+
+                case "no" -> {
+                    status = false;
+                    //Thank the user and ends the program
+                    System.out.println("\nOkay, thanks for playing!");
+
+                break;
+                }
+
+                default -> {
+                    status = true;
+                    System.out.println("\nSorry, I didn't catch that. Please try again:");
+
+                break;
+                }
             }
-            else if (userAnswer == "no") {
-                //Thank the user and ends the program
-                System.out.print("Okay, thanks for playing!");
 
-                status = false;
-            }
-            else {
-
-                status = true;
-                System.out.println("Sorry, I didn't catch that. Please try again:");
-            }
         }
     
     }
 
     public static void main(String[] args) {
 
-        mainMenu();
+        launcher();
         reRun();
         //runCount();
     }
