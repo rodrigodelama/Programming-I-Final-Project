@@ -132,22 +132,6 @@ public class TicTacToe {
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
 
-        /*
-
-        //to clear the console-- does not work
-        try {
-            final String os = System.getProperty("os.name");
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            }
-            else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (final Exception e) {
-        //  Handle any exceptions.
-        }
-        */
-
         //Command used to clear the console-- for later use to reload the game board
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -185,7 +169,7 @@ public class TicTacToe {
         //Try to fix, if not make a switch
         while (status) {
 
-            //Asking the user to 
+            //Asking the user if they would like to play another game
             System.out.println("Would you like to play another game?" + "\nType in Yes or No");
             //used toLowerCase() to format the users answer
                 userAnswer = input.nextLine().toLowerCase();
