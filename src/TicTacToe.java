@@ -42,7 +42,7 @@ public class TicTacToe {
                     //status to false because we want to break off from the while loop
                     //after a valid input has been detected
                     status = false;
-                    System.out.println("\nThis is how the board game looks:\n");
+                    System.out.println("\nThis is how the game board looks:\n");
 
                     System.out.println("╔═════╦═════╦═════╗" + 
                                      "\n║  1  ║  2  ║  3  ║" +
@@ -52,8 +52,10 @@ public class TicTacToe {
                                      "\n║  7  ║  8  ║  9  ║" +
                                      "\n╚═════╩═════╩═════╝" );
 
+                    System.out.println("This is the game board. To place your chip on the board, just type a position's number and hit \"Enter\"" +
+                                     "\nTo win the game, get three chips in a row, column, or diagonally and the win is yours!");
                     //Press enter when the user is ready to continue
-                    System.out.println("Press \"Enter\" when you're ready");
+                    System.out.println("\nPress \"Enter\" when you're ready");
                         enter = input.nextLine();
 
                 break;
@@ -67,8 +69,10 @@ public class TicTacToe {
                 }
 
                 default -> {
-                    System.out.println("Sorry, I didn't catch that. Please type yes or no");
+                    //status = true to rerun loop
                     status = true;
+                    System.out.println("Sorry, I didn't catch that. Please type yes or no");
+
                 break;
                 }
             }
@@ -83,14 +87,38 @@ public class TicTacToe {
         
         //Declared out of the loop to avoid redeclaration
         String gameModeAns;
-        //Reusing the same status variable
+
+        //Reusing the same global static status variable
+        status = true;
         while (status) {
 
             //Asking the user if they want an explanation as to how the game works
-            System.out.println("\nWould you like a quick explanation on how to play?");
+            System.out.println("\nType A or B to select the game mode:");
                 gameModeAns = input.nextLine().toLowerCase();
+            
+                switch (gameModeAns) {
+                    
+                    case "a": {
+                        status = false;
+                        System.out.print("Some one on one action comming your way!\n\n\n");
+                        multiplayer();
 
+                    break;
+                    }
+                    case "b": {
+                        status = false;
+                        System.out.println("Get ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
+                        ai();
 
+                    break;
+                    }
+                    default: {
+                        status = true;
+                        System.out.println("Sorry, I didn't catch that. Please type A or B");
+
+                    break;
+                    }
+                }
 
         }
     
@@ -104,14 +132,14 @@ public class TicTacToe {
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
 
-
-
+        System.out.println("It works!");
 
     }
     
     //ai mode is to play a game against a dumb (random) machine
     public static void ai() {
 
+        System.out.println("It works!");
         
     }
 
@@ -154,10 +182,8 @@ public class TicTacToe {
     public static void main(String[] args) {
 
         mainMenu();
-        multiplayer();
-        //ai();
+        reRun();
         //runCount();
-        //reRun();
     }
 
 }
