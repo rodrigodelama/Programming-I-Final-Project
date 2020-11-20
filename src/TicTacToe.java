@@ -35,6 +35,8 @@ public class TicTacToe {
         //Declaring before the loop to not redeclare the variables every time the while loop runs
         String explanationAns;
         
+        //Making sure while loop always engages after rerun
+        status = true;
         while (status) {
 
             //Asking the user if they want an explanation as to how the game works
@@ -152,7 +154,12 @@ public class TicTacToe {
     //Declared a global static game variables
 
     //backend game board array
-    static char[][] backendGameBoard = new char[3][3];
+    //Declaring empty for reruns-- so that upong reloading the code it always starts empty
+    static char[][] backendGameBoard = {
+                                        {' ', ' ', ' '},
+                                        {' ', ' ', ' '},
+                                        {' ', ' ', ' '}
+    };
     static char[][] userGameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
                                 { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
@@ -268,14 +275,53 @@ public class TicTacToe {
             //Implement code for a 3-in-a-row check or for a full board
 
             //Check for 3-in-a-row
+
+            //Rows
             if (backendGameBoard[0][0] == backendGameBoard[0][1] &&
                 backendGameBoard[0][0] == backendGameBoard[0][2] &&
-                backendGameBoard[0][1] == backendGameBoard[0][2]) {
-                    status = false;
-                    System.out.println("It works!");
+                backendGameBoard[0][1] == backendGameBoard[0][2])
+            {
+                status = false;
+                System.out.println("You won!");
 
             }
-                
+            else if (backendGameBoard[1][0] == backendGameBoard[1][1] &&
+                     backendGameBoard[1][0] == backendGameBoard[1][2] &&
+                     backendGameBoard[1][1] == backendGameBoard[1][2])
+            {
+                status = false;
+                System.out.println("You won!");
+            }
+            else if (backendGameBoard[2][0] == backendGameBoard[2][1] &&
+                     backendGameBoard[2][0] == backendGameBoard[2][2] &&
+                     backendGameBoard[2][1] == backendGameBoard[2][2])
+            {
+                status = false;
+                System.out.println("You won!");
+            }
+
+
+            else if (backendGameBoard[0][0] == backendGameBoard[1][0] &&
+                     backendGameBoard[0][0] == backendGameBoard[2][0] &&
+                     backendGameBoard[1][0] == backendGameBoard[2][0])
+            {
+                status = false;
+                System.out.println("You won!");
+            }
+            else if (backendGameBoard[0][1] == backendGameBoard[1][1] &&
+                     backendGameBoard[0][1] == backendGameBoard[2][1] &&
+                     backendGameBoard[1][1] == backendGameBoard[2][1])
+            {
+                status = false;
+                System.out.println("You won!");
+            }
+            else if (backendGameBoard[0][2] == backendGameBoard[1][2] &&
+                     backendGameBoard[0][2] == backendGameBoard[2][2] &&
+                     backendGameBoard[1][2] == backendGameBoard[2][2])
+            {
+                status = false;
+                System.out.println("You won!");
+            }
         }
         
 //IMPLEMENT SCOREBOARD
@@ -394,6 +440,8 @@ public class TicTacToe {
 
         launcher();
         reRun();
+
+        //Probably going to implement global counter values for wins
         //runCount();
     }
 
