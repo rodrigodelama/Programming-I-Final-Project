@@ -300,7 +300,7 @@ public class TicTacToe {
                 System.out.println("You won!");
             }
 
-
+            //Columns
             else if (backendGameBoard[0][0] == backendGameBoard[1][0] &&
                      backendGameBoard[0][0] == backendGameBoard[2][0] &&
                      backendGameBoard[1][0] == backendGameBoard[2][0])
@@ -322,6 +322,38 @@ public class TicTacToe {
                 status = false;
                 System.out.println("You won!");
             }
+
+            //Diagonals
+            else if (backendGameBoard[0][0] == backendGameBoard[1][1] &&
+                     backendGameBoard[0][0] == backendGameBoard[2][2] &&
+                     backendGameBoard[1][1] == backendGameBoard[2][2])
+            {
+                status = false;
+                System.out.println("You won!");
+            }
+            else if (backendGameBoard[0][2] == backendGameBoard[1][1] &&
+                     backendGameBoard[0][2] == backendGameBoard[2][0] &&
+                     backendGameBoard[1][1] == backendGameBoard[2][0])
+            {
+                status = false;
+                System.out.println("You won!");
+            }
+            
+            /*
+
+//Full board
+            else if (backendGameBoard[0][0] == backendGameBoard[0][1] &&
+                     backendGameBoard[0][0] == backendGameBoard[2][0] &&
+                     backendGameBoard[1][0] == backendGameBoard[2][0] &&
+                     backendGameBoard[0][0] == backendGameBoard[2][0] &&
+                     backendGameBoard[1][0] == backendGameBoard[2][0])
+            {
+                status = false;
+                System.out.println("You won!");
+            }
+
+            */
+
         }
         
 //IMPLEMENT SCOREBOARD
