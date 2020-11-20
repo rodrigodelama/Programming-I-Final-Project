@@ -21,6 +21,13 @@ public class TicTacToe {
     //global enter value
     static String enter;
 
+    public static void clear() {
+
+        //https://www.edureka.co/community/4668/how-to-clear-the-console-in-java
+        //Command used to clear the console-- for later use to reload the game board
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+    }
 
     public static void title() {
         //Title method to avoid repetition
@@ -31,8 +38,7 @@ public class TicTacToe {
     public static void launcher() {
 
         //Clear the users console before runtime
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
+        clear();
 
         title();
         
@@ -90,8 +96,7 @@ public class TicTacToe {
 
         }
 
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
+        clear();
 
         //Mantain the title
         title();
@@ -216,17 +221,18 @@ public class TicTacToe {
     return chip;
     }
 
+    public static void multiplayerTitle() {
+        System.out.println("Multiplayer: 1v1\n");
+    }
+
 
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
 
-        //https://www.edureka.co/community/4668/how-to-clear-the-console-in-java
-        //Command used to clear the console-- for later use to reload the game board
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
+        clear();
 
-        //Game mode selection 
-        System.out.println("Multiplayer: 1v1\n");
+        //Informing the user about theur game mode selection 
+        multiplayerTitle();
 
         //Player name selection
         System.out.println("\nPlayer 1, whats your tag?");
@@ -293,11 +299,10 @@ public class TicTacToe {
 
 
         //Clear selections out to start the game
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
+        clear();
 
         //Game mode selection 
-        System.out.println("Multiplayer: 1v1\n");
+        multiplayerTitle();
 
         //First print of the empty user end game board
         for (int r = 0; r < userGameBoard.length; r++) {
@@ -360,11 +365,10 @@ public class TicTacToe {
 
             }
         
-            System.out.print("\033[H\033[2J");  
-            System.out.flush();
+            clear();
 
             //Placing the game mode once again
-            System.out.println("Multiplayer: 1v1\n");
+            multiplayerTitle();
 
 
             //Printing the modified user box
@@ -375,15 +379,6 @@ public class TicTacToe {
                 System.out.println();
             }
 
-            /*
-            //Test print of the backend matrix
-            for (int r = 0; r < backendGameBoard.length; r++) {
-                for (int c = 0; c < backendGameBoard[0].length; c++) {
-                    System.out.print(backendGameBoard[r][c] + "(" + r + "," + c + ")" + "\t");
-                }
-                System.out.println();
-            }   
-            */
 
 //Implement code for a 3-in-a-row check or for a full board
             //Check for 3-in-a-row
@@ -474,19 +469,10 @@ public class TicTacToe {
     
 
 
-
-
-
-
-
-
-
-
     //ai mode is to play a game against a dumb (random) machine
     public static void ai() {
 
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
+        clear();
 
         //Game mode salections  
         System.out.println("AI: Deathmatch against a dumb random computer\n");
@@ -494,15 +480,6 @@ public class TicTacToe {
         System.out.println("It works!");
         
     }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -531,8 +508,7 @@ public class TicTacToe {
                     //https://stackoverflow.com/questions/2517022/wait-function-in-java
                     try {Thread.sleep(1500);} catch(InterruptedException intrx) {/* handle the exception */}
                     
-                    System.out.print("\033[H\033[2J");  
-                    System.out.flush();
+                    clear();
 
                     //re-runs the game
                     launcher();
@@ -548,8 +524,7 @@ public class TicTacToe {
                     //https://stackoverflow.com/questions/2517022/wait-function-in-java
                     try {Thread.sleep(1500);} catch(InterruptedException intrx) {/* handle the exception */}
 
-                    System.out.print("\033[H\033[2J");  
-                    System.out.flush();
+                    clear();
 
                 break;
                 }
