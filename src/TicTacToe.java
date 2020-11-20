@@ -151,15 +151,20 @@ public class TicTacToe {
     }
 
 
+
+
+
+    
     //Declared a global static game variables
 
-    //backend game board array
+    //Backend game board array
     //Declaring empty for reruns-- so that upong reloading the code it always starts empty
     static char[][] backendGameBoard = {
                                         {' ', ' ', ' '},
                                         {' ', ' ', ' '},
                                         {' ', ' ', ' '}
     };
+    //User
     static char[][] userGameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
                                 { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
@@ -172,8 +177,17 @@ public class TicTacToe {
 
     //User info
     static byte p1Position, p2Position, aiPosition;
-    //variables that will get updated with time
-    static byte p1Wins, p2Wins;
+    
+    //Player names
+    static String p1tag, p2tag;
+
+    //Player chips
+    static String p1chip, p2chip;
+    static final String aiChip = "X";
+
+    //Player wins
+    static byte p1Wins, p2Wins, aiWins;
+
 
 
     //Multiplayer mode is for 1v1
@@ -187,6 +201,72 @@ public class TicTacToe {
         //Game mode selection 
         System.out.println("Multiplayer: 1v1\n");
 
+        //Player name selection
+        System.out.println("\nPlayer 1, whats your tag?");
+            p1tag = input.nextLine();
+        System.out.println("\nPlayer 2, whats your tag?");
+            p2tag = input.nextLine();
+        
+        //Player chip selection
+        System.out.println("\nGamers, you have these chips to choose from:" +
+                            "X, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
+        
+        //Player 1 chip selection
+        System.out.println(p1tag + " select your chip:");
+            p1chip = input.nextLine();
+            
+        status = true;
+        while (status) {
+            //Player 1 chip selection
+            System.out.println("\n" + p1tag + " select your chip:");
+                p1chip = input.nextLine();
+            
+            switch (p1chip) {
+                case "X","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","Y","Z","+","*","-","@","1" -> {
+                    status = false;
+                break;
+                }
+                default -> {
+                    status = true;
+                    System.out.println("Please introduce a valid chip:");
+                break;
+                }
+            }
+        }
+
+        status = true;
+        while (status) {
+            //Player 2 chip selection
+            System.out.println("\n" + p2tag + " select your chip:");
+                p2chip = input.nextLine();
+
+            switch (p2chip) {
+                case "X","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","Y","Z","+","*","-","@","1" -> {
+                    status = false;
+                break;
+                }
+                default -> {
+                    status = true;
+                    System.out.println("Please introduce a valid chip:");
+                break;
+                }
+            }
+        }
+
+        //Test print of names and tags
+        System.out.println("Player 1 data:" +
+                         "\nTag: " + p1tag +
+                         "\nChip: " + p1chip);
+        
+        System.out.println("Player 2 data:" +
+                         "\nTag: " + p2tag +
+                         "\nChip: " + p2chip);
+
+
+        //Clear selections out to start the game
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+
         //First print of the empty user end game board
         for (int r = 0; r < userGameBoard.length; r++) {
             for (int c = 0; c < userGameBoard[0].length; c++) {
@@ -196,7 +276,8 @@ public class TicTacToe {
             System.out.println();
         }
 
-        //Unknown-- probably for different user input
+
+        //Declared outside to avoid redeclarations in loop
         String userInput;
 
         //implementing loop for one person placement
@@ -266,14 +347,13 @@ public class TicTacToe {
             //Test print of the backend matrix
             for (int r = 0; r < backendGameBoard.length; r++) {
                 for (int c = 0; c < backendGameBoard[0].length; c++) {
-                    //+ "(" + r + "," + c + ")" + "\t"
                     System.out.print(backendGameBoard[r][c] + "(" + r + "," + c + ")" + "\t");
                 }
                 System.out.println();
             }   
             */
 
-            //Implement code for a 3-in-a-row check or for a full board
+//Implement code for a 3-in-a-row check or for a full board
             //Check for 3-in-a-row
 
             //Rows
@@ -345,12 +425,10 @@ public class TicTacToe {
         }
         
         */
+        
 
     }
     
-
-
-
 
 
 
@@ -373,8 +451,6 @@ public class TicTacToe {
         System.out.println("It works!");
         
     }
-
-
 
 
 
