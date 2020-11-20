@@ -239,8 +239,28 @@ public class TicTacToe {
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection 
-        System.out.println("\n" + p1tag + " select your chip:");
-            chipSelector() = input.nextLine();
+        //System.out.println("\n" + p1tag + " select your chip:");
+            //chipSelector() = input.nextLine();
+
+        //player 1 old
+        status = true;
+        while (status) {
+
+            System.out.println("\n" + p1tag + " select your chip:");
+                p1chip = input.nextLine();
+
+            switch (p1chip) {
+                case "X","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","Y","Z","+","*","-","@","1" -> {
+                    status = false;
+                break;
+                }
+                default -> {
+                    status = true;
+                    System.out.println("Please introduce a valid chip:");
+                break;
+                }
+            }
+        }
     
         //Player 2 chip selection
         status = true;
@@ -275,6 +295,9 @@ public class TicTacToe {
         //Clear selections out to start the game
         System.out.print("\033[H\033[2J");  
         System.out.flush();
+
+        //Game mode selection 
+        System.out.println("Multiplayer: 1v1\n");
 
         //First print of the empty user end game board
         for (int r = 0; r < userGameBoard.length; r++) {
@@ -364,6 +387,17 @@ public class TicTacToe {
 
 //Implement code for a 3-in-a-row check or for a full board
             //Check for 3-in-a-row
+
+            //Tried for loop-- broken
+            /*
+            for (int r = 0; r < backendGameBoard.length; r++){
+                if (backendGameBoard[0][r] != ' '){
+                    status = false;
+                System.out.println("You won!");
+                }
+
+            }
+            */
 
             //Rows
             if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ')
