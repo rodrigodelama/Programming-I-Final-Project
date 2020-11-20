@@ -2,7 +2,7 @@
 //100451775@alumnos.uc3m.es
 //@RDLF11
 
-//Scanner imported to read user keyboard inputs
+//Scanner imported to read user inputs
 import java.util.Scanner;
 
 //We're going for CPU mode bois - gonna get a 100%
@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class TicTacToe {
 
 
-    //Declared static Scanner for permament usage, avoiding a resouse leak (if not closed)
+    //Declared static Scanner for permament usage, avoiding a resouse leak if not closed later on
     static Scanner input = new Scanner(System.in);
 
     //Declared static boolean for global use in while loops
@@ -22,15 +22,19 @@ public class TicTacToe {
     static String enter;
 
 
+    public static void title() {
+        //Title method to avoid repetition
+        System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
+                           "\nBy Rodrigo De Lama - Nov 2020\n");
+    }
+
     public static void launcher() {
 
         //Clear the users console before runtime
         System.out.print("\033[H\033[2J");  
         System.out.flush();
 
-        //Game Intro
-        System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
-                           "\nBy Rodrigo De Lama - Nov 2020\n");
+        title();
         
         //Declaring before the loop to not redeclare the variables every time the while loop runs
         String explanationAns;
@@ -90,8 +94,7 @@ public class TicTacToe {
         System.out.flush();
 
         //Mantain the title
-        System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
-                           "\nBy Rodrigo De Lama - Nov 2020\n");
+        title();
 
         System.out.println("\nIn which mode would you like to play?");
 
@@ -154,7 +157,7 @@ public class TicTacToe {
 
 
 
-    
+
     //Declared a global static game variables
 
     //Backend game board array
@@ -188,7 +191,31 @@ public class TicTacToe {
     //Player wins
     static byte p1Wins, p2Wins, aiWins;
 
-
+/*
+    //extrapolated methods to avoid repetition
+    public static String chipSelector() {
+        String chip = input.nextLine();
+        status = true;
+        while (status) {
+            //Chip selection
+            System.out.println("\n" + p1tag + " select your chip:");
+                chip = input.nextLine();
+            
+            switch (chip) {
+                case "X","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","Y","Z","+","*","-","@","1" -> {
+                    status = false;
+                break;
+                }
+                default -> {
+                    status = true;
+                    System.out.println("Please introduce a valid chip:");
+                break;
+                }
+            }
+        }
+    return chip;
+    }
+*/
 
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
@@ -209,15 +236,12 @@ public class TicTacToe {
         
         //Player chip selection
         System.out.println("\nGamers, you have these chips to choose from:" +
-                            "X, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
+                            "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
-        //Player 1 chip selection
-        System.out.println(p1tag + " select your chip:");
-            p1chip = input.nextLine();
-            
+        //Player 1 chip selection  
         status = true;
         while (status) {
-            //Player 1 chip selection
+    
             System.out.println("\n" + p1tag + " select your chip:");
                 p1chip = input.nextLine();
             
@@ -234,9 +258,10 @@ public class TicTacToe {
             }
         }
 
+        //Player 2 chip selection
         status = true;
         while (status) {
-            //Player 2 chip selection
+
             System.out.println("\n" + p2tag + " select your chip:");
                 p2chip = input.nextLine();
 
@@ -289,7 +314,7 @@ public class TicTacToe {
 
             switch (userInput) {
 
-                case "1":
+                case "1": //Used single commas in assignations because the arrays are char arrays
                           userGameBoard[1][3]  = 'X'; 
                           backendGameBoard[0][0] = 'X';
                         break;
