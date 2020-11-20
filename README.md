@@ -1,4 +1,4 @@
-# RodrigoDeLamaFinalProject
+# Rodrigo DeLama - Programming I Final Project
 Final Programming I project - uc3m
 
 This is the final project of my course Programming I at uc3m
