@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-
+    //GLOBAL DECLARATIONS
     //Declared static Scanner for permament usage, avoiding a resouse leak if not closed later on
     static Scanner input = new Scanner(System.in);
 
@@ -21,19 +21,22 @@ public class TicTacToe {
     //global enter value
     static String enter;
 
-    public static void clear() {
 
+    public static void clear() {
         //https://www.edureka.co/community/4668/how-to-clear-the-console-in-java
         //Command used to clear the console-- for later use to reload the game board
         System.out.print("\033[H\033[2J");  
         System.out.flush();
     }
 
+
     public static void title() {
         //Title method to avoid repetition
         System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
                            "\nBy Rodrigo De Lama - Nov 2020\n");
     }
+
+
 
     public static void launcher() {
 
@@ -157,7 +160,6 @@ public class TicTacToe {
         }
     
     }
-
 
 
 
@@ -469,6 +471,8 @@ public class TicTacToe {
     
 
 
+
+
     //ai mode is to play a game against a dumb (random) machine
     public static void ai() {
 
@@ -483,6 +487,8 @@ public class TicTacToe {
 
 
 
+
+    
     //reRun is used to ak if the user wants to restart the game
     public static void reRun() {
         
@@ -545,7 +551,6 @@ public class TicTacToe {
 
         launcher();
         reRun();
-
         //Probably going to implement global counter values for wins
         //runCount();
     }
