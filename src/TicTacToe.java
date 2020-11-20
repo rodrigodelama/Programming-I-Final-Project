@@ -191,8 +191,8 @@ public class TicTacToe {
     //Player wins
     static byte p1Wins, p2Wins, aiWins;
 
-/*
-    //extrapolated methods to avoid repetition
+
+    //Extrapolated method to avoid repetition
     public static String chipSelector() {
         String chip = input.nextLine();
         status = true;
@@ -215,7 +215,7 @@ public class TicTacToe {
         }
     return chip;
     }
-*/
+
 
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
@@ -238,26 +238,10 @@ public class TicTacToe {
         System.out.println("\nGamers, you have these chips to choose from:" +
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
-        //Player 1 chip selection  
-        status = true;
-        while (status) {
+        //Player 1 chip selection 
+        System.out.println("\n" + p1tag + " select your chip:");
+            chipSelector() = input.nextLine();
     
-            System.out.println("\n" + p1tag + " select your chip:");
-                p1chip = input.nextLine();
-            
-            switch (p1chip) {
-                case "X","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","Y","Z","+","*","-","@","1" -> {
-                    status = false;
-                break;
-                }
-                default -> {
-                    status = true;
-                    System.out.println("Please introduce a valid chip:");
-                break;
-                }
-            }
-        }
-
         //Player 2 chip selection
         status = true;
         while (status) {
