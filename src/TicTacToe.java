@@ -57,7 +57,7 @@ public class TicTacToe {
                                      "\n║  7  ║  8  ║  9  ║" +
                                      "\n╚═════╩═════╩═════╝" );
 
-                    System.out.println("This is the game board. To place your chip on the board, just type a position's number and hit \"Enter\"" +
+                    System.out.println("This is your game board. To place a chip on the board, just type a position's number and hit \"Enter\"" +
                                      "\nTo win the game, get three chips in a row, column, or diagonally and the win is yours!");
                     //Press enter when the user is ready to continue
                     System.out.println("\nPress \"Enter\" when you're ready");
@@ -159,11 +159,6 @@ public class TicTacToe {
 
 
 
-
-
-
-
-
     //Declared a global static variables 
     //backend game board array
     static char[][] backendGameBoard = new char[3][3];
@@ -205,7 +200,6 @@ public class TicTacToe {
         //Unknown-- probably for different user input
         char userInput;
 
-
         //implementing loop for one person placement
         status = true;
         while (status) {
@@ -222,7 +216,7 @@ public class TicTacToe {
                           backendGameBoard[0][1] = 'X';
                         break;
                 case '3': userGameBoard[1][15] = 'X'; 
-                          backendGameBoard[0][20] = 'X';
+                          backendGameBoard[0][2] = 'X';
                         break;
                 case '4': userGameBoard[3][3]  = 'X'; 
                           backendGameBoard[1][0] = 'X';
@@ -245,10 +239,12 @@ public class TicTacToe {
 
                 default: {
                     System.out.println("Please input a valid location, 1-9");
-                    System.out.println("Press \"Enter\" to try again:");
-                        enter = input.nextLine();
+
+                    //Inform the user of an invalid input and loop
+                    try {Thread.sleep(1500);} catch(InterruptedException intrx) {/* handle the exception */}
                 break;
                 }
+
             }
         
             System.out.print("\033[H\033[2J");  
@@ -258,7 +254,6 @@ public class TicTacToe {
             System.out.println("Multiplayer: 1v1\n");
 
 
-            /*
             //Printing the modified user box
             for (int r = 0; r < userGameBoard.length; r++) {
                 for (int c = 0; c < userGameBoard[0].length; c++) {
@@ -266,8 +261,8 @@ public class TicTacToe {
                 }
                 System.out.println();
             }
-            */
 
+            /*
             //Test print of the backend matrix
             for (int r = 0; r < backendGameBoard.length; r++) {
                 for (int c = 0; c < backendGameBoard[0].length; c++) {
@@ -275,7 +270,8 @@ public class TicTacToe {
                     System.out.print(backendGameBoard[r][c] + "(" + r + "," + c + ")" + "\t");
                 }
                 System.out.println();
-            }
+            }   
+            */
 
             //Implement code for a 3-in-a-row check or for a full board
 
@@ -283,12 +279,17 @@ public class TicTacToe {
                 
         }
         
+//IMPLEMENT SCOREBOARD
+        /*
+
         //Print the wins
         if (p1Wins > 0 || p2Wins > 0) {
 
             System.out.println("Player 1 has won " + p1Wins + " time");
         }
         
+        */
+
     }
     
 
