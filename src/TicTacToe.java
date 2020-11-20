@@ -274,7 +274,6 @@ public class TicTacToe {
             */
 
             //Implement code for a 3-in-a-row check or for a full board
-
             //Check for 3-in-a-row
 
             //Rows
@@ -325,15 +324,13 @@ public class TicTacToe {
                 System.out.println("You won!");
             }
 
-//Full board
-            else if (backendGameBoard[0][0] == backendGameBoard[0][1] &&
-                     backendGameBoard[0][0] == backendGameBoard[2][0] &&
-                     backendGameBoard[1][0] == backendGameBoard[2][0] &&
-                     backendGameBoard[0][0] == backendGameBoard[2][0] &&
-                     backendGameBoard[1][0] == backendGameBoard[2][0])
+            //Full board
+            else if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != 0 && backendGameBoard[0][2] != ' ' &&
+                     backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != 0 && backendGameBoard[2][2] != ' ' &&
+                     backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != 0 && backendGameBoard[2][2] != ' ' )
             {
                 status = false;
-                System.out.println("You won!");
+                System.out.println("The board is full- Draw!");
             }
 
         }
