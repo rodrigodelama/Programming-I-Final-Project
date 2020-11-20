@@ -197,42 +197,43 @@ public class TicTacToe {
         }
 
         //Unknown-- probably for different user input
-        char userInput;
+        String userInput;
 
         //implementing loop for one person placement
         status = true;
         while (status) {
 
             System.out.println("\nIn what square would you like to place your chip?");
-                userInput = input.next().charAt(0);
+                userInput = input.nextLine();
 
             switch (userInput) {
 
-                case '1': userGameBoard[1][3]  = 'X'; 
+                case "1":
+                          userGameBoard[1][3]  = 'X'; 
                           backendGameBoard[0][0] = 'X';
                         break;
-                case '2': userGameBoard[1][9]  = 'X';
+                case "2": userGameBoard[1][9]  = 'X';
                           backendGameBoard[0][1] = 'X';
                         break;
-                case '3': userGameBoard[1][15] = 'X'; 
+                case "3": userGameBoard[1][15] = 'X'; 
                           backendGameBoard[0][2] = 'X';
                         break;
-                case '4': userGameBoard[3][3]  = 'X'; 
+                case "4": userGameBoard[3][3]  = 'X'; 
                           backendGameBoard[1][0] = 'X';
                     break;
-                case '5': userGameBoard[3][9]  = 'X'; 
+                case "5": userGameBoard[3][9]  = 'X'; 
                           backendGameBoard[1][1] = 'X';
                         break;
-                case '6': userGameBoard[3][15] = 'X'; 
+                case "6": userGameBoard[3][15] = 'X'; 
                           backendGameBoard[1][2] = 'X';
                     break;
-                case '7': userGameBoard[5][3]  = 'X'; 
+                case "7": userGameBoard[5][3]  = 'X'; 
                           backendGameBoard[2][0] = 'X';
                         break;
-                case '8': userGameBoard[5][9]  = 'X'; 
+                case "8": userGameBoard[5][9]  = 'X'; 
                           backendGameBoard[2][1] = 'X';
                         break;
-                case '9': userGameBoard[5][15] = 'X'; 
+                case "9": userGameBoard[5][15] = 'X'; 
                           backendGameBoard[2][2] = 'X';
                         break;
 
@@ -277,69 +278,52 @@ public class TicTacToe {
             //Check for 3-in-a-row
 
             //Rows
-            if (backendGameBoard[0][0] == backendGameBoard[0][1] &&
-                backendGameBoard[0][0] == backendGameBoard[0][2] &&
-                backendGameBoard[0][1] == backendGameBoard[0][2])
+            if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
 
             }
-            else if (backendGameBoard[1][0] == backendGameBoard[1][1] &&
-                     backendGameBoard[1][0] == backendGameBoard[1][2] &&
-                     backendGameBoard[1][1] == backendGameBoard[1][2])
+            else if (backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[1][2] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
-            else if (backendGameBoard[2][0] == backendGameBoard[2][1] &&
-                     backendGameBoard[2][0] == backendGameBoard[2][2] &&
-                     backendGameBoard[2][1] == backendGameBoard[2][2])
+
+            else if (backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
 
             //Columns
-            else if (backendGameBoard[0][0] == backendGameBoard[1][0] &&
-                     backendGameBoard[0][0] == backendGameBoard[2][0] &&
-                     backendGameBoard[1][0] == backendGameBoard[2][0])
+            else if (backendGameBoard[0][0] != ' ' && backendGameBoard[1][0] != ' ' && backendGameBoard[2][0] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
-            else if (backendGameBoard[0][1] == backendGameBoard[1][1] &&
-                     backendGameBoard[0][1] == backendGameBoard[2][1] &&
-                     backendGameBoard[1][1] == backendGameBoard[2][1])
+            else if (backendGameBoard[0][1] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][1] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
-            else if (backendGameBoard[0][2] == backendGameBoard[1][2] &&
-                     backendGameBoard[0][2] == backendGameBoard[2][2] &&
-                     backendGameBoard[1][2] == backendGameBoard[2][2])
+            else if (backendGameBoard[0][2] != ' ' && backendGameBoard[1][2] != ' ' && backendGameBoard[2][2] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
 
             //Diagonals
-            else if (backendGameBoard[0][0] == backendGameBoard[1][1] &&
-                     backendGameBoard[0][0] == backendGameBoard[2][2] &&
-                     backendGameBoard[1][1] == backendGameBoard[2][2])
+            else if (backendGameBoard[0][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
-            else if (backendGameBoard[0][2] == backendGameBoard[1][1] &&
-                     backendGameBoard[0][2] == backendGameBoard[2][0] &&
-                     backendGameBoard[1][1] == backendGameBoard[2][0])
+            else if (backendGameBoard[0][2] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][0] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
-            
-            /*
 
 //Full board
             else if (backendGameBoard[0][0] == backendGameBoard[0][1] &&
@@ -351,8 +335,6 @@ public class TicTacToe {
                 status = false;
                 System.out.println("You won!");
             }
-
-            */
 
         }
         
