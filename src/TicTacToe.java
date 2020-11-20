@@ -149,23 +149,25 @@ public class TicTacToe {
     }
 
 
+    //Declared a global static game variables
 
-
-
-
-
-
-
-
-
-
-    //Declared a global static variables 
     //backend game board array
     static char[][] backendGameBoard = new char[3][3];
-    static byte p1Position, p2Position, aiPosition;
+    static char[][] userGameBoard = {
+                                { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
+                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
+                                { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
+                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
+                                { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
+                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
+                                { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
+    };
 
+    //User info
+    static byte p1Position, p2Position, aiPosition;
     //variables that will get updated with time
     static byte p1Wins, p2Wins;
+
 
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
@@ -179,16 +181,6 @@ public class TicTacToe {
         System.out.println("Multiplayer: 1v1\n");
 
         //First print of the empty user end game board
-        char[][] userGameBoard = {
-                                { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
-                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
-                                { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
-                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
-                                { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
-                                { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
-                                { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
-        };
-
         for (int r = 0; r < userGameBoard.length; r++) {
             for (int c = 0; c < userGameBoard[0].length; c++) {
                 //+ "(" + r + "," + c + ")" + "\t"
@@ -276,6 +268,13 @@ public class TicTacToe {
             //Implement code for a 3-in-a-row check or for a full board
 
             //Check for 3-in-a-row
+            if (backendGameBoard[0][0] == backendGameBoard[0][1] &&
+                backendGameBoard[0][0] == backendGameBoard[0][2] &&
+                backendGameBoard[0][1] == backendGameBoard[0][2]) {
+                    status = false;
+                    System.out.println("It works!");
+
+            }
                 
         }
         
