@@ -84,7 +84,14 @@ public class TicTacToe {
 
         }
 
-        System.out.println("In which mode would you like to play?");
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+
+        //Mantain the title
+        System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
+                           "\nBy Rodrigo De Lama - Nov 2020\n");
+
+        System.out.println("\nIn which mode would you like to play?");
 
         //Present the available game modes
         System.out.println("(A) Multiplayer: 1 versus 1\n" +
@@ -98,7 +105,7 @@ public class TicTacToe {
         while (status) {
 
             //Asking the user if they want an explanation as to how the game works
-            System.out.println("\nType A or B to select the game mode:");
+            System.out.println("\n\nType A or B to select the game mode:");
                 gameModeAns = input.nextLine().toLowerCase();
             
             switch (gameModeAns) {
@@ -106,7 +113,7 @@ public class TicTacToe {
                 //Multiplayer
                 case "a" -> {
                     status = false;
-                    System.out.print("Some one on one action comming your way!\n\n\n");
+                    System.out.print("\nSome one on one action comming your way!\n\n\n");
 
                     //https://stackoverflow.com/questions/2517022/wait-function-in-java
                     try {Thread.sleep(1000);} catch(InterruptedException intrx) {/* handle the exception */}
@@ -119,7 +126,7 @@ public class TicTacToe {
                 //AI mode
                 case "b" -> {
                     status = false;
-                    System.out.println("Get ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
+                    System.out.println("\nGet ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
 
                     //https://stackoverflow.com/questions/2517022/wait-function-in-java
                     try {Thread.sleep(1000);} catch(InterruptedException intrx) {/* handle the exception */}
@@ -158,11 +165,11 @@ public class TicTacToe {
 
 
     //Declared a global static variables 
-    //game board array
-    static int[] gameBoard = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    //backend game board array
+    static char[][] backendGameBoard = new char[3][3];
     static byte p1Position, p2Position, aiPosition;
 
-    //
+    //variables that will get updated with time
     static byte p1Wins, p2Wins;
 
     //Multiplayer mode is for 1v1
@@ -173,10 +180,11 @@ public class TicTacToe {
         System.out.print("\033[H\033[2J");  
         System.out.flush();
 
-        //Game mode salections  
+        //Game mode selection 
         System.out.println("Multiplayer: 1v1\n");
 
-        char[][] gameBoard = {
+        //First print of the empty user end game board
+        char[][] userGameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
                                 { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
                                 { '╠', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╬', '═', '═', '═', '═', '═', '╣'},
@@ -186,69 +194,100 @@ public class TicTacToe {
                                 { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
         };
 
-        for (int r = 0; r < gameBoard.length; r++) {
-            for (int c = 0; c < gameBoard[0].length; c++) {
+        for (int r = 0; r < userGameBoard.length; r++) {
+            for (int c = 0; c < userGameBoard[0].length; c++) {
                 //+ "(" + r + "," + c + ")" + "\t"
-                System.out.print(gameBoard[r][c]);
+                System.out.print(userGameBoard[r][c]);
             }
             System.out.println();
         }
 
+        //Unknown-- probably for different user input
         char userInput;
-        //status = true;
-        //while (status) {
 
-            for (int count = 0; count < 9; count++) {
-                System.out.println("\nIn what square would you like to place your chip?");
-                    userInput = input.next().charAt(0);
 
-                switch (userInput) {
+        //implementing loop for one person placement
+        status = true;
+        while (status) {
 
-                    case '1': gameBoard[1][3]  = 'X'; break;
-                    case '2': gameBoard[1][9]  = 'X'; break;
-                    case '3': gameBoard[1][15] = 'X'; break;
-                    case '4': gameBoard[3][3]  = 'X'; break;
-                    case '5': gameBoard[3][9]  = 'X'; break;
-                    case '6': gameBoard[3][15] = 'X'; break;
-                    case '7': gameBoard[5][3]  = 'X'; break;
-                    case '8': gameBoard[5][9]  = 'X'; break;
-                    case '9': gameBoard[5][15] = 'X'; break;
-                    default: {
-                        System.out.println("Please input a valid location, 1-9");
-                        System.out.println("Press \"Enter\" to try again:");
-                            enter = input.nextLine();
+            System.out.println("\nIn what square would you like to place your chip?");
+                userInput = input.next().charAt(0);
+
+            switch (userInput) {
+
+                case '1': userGameBoard[1][3]  = 'X'; 
+                          backendGameBoard[0][0] = 'X';
+                        break;
+                case '2': userGameBoard[1][9]  = 'X';
+                          backendGameBoard[0][1] = 'X';
+                        break;
+                case '3': userGameBoard[1][15] = 'X'; 
+                          backendGameBoard[0][20] = 'X';
+                        break;
+                case '4': userGameBoard[3][3]  = 'X'; 
+                          backendGameBoard[1][0] = 'X';
                     break;
-                    }
-            
-                }
+                case '5': userGameBoard[3][9]  = 'X'; 
+                          backendGameBoard[1][1] = 'X';
+                        break;
+                case '6': userGameBoard[3][15] = 'X'; 
+                          backendGameBoard[1][2] = 'X';
+                    break;
+                case '7': userGameBoard[5][3]  = 'X'; 
+                          backendGameBoard[2][0] = 'X';
+                        break;
+                case '8': userGameBoard[5][9]  = 'X'; 
+                          backendGameBoard[2][1] = 'X';
+                        break;
+                case '9': userGameBoard[5][15] = 'X'; 
+                          backendGameBoard[2][2] = 'X';
+                        break;
 
-                System.out.print("\033[H\033[2J");  
-                System.out.flush();
-
-                //Placing the game mode once again
-                System.out.println("Multiplayer: 1v1\n");
-
-                for (int r = 0; r < gameBoard.length; r++) {
-                    for (int c = 0; c < gameBoard[0].length; c++) {
-                        //+ "(" + r + "," + c + ")" + "\t"
-                        System.out.print(gameBoard[r][c]);
-                    }
-                    System.out.println();
-                }
-
-                //Implement code for a 3-in-a-row check or for a full board
-
-                //Check for 3-in-a-row
-                
-
-                //Print the wins
-                if (p1Wins > 0 || p2Wins > 0) {
-
-                    System.out.println("Player 1 has won " + p1Wins + " time");
+                default: {
+                    System.out.println("Please input a valid location, 1-9");
+                    System.out.println("Press \"Enter\" to try again:");
+                        enter = input.nextLine();
+                break;
                 }
             }
+        
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();
 
-        //}
+            //Placing the game mode once again
+            System.out.println("Multiplayer: 1v1\n");
+
+
+            /*
+            //Printing the modified user box
+            for (int r = 0; r < userGameBoard.length; r++) {
+                for (int c = 0; c < userGameBoard[0].length; c++) {
+                    System.out.print(userGameBoard[r][c]);
+                }
+                System.out.println();
+            }
+            */
+
+            //Test print of the backend matrix
+            for (int r = 0; r < backendGameBoard.length; r++) {
+                for (int c = 0; c < backendGameBoard[0].length; c++) {
+                    //+ "(" + r + "," + c + ")" + "\t"
+                    System.out.print(backendGameBoard[r][c] + "(" + r + "," + c + ")" + "\t");
+                }
+                System.out.println();
+            }
+
+            //Implement code for a 3-in-a-row check or for a full board
+
+            //Check for 3-in-a-row
+                
+        }
+        
+        //Print the wins
+        if (p1Wins > 0 || p2Wins > 0) {
+
+            System.out.println("Player 1 has won " + p1Wins + " time");
+        }
         
     }
     
@@ -267,6 +306,12 @@ public class TicTacToe {
 
     //ai mode is to play a game against a dumb (random) machine
     public static void ai() {
+
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+
+        //Game mode salections  
+        System.out.println("AI: Deathmatch against a dumb random computer\n");
 
         System.out.println("It works!");
         
