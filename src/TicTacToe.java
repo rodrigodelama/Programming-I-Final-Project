@@ -18,7 +18,7 @@ public class TicTacToe {
     //Boolean to check the while condition- if true, loops
     static boolean status = true;
 
-    //global enter value
+    //global enter value to remain empty
     static String enter;
 
 
@@ -36,6 +36,10 @@ public class TicTacToe {
                            "\nBy Rodrigo De Lama - Nov 2020\n");
     }
 
+    public static void sleep(int i) {
+        //https://stackoverflow.com/questions/2517022/wait-function-in-java
+        try {Thread.sleep(i);} catch(InterruptedException intrx) {/* handle the exception */}
+    }
 
 
     public static void launcher() {
@@ -128,8 +132,7 @@ public class TicTacToe {
                     status = false;
                     System.out.print("\nSome one on one action comming your way!\n\n\n");
 
-                    //https://stackoverflow.com/questions/2517022/wait-function-in-java
-                    try {Thread.sleep(1000);} catch(InterruptedException intrx) {/* handle the exception */}
+                    sleep(1000);
                     
                     multiplayer();
 
@@ -141,8 +144,7 @@ public class TicTacToe {
                     status = false;
                     System.out.println("\nGet ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
 
-                    //https://stackoverflow.com/questions/2517022/wait-function-in-java
-                    try {Thread.sleep(1000);} catch(InterruptedException intrx) {/* handle the exception */}
+                    sleep(1000);
 
                     ai();
 
@@ -160,9 +162,6 @@ public class TicTacToe {
         }
     
     }
-
-
-
 
 
     //Declared a global static game variables
@@ -200,12 +199,12 @@ public class TicTacToe {
 
 
     //Extrapolated method to avoid repetition
-    public static String chipSelector() {
+    public static String chipSelector(String tag) {
         String chip = input.nextLine();
         status = true;
         while (status) {
             //Chip selection
-            System.out.println("\n" + p1tag + " select your chip:");
+            System.out.println("\n" + tag + " select your chip:");
                 chip = input.nextLine();
             
             switch (chip) {
@@ -247,48 +246,10 @@ public class TicTacToe {
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection 
-        //System.out.println("\n" + p1tag + " select your chip:");
-            //chipSelector() = input.nextLine();
-
-        //player 1 old
-        status = true;
-        while (status) {
-
-            System.out.println("\n" + p1tag + " select your chip:");
-                p1chip = input.nextLine();
-
-            switch (p1chip) {
-                case "X","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","Y","Z","+","*","-","@","1" -> {
-                    status = false;
-                break;
-                }
-                default -> {
-                    status = true;
-                    System.out.println("Please introduce a valid chip:");
-                break;
-                }
-            }
-        }
+        p1chip = chipSelector(p1tag);
     
         //Player 2 chip selection
-        status = true;
-        while (status) {
-
-            System.out.println("\n" + p2tag + " select your chip:");
-                p2chip = input.nextLine();
-
-            switch (p2chip) {
-                case "X","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","Y","Z","+","*","-","@","1" -> {
-                    status = false;
-                break;
-                }
-                default -> {
-                    status = true;
-                    System.out.println("Please introduce a valid chip:");
-                break;
-                }
-            }
-        }
+        p2chip = chipSelector(p2tag);
 
         //Test print of names and tags
         System.out.println("Player 1 data:" +
@@ -361,7 +322,8 @@ public class TicTacToe {
                     System.out.println("Please input a valid location, 1-9");
 
                     //Inform the user of an invalid input and loop
-                    try {Thread.sleep(1500);} catch(InterruptedException intrx) {/* handle the exception */}
+                    sleep(1500);
+
                 break;
                 }
 
@@ -471,12 +433,16 @@ public class TicTacToe {
     
 
 
-
+    public static void aiTitle() {
+        System.out.println("AI Deathmatch\n");
+    }
 
     //ai mode is to play a game against a dumb (random) machine
     public static void ai() {
 
         clear();
+
+        aiTitle();
 
         //Game mode salections  
         System.out.println("AI: Deathmatch against a dumb random computer\n");
@@ -511,8 +477,7 @@ public class TicTacToe {
 
                     System.out.println("\nOkay, comming right up!");
 
-                    //https://stackoverflow.com/questions/2517022/wait-function-in-java
-                    try {Thread.sleep(1500);} catch(InterruptedException intrx) {/* handle the exception */}
+                    sleep(1500);
                     
                     clear();
 
@@ -527,8 +492,7 @@ public class TicTacToe {
                     //Thank the user and ends the program
                     System.out.println("\nOkay, thanks for playing!");
 
-                    //https://stackoverflow.com/questions/2517022/wait-function-in-java
-                    try {Thread.sleep(1500);} catch(InterruptedException intrx) {/* handle the exception */}
+                    sleep(1500);
 
                     clear();
 
