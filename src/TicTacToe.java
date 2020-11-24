@@ -199,16 +199,19 @@ public class TicTacToe {
 
 
     //Extrapolated method to avoid repetition
-    public static String chipSelector(String tag) {
-        String chip = input.nextLine();
+    public static char chipSelector(String tag) {
+        char chip = ' ';
         status = true;
         while (status) {
             //Chip selection
             System.out.println("\n" + tag + " select your chip:");
-                chip = input.nextLine();
+                chip = input.next().charAt(0);
+
+                //convert character to UpperCase
+                chip = Character.toUpperCase(chip);
             
             switch (chip) {
-                case "X","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","Y","Z","+","*","-","@","1" -> {
+                case 'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
                     status = false;
                 break;
                 }
@@ -222,7 +225,7 @@ public class TicTacToe {
     return chip;
     }
 
-    public static void chipPlecer() {
+    public static void chipPlecer(String tag, char chip) {
 
         //Declared outside to avoid redeclarations in loop
         String userInput;
@@ -237,32 +240,32 @@ public class TicTacToe {
             switch (userInput) {
 
                 case "1": //Used single commas in assignations because the arrays are char arrays
-                          userGameBoard[1][3]  = 'X'; 
-                          backendGameBoard[0][0] = 'X';
+                          userGameBoard[1][3]  = chip; 
+                          backendGameBoard[0][0] = chip;
                         break;
-                case "2": userGameBoard[1][9]  = 'X';
-                          backendGameBoard[0][1] = 'X';
+                case "2": userGameBoard[1][9]  = chip;
+                          backendGameBoard[0][1] = chip;
                         break;
-                case "3": userGameBoard[1][15] = 'X'; 
-                          backendGameBoard[0][2] = 'X';
+                case "3": userGameBoard[1][15] = chip;
+                          backendGameBoard[0][2] = chip;
                         break;
-                case "4": userGameBoard[3][3]  = 'X'; 
-                          backendGameBoard[1][0] = 'X';
+                case "4": userGameBoard[3][3]  = chip; 
+                          backendGameBoard[1][0] = chip;
                     break;
-                case "5": userGameBoard[3][9]  = 'X'; 
-                          backendGameBoard[1][1] = 'X';
+                case "5": userGameBoard[3][9]  = chip; 
+                          backendGameBoard[1][1] = chip;
                         break;
-                case "6": userGameBoard[3][15] = 'X'; 
-                          backendGameBoard[1][2] = 'X';
+                case "6": userGameBoard[3][15] = chip; 
+                          backendGameBoard[1][2] = chip;
                     break;
-                case "7": userGameBoard[5][3]  = 'X'; 
-                          backendGameBoard[2][0] = 'X';
+                case "7": userGameBoard[5][3]  = chip; 
+                          backendGameBoard[2][0] = chip;
                         break;
-                case "8": userGameBoard[5][9]  = 'X'; 
-                          backendGameBoard[2][1] = 'X';
+                case "8": userGameBoard[5][9]  = chip; 
+                          backendGameBoard[2][1] = chip;
                         break;
-                case "9": userGameBoard[5][15] = 'X'; 
-                          backendGameBoard[2][2] = 'X';
+                case "9": userGameBoard[5][15] = chip; 
+                          backendGameBoard[2][2] = chip;
                         break;
 
                 default: {
@@ -303,10 +306,10 @@ public class TicTacToe {
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection 
-        p1chip = chipSelector(p1tag);
+        p1chip = Character.toString(chipSelector(p1tag));
     
         //Player 2 chip selection
-        p2chip = chipSelector(p2tag);
+        p2chip = Character.toString(chipSelector(p2tag));
 
         /*
         //Test print of names and tags
