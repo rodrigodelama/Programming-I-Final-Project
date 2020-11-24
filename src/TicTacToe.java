@@ -92,7 +92,6 @@ public class TicTacToe {
                     
                     System.out.println("\nPlayer X would win!\n");
 
-
                     //Press enter when the user is ready to continue
                     System.out.println("\nPress \"Enter\" when you're ready");
                         enter = input.nextLine();
@@ -100,7 +99,7 @@ public class TicTacToe {
                 break;
                 }
 
-                case "no", "nope", "n" -> {
+                case "no", "nope", "nah", "n" -> {
                     status = false;
                     System.out.println("\nOkay, lets get onto it!\n");
 
@@ -331,26 +330,23 @@ public class TicTacToe {
 
 
 
-//fix possibilities
+//Attempt to do it by scanning arrays
     public static boolean checkWin(String tag, char chip) {
             
         //Implement code for a 3-in-a-row check or for a full board
         //Check for 3-in-a-row
-//Attempt to do it by scanning arrays
-        //Tried for loop-- broken
 
+        //Tried for loop-- broken
             /*
             for (int r = 0; r < backendGameBoard.length; r++){
                 if (backendGameBoard[0][r] != ' '){
                     status = false;
                 System.out.println("You won!");
                 }
-
             }
             */
 
         //write an array with possible win values
-
 
         //Rows
         if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
@@ -409,13 +405,15 @@ public class TicTacToe {
             return false;
         }
 
+    //If none, return true: reloops while
     return true;
     }
 
 
     public static void multiplayerTitle() {
 
-        System.out.println("Multiplayer: 1v1\n");
+        System.out.println("Multiplayer: 1v1\n" +
+                         "\nBy Rodrigo De Lama - Nov 2020\n");
 
     }
 
@@ -486,22 +484,26 @@ public class TicTacToe {
             //Check if player 1 has won
             status = checkWin(p1tag, p1chip);
 
+                //Check if player 1 has already won
+                if (status == false) break;
+
             //User 2 input
             chipPlacer(p2tag, p2chip);
 
             //Check if player 2 has won
             status = checkWin(p2tag, p2chip);
 
+                //Check if player 2 has won-- not necessary
+                if (status == false) break;
+
         }
         
         // clean the matrix
         for (int r = 0; r < backendGameBoard.length; r++) {
 
-            r = 0;
-
             for (int c = 0; c < backendGameBoard[0].length; c++) {
 
-                c = 0;
+                backendGameBoard[r][c] = 0;
 
             }
         }
@@ -523,7 +525,8 @@ public class TicTacToe {
 
 
     public static void aiTitle() {
-        System.out.println("AI Deathmatch\n");
+        System.out.println("AI Deathmatch against a dumb random computer\n" +
+                         "\nBy Rodrigo De Lama - Nov 2020\n");
     }
 
     //ai mode is to play a game against a dumb (random) machine
@@ -531,10 +534,9 @@ public class TicTacToe {
 
         clear();
 
+        //Game mode salection
         aiTitle();
 
-        //Game mode salections  
-        System.out.println("AI: Deathmatch against a dumb random computer\n");
 
         System.out.println("It works!");
         
@@ -559,7 +561,7 @@ public class TicTacToe {
 
             switch (userAns) {
 
-                case "yes", "y" -> {
+                case "yes", "yea", "yuh", "ye", "yessir", "y" -> {
                     status = false;
 
                     System.out.println("\nOkay, comming right up!");
@@ -574,7 +576,7 @@ public class TicTacToe {
                 break;
                 }
 
-                case "no", "n" -> {
+                case "no", "nah", "nope", "n" -> {
                     status = false;
                     //Thank the user and ends the program
                     System.out.println("\nOkay, thanks for playing!");
