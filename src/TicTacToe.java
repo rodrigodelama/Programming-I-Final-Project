@@ -256,49 +256,132 @@ public class TicTacToe {
 
                 case "1": //Used single commas in assignations because the arrays are char arrays
                 status = false;
-                          userGameBoard[1][3]  = chip; 
-                          backendGameBoard[0][0] = chip;
+                    //Check if the place is not taken already
+                    if (backendGameBoard[0][0] != ' ') {
+                        //If empty, fill it
+                        backendGameBoard[0][0] = chip;
+                        userGameBoard[1][3]  = chip;
                         break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        //Invalid option, reloop switch
+                        status = true;
+                        break;
+                    }
+
                 case "2":
                 status = false;
-                          userGameBoard[1][9]  = chip;
-                          backendGameBoard[0][1] = chip;
+                    if (backendGameBoard[0][1] != ' ') {
+                        backendGameBoard[0][1] = chip;
+                        userGameBoard[1][9]  = chip;
                         break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        status = true;
+                        break;
+                    }
+
                 case "3":
                 status = false;
-                          userGameBoard[1][15] = chip;
-                          backendGameBoard[0][2] = chip;
+                    if (backendGameBoard[0][2] != ' ') {
+                        backendGameBoard[0][2] = chip;
+                        userGameBoard[1][15] = chip;
                         break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        status = true;
+                        break;
+                    }
+
                 case "4":
                 status = false;
-                          userGameBoard[3][3]  = chip; 
-                          backendGameBoard[1][0] = chip;
-                    break;
+                    if (backendGameBoard[1][0] != ' ') {
+                        backendGameBoard[1][0] = chip;
+                        userGameBoard[3][3]  = chip; 
+                        break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        status = true;
+                        break;
+                    }
+
                 case "5":
                 status = false;
-                          userGameBoard[3][9]  = chip; 
-                          backendGameBoard[1][1] = chip;
+                    if (backendGameBoard[1][1] != ' ') {
+                        backendGameBoard[1][1] = chip;
+                        userGameBoard[3][9]  = chip; 
                         break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        status = true;
+                        break;
+                    }
+
                 case "6":
                 status = false;
-                          userGameBoard[3][15] = chip; 
-                          backendGameBoard[1][2] = chip;
-                    break;
+                    if (backendGameBoard[1][2] != ' ') {
+                        backendGameBoard[1][2] = chip;                        
+                        userGameBoard[3][15] = chip; 
+                        break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        status = true;
+                        break;
+                    }
+
                 case "7":
                 status = false;
-                          userGameBoard[5][3]  = chip; 
-                          backendGameBoard[2][0] = chip;
+                    if (backendGameBoard[2][0] != ' ') {
+                        backendGameBoard[2][0] = chip;
+                        userGameBoard[5][3]  = chip; 
                         break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        status = true;
+                        break;
+                    }
+
                 case "8":
                 status = false;
-                          userGameBoard[5][9]  = chip; 
-                          backendGameBoard[2][1] = chip;
+                    if (backendGameBoard[2][1] != ' ') {
+                        backendGameBoard[2][1] = chip;
+                        userGameBoard[5][9]  = chip; 
                         break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        status = true;
+                        break;
+                    }
+
                 case "9":
                 status = false;
-                          userGameBoard[5][15] = chip; 
-                          backendGameBoard[2][2] = chip;
+                    if (backendGameBoard[2][2] != ' ') {
+                        backendGameBoard[2][2] = chip;
+                        userGameBoard[5][15] = chip; 
                         break;
+                    }
+                    else {
+                        System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+                        status = true;
+                        break;
+                    }
 
                 default: {
                 status = true;
@@ -351,48 +434,48 @@ public class TicTacToe {
         //Rows
         if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
         {
-            System.out.println(tag  + " you won!");
+            System.out.println("\n" + tag  + " you won!");
             return false;
 
         }
         else if (backendGameBoard[1][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[1][2] == chip)
         {
-            System.out.println(tag  + " you won!");
+            System.out.println("\n" + tag  + " you won!");
             return false;
         }
 
         else if (backendGameBoard[2][0] == chip && backendGameBoard[2][1] == chip && backendGameBoard[2][2] == chip)
         {
-            System.out.println(tag  + " you won!");
+            System.out.println("\n" + tag  + " you won!");
             return false;
         }
 
         //Columns
         else if (backendGameBoard[0][0] == chip && backendGameBoard[1][0] == chip && backendGameBoard[2][0] == chip)
         {
-            System.out.println(tag  + " you won!");
+            System.out.println("\n" + tag  + " you won!");
             return false;
         }
         else if (backendGameBoard[0][1] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][1] == chip)
         {
-            System.out.println(tag  + " you won!");
+            System.out.println("\n" + tag  + " you won!");
             return false;
         }
         else if (backendGameBoard[0][2] == chip && backendGameBoard[1][2] == chip && backendGameBoard[2][2] == chip)
         {
-            System.out.println(tag  + " you won!");
+            System.out.println("\n" + tag  + " you won!");
             return false;
         }
 
         //Diagonals
         else if (backendGameBoard[0][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][2] == chip)
         {
-            System.out.println(tag  + " you won!");
+            System.out.println("\n" + tag  + " you won!");
             return false;
         }
         else if (backendGameBoard[0][2] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][0] == chip)
         {
-            System.out.println(tag  + " you won!");
+            System.out.println("\n" + tag  + " you won!");
             return false;
         }
 
@@ -401,7 +484,7 @@ public class TicTacToe {
                  backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ' &&
                  backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
         {
-            System.out.println("The board is full- Draw!");
+            System.out.println("\nThe board is full- Draw!");
             return false;
         }
 
