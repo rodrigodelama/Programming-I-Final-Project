@@ -257,7 +257,7 @@ public class TicTacToe {
                 case "1": //Used single commas in assignations because the arrays are char arrays
                 status = false;
                     //Check if the place is not taken already
-                    if (backendGameBoard[0][0] != ' ') {
+                    if (backendGameBoard[0][0] == ' ') {
                         //If empty, fill it
                         backendGameBoard[0][0] = chip;
                         userGameBoard[1][3]  = chip;
@@ -273,7 +273,7 @@ public class TicTacToe {
 
                 case "2":
                 status = false;
-                    if (backendGameBoard[0][1] != ' ') {
+                    if (backendGameBoard[0][1] == ' ') {
                         backendGameBoard[0][1] = chip;
                         userGameBoard[1][9]  = chip;
                         break;
@@ -287,7 +287,7 @@ public class TicTacToe {
 
                 case "3":
                 status = false;
-                    if (backendGameBoard[0][2] != ' ') {
+                    if (backendGameBoard[0][2] == ' ') {
                         backendGameBoard[0][2] = chip;
                         userGameBoard[1][15] = chip;
                         break;
@@ -301,7 +301,7 @@ public class TicTacToe {
 
                 case "4":
                 status = false;
-                    if (backendGameBoard[1][0] != ' ') {
+                    if (backendGameBoard[1][0] == ' ') {
                         backendGameBoard[1][0] = chip;
                         userGameBoard[3][3]  = chip; 
                         break;
@@ -315,7 +315,7 @@ public class TicTacToe {
 
                 case "5":
                 status = false;
-                    if (backendGameBoard[1][1] != ' ') {
+                    if (backendGameBoard[1][1] == ' ') {
                         backendGameBoard[1][1] = chip;
                         userGameBoard[3][9]  = chip; 
                         break;
@@ -329,7 +329,7 @@ public class TicTacToe {
 
                 case "6":
                 status = false;
-                    if (backendGameBoard[1][2] != ' ') {
+                    if (backendGameBoard[1][2] == ' ') {
                         backendGameBoard[1][2] = chip;                        
                         userGameBoard[3][15] = chip; 
                         break;
@@ -343,7 +343,7 @@ public class TicTacToe {
 
                 case "7":
                 status = false;
-                    if (backendGameBoard[2][0] != ' ') {
+                    if (backendGameBoard[2][0] == ' ') {
                         backendGameBoard[2][0] = chip;
                         userGameBoard[5][3]  = chip; 
                         break;
@@ -357,7 +357,7 @@ public class TicTacToe {
 
                 case "8":
                 status = false;
-                    if (backendGameBoard[2][1] != ' ') {
+                    if (backendGameBoard[2][1] == ' ') {
                         backendGameBoard[2][1] = chip;
                         userGameBoard[5][9]  = chip; 
                         break;
@@ -371,7 +371,7 @@ public class TicTacToe {
 
                 case "9":
                 status = false;
-                    if (backendGameBoard[2][2] != ' ') {
+                    if (backendGameBoard[2][2] == ' ') {
                         backendGameBoard[2][2] = chip;
                         userGameBoard[5][15] = chip; 
                         break;
@@ -495,7 +495,7 @@ public class TicTacToe {
 
     public static void multiplayerTitle() {
 
-        System.out.println("Multiplayer: 1v1\n" +
+        System.out.println("Multiplayer: 1v1" +
                          "\nBy Rodrigo De Lama - Nov 2020\n");
 
     }
@@ -608,7 +608,7 @@ public class TicTacToe {
 
 
     public static void aiTitle() {
-        System.out.println("AI Deathmatch against a dumb random computer\n" +
+        System.out.println("AI Deathmatch against a dumb random computer" +
                          "\nBy Rodrigo De Lama - Nov 2020\n");
     }
 
