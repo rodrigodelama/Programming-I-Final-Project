@@ -191,7 +191,7 @@ public class TicTacToe {
     static String p1tag, p2tag;
 
     //Player chips
-    static String p1chip, p2chip;
+    static char p1chip, p2chip;
     static final String aiChip = "X";
 
     //Player wins
@@ -234,41 +234,59 @@ public class TicTacToe {
         status = true;
         while (status) {
 
-            System.out.println("\nIn what square would you like to place your chip?");
+            System.out.println("\n" + tag + " in what square would you like to place your chip?");
                 userInput = input.nextLine();
 
             switch (userInput) {
 
                 case "1": //Used single commas in assignations because the arrays are char arrays
+                status = false;
                           userGameBoard[1][3]  = chip; 
                           backendGameBoard[0][0] = chip;
                         break;
-                case "2": userGameBoard[1][9]  = chip;
+                case "2":
+                status = false;
+                          userGameBoard[1][9]  = chip;
                           backendGameBoard[0][1] = chip;
                         break;
-                case "3": userGameBoard[1][15] = chip;
+                case "3":
+                status = false;
+                          userGameBoard[1][15] = chip;
                           backendGameBoard[0][2] = chip;
                         break;
-                case "4": userGameBoard[3][3]  = chip; 
+                case "4":
+                status = false;
+                          userGameBoard[3][3]  = chip; 
                           backendGameBoard[1][0] = chip;
                     break;
-                case "5": userGameBoard[3][9]  = chip; 
+                case "5":
+                status = false;
+                          userGameBoard[3][9]  = chip; 
                           backendGameBoard[1][1] = chip;
                         break;
-                case "6": userGameBoard[3][15] = chip; 
+                case "6":
+                status = false;
+                          userGameBoard[3][15] = chip; 
                           backendGameBoard[1][2] = chip;
                     break;
-                case "7": userGameBoard[5][3]  = chip; 
+                case "7":
+                status = false;
+                          userGameBoard[5][3]  = chip; 
                           backendGameBoard[2][0] = chip;
                         break;
-                case "8": userGameBoard[5][9]  = chip; 
+                case "8":
+                status = false;
+                          userGameBoard[5][9]  = chip; 
                           backendGameBoard[2][1] = chip;
                         break;
-                case "9": userGameBoard[5][15] = chip; 
+                case "9":
+                status = false;
+                          userGameBoard[5][15] = chip; 
                           backendGameBoard[2][2] = chip;
                         break;
 
                 default: {
+                status = true;
                     System.out.println("Please input a valid location, 1-9");
 
                     //Inform the user of an invalid input and loop
@@ -278,6 +296,19 @@ public class TicTacToe {
                 }
 
             }
+        }
+
+        clear();
+
+        //Placing the game mode once again
+        multiplayerTitle();
+
+        //Printing the modified user box
+        for (int r = 0; r < userGameBoard.length; r++) {
+            for (int c = 0; c < userGameBoard[0].length; c++) {
+                System.out.print(userGameBoard[r][c]);
+            }
+            System.out.println();
         }
         
     }
@@ -306,21 +337,28 @@ public class TicTacToe {
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection 
-        p1chip = Character.toString(chipSelector(p1tag));
+        p1chip = chipSelector(p1tag);
     
         //Player 2 chip selection
-        p2chip = Character.toString(chipSelector(p2tag));
+        p2chip = chipSelector(p2tag);
 
-        /*
+
+        clear();
+
         //Test print of names and tags
-        System.out.println("Player 1 data:" +
+        System.out.println("\nPlayer 1 data:" +
                          "\nTag: " + p1tag +
                          "\nChip: " + p1chip);
         
-        System.out.println("Player 2 data:" +
+        System.out.println("\nPlayer 2 data:" +
                          "\nTag: " + p2tag +
                          "\nChip: " + p2chip);
-        */
+    
+        System.out.println("\nPress \"Enter\" when you're ready");
+            //line below is to clear the scanners input
+            input.nextLine();
+            enter = input.nextLine();
+
 
         //Clear selections out to start the game
         clear();
@@ -337,12 +375,16 @@ public class TicTacToe {
             System.out.println();
         }
 
+        status = true;
+        while (status) {
 
+            //User 1 input
+            chipPlecer(p1tag, p1chip);
 
+            //User 2 input
+            chipPlecer(p2tag, p2chip);
 
-
-        //
-        
+            /*
             clear();
 
             //Placing the game mode once again
@@ -355,11 +397,11 @@ public class TicTacToe {
                 }
                 System.out.println();
             }
+            */
 
-
-//Implement code for a 3-in-a-row check or for a full board
+            //Implement code for a 3-in-a-row check or for a full board
             //Check for 3-in-a-row
-
+//Attempt to do it by scanning arrays
             //Tried for loop-- broken
             /*
             for (int r = 0; r < backendGameBoard.length; r++){
@@ -371,28 +413,29 @@ public class TicTacToe {
             }
             */
 
-            //write an array with possible win values
+        //write an array with possible win values
 
+            status = true;
 
             //Rows
             if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
-
+    
             }
             else if (backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[1][2] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
-
+    
             else if (backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ')
             {
                 status = false;
                 System.out.println("You won!");
             }
-
+    
             //Columns
             else if (backendGameBoard[0][0] != ' ' && backendGameBoard[1][0] != ' ' && backendGameBoard[2][0] != ' ')
             {
@@ -409,7 +452,7 @@ public class TicTacToe {
                 status = false;
                 System.out.println("You won!");
             }
-
+    
             //Diagonals
             else if (backendGameBoard[0][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ')
             {
@@ -421,7 +464,7 @@ public class TicTacToe {
                 status = false;
                 System.out.println("You won!");
             }
-
+    
             //Full board
             else if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != 0 && backendGameBoard[0][2] != ' ' &&
                      backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != 0 && backendGameBoard[2][2] != ' ' &&
@@ -432,6 +475,22 @@ public class TicTacToe {
             }
 
         }
+
+        //clean the matrix
+        for (int r = 0; r < backendGameBoard.length; r++) {
+
+            r = 0;
+
+            for (int c = 0; c < backendGameBoard[0].length; c++) {
+
+                c = 0;
+
+            }
+        }
+    
+    }
+
+
         
 //IMPLEMENT SCOREBOARD
         /*
@@ -443,8 +502,6 @@ public class TicTacToe {
         }
         
         */
-
-    
 
 
     public static void aiTitle() {
