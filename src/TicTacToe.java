@@ -222,60 +222,7 @@ public class TicTacToe {
     return chip;
     }
 
-    public static void multiplayerTitle() {
-        System.out.println("Multiplayer: 1v1\n");
-    }
-
-
-    //Multiplayer mode is for 1v1
-    public static void multiplayer() {
-
-        clear();
-
-        //Informing the user about theur game mode selection 
-        multiplayerTitle();
-
-        //Player name selection
-        System.out.println("\nPlayer 1, whats your tag?");
-            p1tag = input.nextLine();
-        System.out.println("\nPlayer 2, whats your tag?");
-            p2tag = input.nextLine();
-        
-        //Player chip selection
-        System.out.println("\nGamers, you have these chips to choose from:" +
-                            "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
-        
-        //Player 1 chip selection 
-        p1chip = chipSelector(p1tag);
-    
-        //Player 2 chip selection
-        p2chip = chipSelector(p2tag);
-
-        //Test print of names and tags
-        System.out.println("Player 1 data:" +
-                         "\nTag: " + p1tag +
-                         "\nChip: " + p1chip);
-        
-        System.out.println("Player 2 data:" +
-                         "\nTag: " + p2tag +
-                         "\nChip: " + p2chip);
-
-
-        //Clear selections out to start the game
-        clear();
-
-        //Game mode selection 
-        multiplayerTitle();
-
-        //First print of the empty user end game board
-        for (int r = 0; r < userGameBoard.length; r++) {
-            for (int c = 0; c < userGameBoard[0].length; c++) {
-                //+ "(" + r + "," + c + ")" + "\t"
-                System.out.print(userGameBoard[r][c]);
-            }
-            System.out.println();
-        }
-
+    public static void chipPlecer() {
 
         //Declared outside to avoid redeclarations in loop
         String userInput;
@@ -328,12 +275,75 @@ public class TicTacToe {
                 }
 
             }
+        }
+        
+    }
+
+    public static void multiplayerTitle() {
+        System.out.println("Multiplayer: 1v1\n");
+    }
+
+
+    //Multiplayer mode is for 1v1
+    public static void multiplayer() {
+
+        clear();
+
+        //Informing the user about theur game mode selection 
+        multiplayerTitle();
+
+        //Player name selection
+        System.out.println("\nPlayer 1, whats your tag?");
+            p1tag = input.nextLine();
+        System.out.println("\nPlayer 2, whats your tag?");
+            p2tag = input.nextLine();
+        
+        //Player chip selection
+        System.out.println("\nGamers, you have these chips to choose from:" +
+                            "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
+        
+        //Player 1 chip selection 
+        p1chip = chipSelector(p1tag);
+    
+        //Player 2 chip selection
+        p2chip = chipSelector(p2tag);
+
+        /*
+        //Test print of names and tags
+        System.out.println("Player 1 data:" +
+                         "\nTag: " + p1tag +
+                         "\nChip: " + p1chip);
+        
+        System.out.println("Player 2 data:" +
+                         "\nTag: " + p2tag +
+                         "\nChip: " + p2chip);
+        */
+
+        //Clear selections out to start the game
+        clear();
+
+        //Game mode selection 
+        multiplayerTitle();
+
+        //First print of the empty user end game board
+        for (int r = 0; r < userGameBoard.length; r++) {
+            for (int c = 0; c < userGameBoard[0].length; c++) {
+                //+ "(" + r + "," + c + ")" + "\t"
+                System.out.print(userGameBoard[r][c]);
+            }
+            System.out.println();
+        }
+
+
+
+
+
+        //
         
             clear();
 
             //Placing the game mode once again
             multiplayerTitle();
-
 
             //Printing the modified user box
             for (int r = 0; r < userGameBoard.length; r++) {
@@ -357,6 +367,9 @@ public class TicTacToe {
 
             }
             */
+
+            //write an array with possible win values
+
 
             //Rows
             if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ')
@@ -427,9 +440,7 @@ public class TicTacToe {
         }
         
         */
-        
 
-    }
     
 
 
@@ -453,8 +464,6 @@ public class TicTacToe {
 
 
 
-
-    
     //reRun is used to ak if the user wants to restart the game
     public static void reRun() {
         
