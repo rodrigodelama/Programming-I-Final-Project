@@ -61,7 +61,7 @@ public class TicTacToe {
                 explanationAns = input.nextLine().toLowerCase();
 
             switch (explanationAns) {
-                case "yes", "y" -> {
+                case "yes", "yep", "yas", "y" -> {
                     
                     //status to false because we want to break off from the while loop
                     //after a valid input has been detected
@@ -77,7 +77,22 @@ public class TicTacToe {
                                      "\n╚═════╩═════╩═════╝" );
 
                     System.out.println("This is your game board. To place a chip on the board, just type a position's number and hit \"Enter\"" +
-                                     "\nTo win the game, get three chips in a row, column, or diagonally and the win is yours!");
+                                     "\nTo win the game, get three chips in a row, column, or diagonally and the win is yours!\n");
+                    
+                    // idea de Mónica
+                    System.out.println("\nThis is an example of a winning move:\n");
+
+                    System.out.println("╔═════╦═════╦═════╗" + 
+                                     "\n║  X  ║     ║  O  ║" +
+                                     "\n╠═════╬═════╬═════╣" +
+                                     "\n║     ║  X  ║     ║" +
+                                     "\n╠═════╬═════╬═════╣" +
+                                     "\n║  O  ║  O  ║  X  ║" +
+                                     "\n╚═════╩═════╩═════╝" );
+
+                    System.out.println("\nPlayer X would win!\n");
+
+
                     //Press enter when the user is ready to continue
                     System.out.println("\nPress \"Enter\" when you're ready");
                         enter = input.nextLine();
@@ -85,7 +100,7 @@ public class TicTacToe {
                 break;
                 }
 
-                case "no", "n" -> {
+                case "no", "nope", "n" -> {
                     status = false;
                     System.out.println("\nOkay, lets get onto it!\n");
 
@@ -225,7 +240,7 @@ public class TicTacToe {
     return chip;
     }
 
-    public static void chipPlecer(String tag, char chip) {
+    public static void chipPlacer(String tag, char chip) {
 
         //Declared outside to avoid redeclarations in loop
         String userInput;
@@ -235,6 +250,7 @@ public class TicTacToe {
         while (status) {
 
             System.out.println("\n" + tag + " in what square would you like to place your chip?");
+                //1-9
                 userInput = input.nextLine();
 
             switch (userInput) {
@@ -379,10 +395,10 @@ public class TicTacToe {
         while (status) {
 
             //User 1 input
-            chipPlecer(p1tag, p1chip);
+            chipPlacer(p1tag, p1chip);
 
             //User 2 input
-            chipPlecer(p2tag, p2chip);
+            chipPlacer(p2tag, p2chip);
 
             /*
             clear();
