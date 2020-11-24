@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class TicTacToe {
 
     //GLOBAL DECLARATIONS
-    //Declared static Scanner for permament usage, avoiding a resouse leak if not closed later on
+    //Declared static Scanner for permanent usage, avoiding a resource leak if not closed later on
     static Scanner input = new Scanner(System.in);
 
     //Declared static boolean for global use in while loops
@@ -89,7 +89,21 @@ public class TicTacToe {
                                      "\n╠═════╬═════╬═════╣" +
                                      "\n║  O  ║  O  ║  X  ║" +
                                      "\n╚═════╩═════╩═════╝" );
+                    
 
+                    /*
+
+                    System.out.println("-------------------" + 
+                                     "\n|  X  |     |  O  |" +
+                                     "\n|-----|-----|-----|" +
+                                     "\n|     |  X  |     |" +
+                                     "\n|-----|-----|-----|" +
+                                     "\n|  O  |  O  |  X  |" +
+                                     "\n-------------------" );
+
+                    */
+
+                    
                     System.out.println("\nPlayer X would win!\n");
 
 
