@@ -61,7 +61,7 @@ public class TicTacToe {
                 explanationAns = input.nextLine().toLowerCase();
 
             switch (explanationAns) {
-                case "yes", "yep", "yas", "y" -> {
+                case "yes", "yep", "yas", "sure", "y" -> {
                     
                     //status to false because we want to break off from the while loop
                     //after a valid input has been detected
@@ -89,20 +89,6 @@ public class TicTacToe {
                                      "\n╠═════╬═════╬═════╣" +
                                      "\n║  O  ║  O  ║  X  ║" +
                                      "\n╚═════╩═════╩═════╝" );
-                    
-
-                    /*
-
-                    System.out.println("-------------------" + 
-                                     "\n|  X  |     |  O  |" +
-                                     "\n|-----|-----|-----|" +
-                                     "\n|     |  X  |     |" +
-                                     "\n|-----|-----|-----|" +
-                                     "\n|  O  |  O  |  X  |" +
-                                     "\n-------------------" );
-
-                    */
-
                     
                     System.out.println("\nPlayer X would win!\n");
 
@@ -343,9 +329,94 @@ public class TicTacToe {
         
     }
 
+
+
+//fix possibilities
+    public static void checkWin(String tag, char chip) {
+            
+        //Implement code for a 3-in-a-row check or for a full board
+        //Check for 3-in-a-row
+//Attempt to do it by scanning arrays
+        //Tried for loop-- broken
+
+            /*
+            for (int r = 0; r < backendGameBoard.length; r++){
+                if (backendGameBoard[0][r] != ' '){
+                    status = false;
+                System.out.println("You won!");
+                }
+
+            }
+            */
+
+        //write an array with possible win values
+
+        status = true;
+
+        //Rows
+        if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
+        {
+            status = false;
+            System.out.println(tag  + " you won!");
+
+        }
+        else if (backendGameBoard[1][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[1][2] == chip)
+        {
+            status = false;
+            System.out.println(tag  + " you won!");
+        }
+
+        else if (backendGameBoard[2][0] == chip && backendGameBoard[2][1] == chip && backendGameBoard[2][2] == chip)
+        {
+            status = false;
+            System.out.println(tag  + " you won!");
+        }
+
+        //Columns
+        else if (backendGameBoard[0][0] == chip && backendGameBoard[1][0] == chip && backendGameBoard[2][0] == chip)
+        {
+            status = false;
+            System.out.println(tag  + " you won!");
+        }
+        else if (backendGameBoard[0][1] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][1] == chip)
+        {
+            status = false;
+            System.out.println(tag  + " you won!");
+        }
+        else if (backendGameBoard[0][2] == chip && backendGameBoard[1][2] == chip && backendGameBoard[2][2] == chip)
+        {
+            status = false;
+            System.out.println(tag  + " you won!");
+        }
+
+        //Diagonals
+        else if (backendGameBoard[0][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][2] == chip)
+        {
+            status = false;
+            System.out.println(tag  + " you won!");
+        }
+        else if (backendGameBoard[0][2] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][0] == chip)
+        {
+            status = false;
+            System.out.println(tag  + " you won!");
+        }
+
+        //Full board
+        else if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ' &&
+                 backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ' &&
+                 backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
+        {
+            status = false;
+            System.out.println("The board is full- Draw!");
+        }
+
+    }
+
+
     public static void multiplayerTitle() {
         System.out.println("Multiplayer: 1v1\n");
     }
+
 
 
     //Multiplayer mode is for 1v1
@@ -411,102 +482,18 @@ public class TicTacToe {
             //User 1 input
             chipPlacer(p1tag, p1chip);
 
+            //Check if player 1 has won
+            checkWin(p1tag, p1chip);
+
             //User 2 input
             chipPlacer(p2tag, p2chip);
 
-            /*
-            clear();
-
-            //Placing the game mode once again
-            multiplayerTitle();
-
-            //Printing the modified user box
-            for (int r = 0; r < userGameBoard.length; r++) {
-                for (int c = 0; c < userGameBoard[0].length; c++) {
-                    System.out.print(userGameBoard[r][c]);
-                }
-                System.out.println();
-            }
-            */
-
-            //Implement code for a 3-in-a-row check or for a full board
-            //Check for 3-in-a-row
-//Attempt to do it by scanning arrays
-            //Tried for loop-- broken
-            /*
-            for (int r = 0; r < backendGameBoard.length; r++){
-                if (backendGameBoard[0][r] != ' '){
-                    status = false;
-                System.out.println("You won!");
-                }
-
-            }
-            */
-
-        //write an array with possible win values
-
-            status = true;
-
-            //Rows
-            if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ')
-            {
-                status = false;
-                System.out.println("You won!");
-    
-            }
-            else if (backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[1][2] != ' ')
-            {
-                status = false;
-                System.out.println("You won!");
-            }
-    
-            else if (backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ')
-            {
-                status = false;
-                System.out.println("You won!");
-            }
-    
-            //Columns
-            else if (backendGameBoard[0][0] != ' ' && backendGameBoard[1][0] != ' ' && backendGameBoard[2][0] != ' ')
-            {
-                status = false;
-                System.out.println("You won!");
-            }
-            else if (backendGameBoard[0][1] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][1] != ' ')
-            {
-                status = false;
-                System.out.println("You won!");
-            }
-            else if (backendGameBoard[0][2] != ' ' && backendGameBoard[1][2] != ' ' && backendGameBoard[2][2] != ' ')
-            {
-                status = false;
-                System.out.println("You won!");
-            }
-    
-            //Diagonals
-            else if (backendGameBoard[0][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ')
-            {
-                status = false;
-                System.out.println("You won!");
-            }
-            else if (backendGameBoard[0][2] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][0] != ' ')
-            {
-                status = false;
-                System.out.println("You won!");
-            }
-    
-            //Full board
-            else if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != 0 && backendGameBoard[0][2] != ' ' &&
-                     backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != 0 && backendGameBoard[2][2] != ' ' &&
-                     backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != 0 && backendGameBoard[2][2] != ' ' )
-            {
-                status = false;
-                System.out.println("The board is full- Draw!");
-            }
+            //Check if player 2 has won
+            checkWin(p2tag, p2chip);
 
         }
-
-        //clean the matrix
+        
+        // clean the matrix
         for (int r = 0; r < backendGameBoard.length; r++) {
 
             r = 0;
