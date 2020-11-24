@@ -79,7 +79,7 @@ public class TicTacToe {
                     System.out.println("This is your game board. To place a chip on the board, just type a position's number and hit \"Enter\"" +
                                      "\nTo win the game, get three chips in a row, column, or diagonally and the win is yours!\n");
                     
-                    // idea de Mónica
+                    //idea de Mónica
                     System.out.println("\nThis is an example of a winning move:\n");
 
                     System.out.println("╔═════╦═════╦═════╗" + 
@@ -332,7 +332,7 @@ public class TicTacToe {
 
 
 //fix possibilities
-    public static void checkWin(String tag, char chip) {
+    public static boolean checkWin(String tag, char chip) {
             
         //Implement code for a 3-in-a-row check or for a full board
         //Check for 3-in-a-row
@@ -351,54 +351,53 @@ public class TicTacToe {
 
         //write an array with possible win values
 
-        status = true;
 
         //Rows
         if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
         {
-            status = false;
             System.out.println(tag  + " you won!");
+            return false;
 
         }
         else if (backendGameBoard[1][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[1][2] == chip)
         {
-            status = false;
             System.out.println(tag  + " you won!");
+            return false;
         }
 
         else if (backendGameBoard[2][0] == chip && backendGameBoard[2][1] == chip && backendGameBoard[2][2] == chip)
         {
-            status = false;
             System.out.println(tag  + " you won!");
+            return false;
         }
 
         //Columns
         else if (backendGameBoard[0][0] == chip && backendGameBoard[1][0] == chip && backendGameBoard[2][0] == chip)
         {
-            status = false;
             System.out.println(tag  + " you won!");
+            return false;
         }
         else if (backendGameBoard[0][1] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][1] == chip)
         {
-            status = false;
             System.out.println(tag  + " you won!");
+            return false;
         }
         else if (backendGameBoard[0][2] == chip && backendGameBoard[1][2] == chip && backendGameBoard[2][2] == chip)
         {
-            status = false;
             System.out.println(tag  + " you won!");
+            return false;
         }
 
         //Diagonals
         else if (backendGameBoard[0][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][2] == chip)
         {
-            status = false;
             System.out.println(tag  + " you won!");
+            return false;
         }
         else if (backendGameBoard[0][2] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][0] == chip)
         {
-            status = false;
             System.out.println(tag  + " you won!");
+            return false;
         }
 
         //Full board
@@ -406,17 +405,19 @@ public class TicTacToe {
                  backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ' &&
                  backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
         {
-            status = false;
             System.out.println("The board is full- Draw!");
+            return false;
         }
 
+    return true;
     }
 
 
     public static void multiplayerTitle() {
-        System.out.println("Multiplayer: 1v1\n");
-    }
 
+        System.out.println("Multiplayer: 1v1\n");
+
+    }
 
 
     //Multiplayer mode is for 1v1
@@ -448,12 +449,12 @@ public class TicTacToe {
 
         //Test print of names and tags
         System.out.println("\nPlayer 1 data:" +
-                         "\nTag: " + p1tag +
-                         "\nChip: " + p1chip);
+                           "\nTag: " + p1tag +
+                           "\nChip: " + p1chip);
         
         System.out.println("\nPlayer 2 data:" +
-                         "\nTag: " + p2tag +
-                         "\nChip: " + p2chip);
+                           "\nTag: " + p2tag +
+                           "\nChip: " + p2chip);
     
         System.out.println("\nPress \"Enter\" when you're ready");
             //line below is to clear the scanners input
@@ -483,13 +484,13 @@ public class TicTacToe {
             chipPlacer(p1tag, p1chip);
 
             //Check if player 1 has won
-            checkWin(p1tag, p1chip);
+            status = checkWin(p1tag, p1chip);
 
             //User 2 input
             chipPlacer(p2tag, p2chip);
 
             //Check if player 2 has won
-            checkWin(p2tag, p2chip);
+            status = checkWin(p2tag, p2chip);
 
         }
         
