@@ -187,6 +187,19 @@ public class TicTacToe {
                                         {' ', ' ', ' '},
                                         {' ', ' ', ' '}
     };
+
+    public static void cleanBackEnd() {
+        // clean the backend matrix
+        for (int r = 0; r < backendGameBoard.length; r++) {
+
+            for (int c = 0; c < backendGameBoard[0].length; c++) {
+
+                backendGameBoard[r][c] = 0;
+
+            }
+        }
+    }
+
     //User
     static char[][] userGameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
@@ -197,6 +210,52 @@ public class TicTacToe {
                                 { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
                                 { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
     };
+
+    public static void cleanFrontEnd() {
+        
+//attempt with for loops
+        /*
+
+        //custom to my matrix
+        //for loops to clean the frontend game board 
+        for (int r = 1; r < 5; r += 2) {
+
+            int i = 3;
+                userGameBoard[r][i] = ' ';
+            i += 6;
+
+        }
+        
+        for (int c = 3; c < 15; c += 6) {
+                
+            int i = 1;
+                userGameBoard[i][c] = ' ';
+            i += 2;
+
+        }
+        
+        */
+
+        // clean the frontend matrix
+        //case 1
+        userGameBoard[1][3]  = ' ';
+        //case 2
+        userGameBoard[1][9]  = ' ';
+        //case 3
+        userGameBoard[1][15] = ' ';
+        //case 4
+        userGameBoard[3][3]  = ' ';
+        //case 5
+        userGameBoard[3][9]  = ' ';
+        //case 6
+        userGameBoard[3][15] = ' ';
+        //case 7
+        userGameBoard[5][3]  = ' ';
+        //case 8
+        userGameBoard[5][9]  = ' ';
+        //case 9
+        userGameBoard[5][15] = ' ';
+    }
 
     //User info
     static byte p1Position, p2Position, aiPosition;
@@ -599,64 +658,11 @@ public class TicTacToe {
 
         }
         
-        // clean the backend matrix
-        for (int r = 0; r < backendGameBoard.length; r++) {
-
-            for (int c = 0; c < backendGameBoard[0].length; c++) {
-
-                backendGameBoard[r][c] = 0;
-
-            }
-        }
-
-//attempt for loops
-        /*
-
-        //custom to my matrix
-        //for loops to clean the frontend game board 
-        for (int r = 1; r < 5; r += 2) {
-
-            int i = 3;
-                userGameBoard[r][i] = ' ';
-            i += 6;
-
-        }
-        
-        for (int c = 3; c < 15; c += 6) {
-                
-            int i = 1;
-                userGameBoard[i][c] = ' ';
-            i += 2;
-
-        }
-        
-        */
-
-        // clean the frontend matrix
-        //case 1
-        userGameBoard[1][3]  = ' ';
-        //case 2
-        userGameBoard[1][9]  = ' ';
-        //case 3
-        userGameBoard[1][15] = ' ';
-        //case 4
-        userGameBoard[3][3]  = ' ';
-        //case 5
-        userGameBoard[3][9]  = ' ';
-        //case 6
-        userGameBoard[3][15] = ' ';
-        //case 7
-        userGameBoard[5][3]  = ' ';
-        //case 8
-        userGameBoard[5][9]  = ' ';
-        //case 9
-        userGameBoard[5][15] = ' ';
-        
-        
+        //Clean Arrays for possible next play
+        cleanBackEnd();
+        cleanFrontEnd();
     }
 
-
-        
 //IMPLEMENT SCOREBOARD
         /*
 
@@ -669,6 +675,7 @@ public class TicTacToe {
         */
 
 
+        
     public static void aiTitle() {
         System.out.println("AI Deathmatch against a dumb random computer" +
                          "\nBy Rodrigo De Lama - Nov 2020\n");
