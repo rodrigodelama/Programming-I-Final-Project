@@ -273,9 +273,6 @@ public class TicTacToe {
     static char p1chip, p2chip;
     static final char aiChip = 'X';
 
-    //Player wins
-    static byte p1Wins, p2Wins, aiWins;
-
 
 
     //Extrapolated method to avoid repetition
@@ -666,6 +663,8 @@ public class TicTacToe {
         //Clean Arrays for possible next play
         cleanBackEnd();
         cleanFrontEnd();
+        
+        reRun();
     }
 
 //IMPLEMENT SCOREBOARD
@@ -679,6 +678,14 @@ public class TicTacToe {
         
         */
 
+    
+    //Player wins
+    static byte p1Wins, p2Wins, aiWins;
+
+    public static void scoreboard(String p1win, String p2win, String aiWins) {
+        
+    }
+
 
     public static void aiRandomPlacer(String tag, char chip) {
 
@@ -691,6 +698,10 @@ public class TicTacToe {
                 // nextInt is INCLUSIVE in its lower value
             final int randomValue = ThreadLocalRandom.current().nextInt(1, 10);
                 //calculates a random number bewteen 1 and 9
+
+            System.out.println("Our stupid smart AI is thinking about it's move...");
+
+            sleep(2500);
 
             switch (randomValue) {
 
@@ -827,6 +838,33 @@ public class TicTacToe {
         
     }
 
+    //Doesn't include X
+    public static char AIchipSelector(String tag) {
+        char chip = ' ';
+        status = true;
+        while (status) {
+            //Chip selection
+            System.out.println("\n" + tag + " select your chip:");
+                chip = input.next().charAt(0);
+
+                //convert character to UpperCase
+                chip = Character.toUpperCase(chip);
+            
+            switch (chip) {
+                case '0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
+                    status = false;
+                break;
+                }
+                default -> {
+                    status = true;
+                    System.out.println("Please introduce a valid chip:");
+                break;
+                }
+            }
+        }
+    return chip;
+    }
+
         
     public static void aiTitle() {
         System.out.println("AI Deathmatch against a dumb random computer" +
@@ -850,7 +888,7 @@ public class TicTacToe {
                             "\n0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection 
-        p1chip = chipSelector(p1tag);
+        p1chip = AIchipSelector(p1tag);
 
         //Clear selections out to start the game
         clear();
@@ -892,6 +930,8 @@ public class TicTacToe {
 
         cleanBackEnd();
         cleanFrontEnd();
+
+        reRun();
     }
 
 
@@ -955,7 +995,6 @@ public class TicTacToe {
     public static void main(String[] args) {
 
         launcher();
-        reRun();
         //Probably going to implement global counter values for wins
         //runCount();
     }
