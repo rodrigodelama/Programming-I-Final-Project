@@ -266,7 +266,8 @@ public class TicTacToe {
 
     //Game resources
     //Player names
-    static String p1tag, p2tag, ai;
+    static String p1tag, p2tag;
+    static final String ai = "AI";
 
     //Player chips
     static char p1chip, p2chip;
