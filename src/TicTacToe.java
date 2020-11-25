@@ -261,7 +261,7 @@ public class TicTacToe {
                     if (backendGameBoard[0][0] == ' ') {
                         //If empty, fill it
                         backendGameBoard[0][0] = chip;
-                        userGameBoard[1][3]  = chip;
+                        userGameBoard[1][3] = chip;
                         break;
                     }
                     else {
@@ -276,7 +276,7 @@ public class TicTacToe {
                 status = false;
                     if (backendGameBoard[0][1] == ' ') {
                         backendGameBoard[0][1] = chip;
-                        userGameBoard[1][9]  = chip;
+                        userGameBoard[1][9] = chip;
                         break;
                     }
                     else {
@@ -304,7 +304,7 @@ public class TicTacToe {
                 status = false;
                     if (backendGameBoard[1][0] == ' ') {
                         backendGameBoard[1][0] = chip;
-                        userGameBoard[3][3]  = chip; 
+                        userGameBoard[3][3] = chip; 
                         break;
                     }
                     else {
@@ -318,7 +318,7 @@ public class TicTacToe {
                 status = false;
                     if (backendGameBoard[1][1] == ' ') {
                         backendGameBoard[1][1] = chip;
-                        userGameBoard[3][9]  = chip; 
+                        userGameBoard[3][9] = chip; 
                         break;
                     }
                     else {
@@ -346,7 +346,7 @@ public class TicTacToe {
                 status = false;
                     if (backendGameBoard[2][0] == ' ') {
                         backendGameBoard[2][0] = chip;
-                        userGameBoard[5][3]  = chip; 
+                        userGameBoard[5][3] = chip; 
                         break;
                     }
                     else {
@@ -360,7 +360,7 @@ public class TicTacToe {
                 status = false;
                     if (backendGameBoard[2][1] == ' ') {
                         backendGameBoard[2][1] = chip;
-                        userGameBoard[5][9]  = chip; 
+                        userGameBoard[5][9] = chip; 
                         break;
                     }
                     else {
@@ -599,7 +599,7 @@ public class TicTacToe {
 
         }
         
-        // clean the matrix
+        // clean the backend matrix
         for (int r = 0; r < backendGameBoard.length; r++) {
 
             for (int c = 0; c < backendGameBoard[0].length; c++) {
@@ -608,7 +608,51 @@ public class TicTacToe {
 
             }
         }
-    
+
+//attempt for loops
+        /*
+
+        //custom to my matrix
+        //for loops to clean the frontend game board 
+        for (int r = 1; r < 5; r += 2) {
+
+            int i = 3;
+                userGameBoard[r][i] = ' ';
+            i += 6;
+
+        }
+        
+        for (int c = 3; c < 15; c += 6) {
+                
+            int i = 1;
+                userGameBoard[i][c] = ' ';
+            i += 2;
+
+        }
+        
+        */
+
+        // clean the frontend matrix
+        //case 1
+        userGameBoard[1][3]  = ' ';
+        //case 2
+        userGameBoard[1][9]  = ' ';
+        //case 3
+        userGameBoard[1][15] = ' ';
+        //case 4
+        userGameBoard[3][3]  = ' ';
+        //case 5
+        userGameBoard[3][9]  = ' ';
+        //case 6
+        userGameBoard[3][15] = ' ';
+        //case 7
+        userGameBoard[5][3]  = ' ';
+        //case 8
+        userGameBoard[5][9]  = ' ';
+        //case 9
+        userGameBoard[5][15] = ' ';
+        
+        
     }
 
 
