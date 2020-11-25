@@ -81,6 +81,8 @@ public class TicTacToe {
 
                     System.out.println("This is your game board. To place a chip on the board, just type a position's number and hit \"Enter\"" +
                                      "\nTo win the game, get three chips in a row, column, or diagonally and the win is yours!\n");
+
+                    sleep(2000);
                     
                     //idea de Mónica
                     System.out.println("\nThis is an example of a winning move:\n");
@@ -475,7 +477,6 @@ public class TicTacToe {
     }
 
 
-
 //Attempt to do it by scanning arrays
     public static boolean checkWin(String tag, char chip) {
             
@@ -825,8 +826,6 @@ public class TicTacToe {
         
     }
 
-        
-    }
         
     public static void aiTitle() {
         System.out.println("AI Deathmatch against a dumb random computer" +
