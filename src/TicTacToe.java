@@ -212,6 +212,7 @@ public class TicTacToe {
     static byte p1Wins, p2Wins, aiWins;
 
 
+
     //Extrapolated method to avoid repetition
     public static char chipSelector(String tag) {
         char chip = ' ';
@@ -509,22 +510,39 @@ public class TicTacToe {
         //Informing the user about theur game mode selection 
         multiplayerTitle();
 
-        //Player name selection
+        //Player 1 name (tag) selection
         System.out.println("\nPlayer 1, whats your tag?");
             p1tag = input.nextLine();
-        System.out.println("\nPlayer 2, whats your tag?");
-            p2tag = input.nextLine();
         
+        //do while to check that the chip is not already being utilized
+        do {
+
+            //Player 2 tag selection
+            System.out.println("\nPlayer 2, whats your tag?");
+                p2tag = input.nextLine();
+
+            //If both are the same, throws error
+            if (p2tag == p1tag) System.out.println("Error!" + "\nPlease choose another tag");
+
+        } while (p2tag == p1tag); //Do while that condition is true
+
         //Player chip selection
         System.out.println("\nGamers, you have these chips to choose from:" +
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection 
         p1chip = chipSelector(p1tag);
-    
-        //Player 2 chip selection
-        p2chip = chipSelector(p2tag);
+        
+        //Same check as with the tag
+        do {
 
+            //Player 2 chip selection
+            p2chip = chipSelector(p2tag);
+
+            //If both are the same, throws error
+            if (p2chip == p1chip) System.out.println("Error!" + "\nPlease choose another chip");
+
+        } while (p2chip == p1chip);
 
         clear();
 
