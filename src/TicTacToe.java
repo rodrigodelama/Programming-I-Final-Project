@@ -5,6 +5,9 @@
 //Scanner imported to read user inputs
 import java.util.Scanner;
 
+//Used to generate random numbers without JAVA Math class
+import java.util.concurrent.ThreadLocalRandom;
+
 //We're going for CPU mode bois - gonna get a 100%
 //CPU Mode is AI Mode in my game
 
@@ -257,15 +260,15 @@ public class TicTacToe {
         userGameBoard[5][15] = ' ';
     }
 
-    //User info
-    static byte p1Position, p2Position, aiPosition;
-    
+   
+
+    //Game resources
     //Player names
-    static String p1tag, p2tag;
+    static String p1tag, p2tag, ai;
 
     //Player chips
     static char p1chip, p2chip;
-    static final String aiChip = "X";
+    static final char aiChip = 'X';
 
     //Player wins
     static byte p1Wins, p2Wins, aiWins;
@@ -489,7 +492,7 @@ public class TicTacToe {
             }
             */
 
-        //write an array with possible win values
+//write an array with possible win values
 
         //Rows
         if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
@@ -653,7 +656,7 @@ public class TicTacToe {
             //Check if player 2 has won
             status = checkWin(p2tag, p2chip);
 
-                //Check if player 2 has won-- not necessary
+                //Check if player 2 has won-- not necessary since its the last move
                 if (status == false) break;
 
         }
@@ -675,6 +678,155 @@ public class TicTacToe {
         */
 
 
+    public static void aiRandomPlacer(String tag, char chip) {
+
+        //implementing loop for random chip placement
+        status = true;
+        while (status) {
+
+            // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
+				// nextInt is EXCLUSIVE at its top value- so add 1 to make it inclusive
+                // nextInt is INCLUSIVE in its lower value
+            final int randomValue = ThreadLocalRandom.current().nextInt(1, 10);
+                //calculates a random number bewteen 1 and 9
+
+            switch (randomValue) {
+
+                case 1: //Used single commas in assignations because the arrays are char arrays
+                status = false;
+                    //Check if the place is not taken already
+                    if (backendGameBoard[0][0] == ' ') {
+                        //If empty, fill it
+                        backendGameBoard[0][0] = chip;
+                        userGameBoard[1][3] = chip;
+                        break;
+                    }
+                    else {
+                        //Invalid option, reloop switch, no comment necessary to the machine
+                        status = true;
+                        break;
+                    }
+
+                case 2:
+                status = false;
+                    if (backendGameBoard[0][1] == ' ') {
+                        backendGameBoard[0][1] = chip;
+                        userGameBoard[1][9] = chip;
+                        break;
+                    }
+                    else {
+                        status = true;
+                        break;
+                    }
+
+                case 3:
+                status = false;
+                    if (backendGameBoard[0][2] == ' ') {
+                        backendGameBoard[0][2] = chip;
+                        userGameBoard[1][15] = chip;
+                        break;
+                    }
+                    else {
+                        status = true;
+                        break;
+                    }
+
+                case 4:
+                status = false;
+                    if (backendGameBoard[1][0] == ' ') {
+                        backendGameBoard[1][0] = chip;
+                        userGameBoard[3][3] = chip; 
+                        break;
+                    }
+                    else {
+                        status = true;
+                        break;
+                    }
+
+                case 5:
+                status = false;
+                    if (backendGameBoard[1][1] == ' ') {
+                        backendGameBoard[1][1] = chip;
+                        userGameBoard[3][9] = chip; 
+                        break;
+                    }
+                    else {
+                        status = true;
+                        break;
+                    }
+
+                case 6:
+                status = false;
+                    if (backendGameBoard[1][2] == ' ') {
+                        backendGameBoard[1][2] = chip;                        
+                        userGameBoard[3][15] = chip; 
+                        break;
+                    }
+                    else {
+                        status = true;
+                        break;
+                    }
+
+                case 7:
+                status = false;
+                    if (backendGameBoard[2][0] == ' ') {
+                        backendGameBoard[2][0] = chip;
+                        userGameBoard[5][3] = chip; 
+                        break;
+                    }
+                    else {
+                        status = true;
+                        break;
+                    }
+
+                case 8:
+                status = false;
+                    if (backendGameBoard[2][1] == ' ') {
+                        backendGameBoard[2][1] = chip;
+                        userGameBoard[5][9] = chip; 
+                        break;
+                    }
+                    else {
+                        status = true;
+                        break;
+                    }
+
+                case 9:
+                status = false;
+                    if (backendGameBoard[2][2] == ' ') {
+                        backendGameBoard[2][2] = chip;
+                        userGameBoard[5][15] = chip; 
+                        break;
+                    }
+                    else {
+                        status = true;
+                        break;
+                    }
+
+                default: {
+                status = true;
+                break;
+                }
+            }
+        }
+
+        clear();
+
+        //Placing the game mode once again
+        aiTitle();
+
+        //Printing the modified user box
+        for (int r = 0; r < userGameBoard.length; r++) {
+            for (int c = 0; c < userGameBoard[0].length; c++) {
+                System.out.print(userGameBoard[r][c]);
+            }
+            System.out.println();
+        }
+        
+    }
+
+        
+    }
         
     public static void aiTitle() {
         System.out.println("AI Deathmatch against a dumb random computer" +
@@ -688,10 +840,58 @@ public class TicTacToe {
 
         //Game mode salection
         aiTitle();
-
-
-        System.out.println("It works!");
         
+        //Player 1 name (tag) selection
+        System.out.println("\nPlayer 1, whats your tag?");
+            p1tag = input.nextLine();
+
+        //Player chip selection
+        System.out.println("\nGamer, you have these chips to choose from:" +
+                            "\n0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
+        
+        //Player 1 chip selection 
+        p1chip = chipSelector(p1tag);
+
+        //Clear selections out to start the game
+        clear();
+
+        //Game mode selection 
+        aiTitle();
+
+        //First print of the empty user end game board
+        for (int r = 0; r < userGameBoard.length; r++) {
+            for (int c = 0; c < userGameBoard[0].length; c++) {
+                //+ "(" + r + "," + c + ")" + "\t"
+                System.out.print(userGameBoard[r][c]);
+            }
+            System.out.println();
+        }
+
+        status = true;
+        while (status) {
+
+            //User 1 input
+            chipPlacer(p1tag, p1chip);
+
+            //Check if player 1 has won
+            status = checkWin(p1tag, p1chip);
+
+                //Check if player 1 has already won
+                if (status == false) break;
+
+            //User 2 input
+            aiRandomPlacer(ai, aiChip);
+
+            //Check if AI has won
+            status = checkWin(ai, aiChip);
+
+                //Check if AI has won-- not necessary since its the last move
+                if (status == false) break;
+
+        }
+
+        cleanBackEnd();
+        cleanFrontEnd();
     }
 
 
