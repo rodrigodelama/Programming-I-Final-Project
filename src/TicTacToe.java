@@ -199,7 +199,7 @@ public class TicTacToe {
 
             for (int c = 0; c < backendGameBoard[0].length; c++) {
 
-                backendGameBoard[r][c] = 0;
+                backendGameBoard[r][c] = ' ';
 
             }
         }
