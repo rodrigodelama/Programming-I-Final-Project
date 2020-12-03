@@ -82,6 +82,7 @@ public class TicTacToe {
                              "\nAI wins: " + aiWins
             );
 
+            //implement structure to figure out which player is leading in the puctuation
             int subMax = Math.max(p1Wins, p2Wins);
             int overallMax = Math.max(subMax, aiWins);
 
@@ -1075,9 +1076,9 @@ public class TicTacToe {
             //Asking the user if they would like to play another game
             System.out.println("\n\nWould you like to play another game?" + "\nType in Yes or No");
             //used toLowerCase() to format the users answer
-                //userAns = input.nextLine().toLowerCase();
+                userAns = input.nextLine().toLowerCase();
 
-            switch ( userAns = input.nextLine().toLowerCase() ) {
+            switch (userAns) {
 
                 case "yes", "yea", "yuh", "ye", "yessir", "y" -> {
                     status = false;
