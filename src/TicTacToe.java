@@ -317,7 +317,7 @@ public class TicTacToe {
 
             switch (userInput) {
 
-                case "1": //Used single commas in assignations because the arrays are char arrays
+                case "1": //Used double commas since tghe user input is declared as a string- 
                 status = false;
                     //Check if the place is not taken already
                     if (backendGameBoard[0][0] == ' ') {
