@@ -818,16 +818,15 @@ public class TicTacToe {
         status = true;
         while (status) {
 
-            // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
-				// nextInt is EXCLUSIVE at its top value- so add 1 to make it inclusive
-                // nextInt is INCLUSIVE in its lower value
-            randomValue = ThreadLocalRandom.current().nextInt(1, 10);
-                //calculates a random number bewteen 1 and 9
-
             System.out.println("Our stupid smart AI is thinking about it's move...");
-
             sleep(2500);
 
+            // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
+			// nextInt is EXCLUSIVE at its top value- so add 1 to make it inclusive
+            // nextInt is INCLUSIVE in its lower value
+            randomValue = ThreadLocalRandom.current().nextInt(1, 10);
+                //calculates a random number bewteen 1 and 9
+                
             switch (randomValue) {
 
                 case 1: //Integer cases
@@ -1076,9 +1075,9 @@ public class TicTacToe {
             //Asking the user if they would like to play another game
             System.out.println("\n\nWould you like to play another game?" + "\nType in Yes or No");
             //used toLowerCase() to format the users answer
-                userAns = input.nextLine().toLowerCase();
+                //userAns = input.nextLine().toLowerCase();
 
-            switch (userAns) {
+            switch ( userAns = input.nextLine().toLowerCase() ) {
 
                 case "yes", "yea", "yuh", "ye", "yessir", "y" -> {
                     status = false;
@@ -1121,8 +1120,8 @@ public class TicTacToe {
 
     public static void main(String[] args) {
 
-        launcher();
-        
+        //launcher();  
+        reRun();
     }
 
 }
