@@ -217,9 +217,19 @@ public class TicTacToe {
                                 { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
     };
 
+    final static char[][] userGameBoardEmpty = {
+                                                {1, 3},
+                                                {1, 9},
+                                                {1, 15},
+                                                {3, 3},
+                                                {3, 9},
+                                                {3, 15},
+                                                {5, 3},
+                                                {5, 9},
+                                                {5, 15},
+    };
+
     public static void cleanFrontEnd() {
-
-
 //This method is fine end effective, but put positions in an array
 //write an array with the positions written
 //to quickly go over the replacing of the blank spacess
@@ -243,6 +253,15 @@ public class TicTacToe {
         userGameBoard[5][9]  = ' ';
         //case 9
         userGameBoard[5][15] = ' ';
+
+        for (int r = 0; r < userGameBoard.length; r++) {
+
+            for (int c = 0; c < userGameBoard[0].length; c++) {
+
+                backendGameBoard[r][c] = ' ';
+
+            }
+        }
     }
 
 
