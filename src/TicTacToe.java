@@ -86,7 +86,22 @@ public class TicTacToe {
             int subMax = Math.max(p1Wins, p2Wins);
             int overallMax = Math.max(subMax, aiWins);
 
-            //System.out.println("\n" + overallMax);
+            String leader = " ";
+
+            if ( p1Wins < p2Wins || p1Wins < aiWins ) {
+
+                leader = p1tag;
+            }
+            else if ( p2Wins < p1Wins || p2Wins < aiWins ) {
+
+                leader = p2tag;
+            }
+            else if ( aiWins < p1Wins || aiWins < p2Wins ) {
+
+                leader = ai;
+            }
+
+            System.out.println("\n" + leader + " you're dominating!");
         }
     }
 
