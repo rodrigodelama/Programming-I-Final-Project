@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 //We're going for CPU mode bois - gonna get a 100%
 //CPU Mode is AI Mode in my game
 
-public class TicTacToe {
+public class doubts {
 
     //GLOBAL DECLARATIONS
     //Declared static Scanner for permanent usage, avoiding a resource leak if not closed later on
@@ -28,6 +28,7 @@ public class TicTacToe {
     public static void clear() {
         //https://www.edureka.co/community/4668/how-to-clear-the-console-in-java
         //Command used to clear the console-- for later use to reload the game board
+        //ANSI escape code
         System.out.print("\033[H\033[2J");  
         System.out.flush();
     }
@@ -44,7 +45,7 @@ public class TicTacToe {
         try {Thread.sleep(i);} catch(InterruptedException intrx) {/* handle the exception */}
     }
 
-
+    //IMPORTANT
     public static void launcher() {
 
         //Clear the users console before runtime
@@ -219,27 +220,9 @@ public class TicTacToe {
     public static void cleanFrontEnd() {
         
 //attempt with for loops
-        /*
 
-        //custom to my matrix
-        //for loops to clean the frontend game board 
-        for (int r = 1; r < 5; r += 2) {
-
-            int i = 3;
-                userGameBoard[r][i] = ' ';
-            i += 6;
-
-        }
-        
-        for (int c = 3; c < 15; c += 6) {
-                
-            int i = 1;
-                userGameBoard[i][c] = ' ';
-            i += 2;
-
-        }
-        
-        */
+        //write an array with the positions written
+        //to quickly go over the replacing of the blank spacess
 
         // clean the frontend matrix
         //case 1
@@ -288,6 +271,7 @@ public class TicTacToe {
                 chip = Character.toUpperCase(chip);
             
             switch (chip) {
+                //Maybe try to put in the options inside of an array
                 case 'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
                     status = false;
                 break;
@@ -319,6 +303,9 @@ public class TicTacToe {
 
                 case "1": //Used single commas in assignations because the arrays are char arrays
                 status = false;
+
+                    //Extrapolate to a 4 var function with the backend and frontend positions
+
                     //Check if the place is not taken already
                     if (backendGameBoard[0][0] == ' ') {
                         //If empty, fill it
@@ -466,6 +453,8 @@ public class TicTacToe {
 
         //Printing the modified user box
         for (int r = 0; r < userGameBoard.length; r++) {
+
+            //selects the row to grab its length
             for (int c = 0; c < userGameBoard[0].length; c++) {
                 System.out.print(userGameBoard[r][c]);
             }
@@ -476,6 +465,7 @@ public class TicTacToe {
 
 
 //Attempt to do it by scanning arrays
+
     public static boolean checkWin(String tag, char chip) {
             
         //Implement code for a 3-in-a-row check or for a full board
@@ -493,6 +483,12 @@ public class TicTacToe {
 
 //write an array with possible win values
 
+        //try to do things with rows and columns
+
+        //every time a users array, row or column is filles (3/3), or diagonals i = j
+        //array for row and column positions occipued
+
+
         //Rows
         if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
         {
@@ -505,7 +501,6 @@ public class TicTacToe {
             System.out.println("\n" + tag  + " you won!");
             return false;
         }
-
         else if (backendGameBoard[2][0] == chip && backendGameBoard[2][1] == chip && backendGameBoard[2][2] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
@@ -556,10 +551,8 @@ public class TicTacToe {
 
 
     public static void multiplayerTitle() {
-
         System.out.println("Multiplayer: 1v1" +
                          "\nBy Rodrigo De Lama - Nov 2020\n");
-
     }
 
 
@@ -689,6 +682,9 @@ public class TicTacToe {
 
     public static void aiRandomPlacer(String tag, char chip) {
 
+        //defined outside to avoid redeclarations
+        int randomValue;
+
         //implementing loop for random chip placement
         status = true;
         while (status) {
@@ -696,7 +692,7 @@ public class TicTacToe {
             // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
 				// nextInt is EXCLUSIVE at its top value- so add 1 to make it inclusive
                 // nextInt is INCLUSIVE in its lower value
-            final int randomValue = ThreadLocalRandom.current().nextInt(1, 10);
+            randomValue = ThreadLocalRandom.current().nextInt(1, 10);
                 //calculates a random number bewteen 1 and 9
 
             System.out.println("Our stupid smart AI is thinking about it's move...");
@@ -995,6 +991,7 @@ public class TicTacToe {
     public static void main(String[] args) {
 
         launcher();
+        
         //Probably going to implement global counter values for wins
         //runCount();
     }
