@@ -217,23 +217,48 @@ public class TicTacToe {
                                 { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
     };
 
-    final static char[][] userGameBoardEmpty = {
-                                                {1, 3},
-                                                {1, 9},
-                                                {1, 15},
-                                                {3, 3},
-                                                {3, 9},
-                                                {3, 15},
-                                                {5, 3},
-                                                {5, 9},
-                                                {5, 15},
-    };
 
     public static void cleanFrontEnd() {
-//This method is fine end effective, but put positions in an array
-//write an array with the positions written
-//to quickly go over the replacing of the blank spacess
+//This method is fine end effective, attempt to put positions in an array
 
+//write an array with the positions to quickly go over the replacing of the blank spacess
+
+/*
+        final int[][] emptyUserGameBoard = {
+                                            {1, 3},
+                                            {1, 9},
+                                            {1, 15},
+                                            {3, 3},
+                                            {3, 9},
+                                            {3, 15},
+                                            {5, 3},
+                                            {5, 9},
+                                            {5, 15}
+        };
+
+        //declared vars for subtituting in backendGameBoard positions
+        int i, j;
+
+        for (int r = 0; r < emptyUserGameBoard.length; r++) {
+
+            //assigning position value to our variable to clean
+            i = emptyUserGameBoard[r][0];
+            j = emptyUserGameBoard[r][1];
+
+            backendGameBoard[i][j] = ' ';
+            
+//            for (int c = 0; c < emptyUserGameBoard[0].length; c++) {
+//                
+//                for (int k = 1; k < emptyUserGameBoard[0].length; k++) {
+
+//                }
+//            }
+            
+        }
+
+*/        
+        //easy clean
+        
         // clean the frontend matrix
         //case 1
         userGameBoard[1][3]  = ' ';
@@ -253,15 +278,7 @@ public class TicTacToe {
         userGameBoard[5][9]  = ' ';
         //case 9
         userGameBoard[5][15] = ' ';
-
-        for (int r = 0; r < userGameBoard.length; r++) {
-
-            for (int c = 0; c < userGameBoard[0].length; c++) {
-
-                backendGameBoard[r][c] = ' ';
-
-            }
-        }
+   
     }
 
 
@@ -302,6 +319,31 @@ public class TicTacToe {
         }
     return chip;
     }
+
+/*
+    //boolean to feed to chip placer
+    static boolean ISai;
+
+    public static void chipPlacingMethod(int b, char chip, int frontendRow, int frontendColumn, boolean ai) {
+
+        if (backendGameBoard[b][b] == ' ') {
+            backendGameBoard[b][b] = chip;
+            userGameBoard[5][15] = chip; 
+        }
+        else {
+
+            //if were working with ai
+            if (ai = false) {
+                System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+            }
+            
+            status = true;
+            break;
+        }
+        
+    }
+*/
 
     public static void chipPlacer(String tag, char chip) {
 
@@ -728,17 +770,16 @@ public class TicTacToe {
 
             switch (randomValue) {
 
-                case 1: //Used single commas in assignations because the arrays are char arrays
+                case 1: //Integer cases
                 status = false;
                     //Check if the place is not taken already
                     if (backendGameBoard[0][0] == ' ') {
-                        //If empty, fill it
                         backendGameBoard[0][0] = chip;
                         userGameBoard[1][3] = chip;
                         break;
                     }
                     else {
-                        //Invalid option, reloop switch, no comment necessary to the machine
+                        //reloop
                         status = true;
                         break;
                     }
