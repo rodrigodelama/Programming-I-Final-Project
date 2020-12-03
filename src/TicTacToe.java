@@ -218,9 +218,9 @@ public class TicTacToe {
     };
 
     public static void cleanFrontEnd() {
-        
-//This method is fine end effective, but put positions in an array
 
+
+//This method is fine end effective, but put positions in an array
 //write an array with the positions written
 //to quickly go over the replacing of the blank spacess
 
@@ -255,7 +255,7 @@ public class TicTacToe {
     static char p1chip, p2chip;
     static final char aiChip = 'X';
 
-    
+
     //Extrapolated method to avoid repetition
     public static char chipSelector(String tag) {
         char chip = ' ';
@@ -304,6 +304,14 @@ public class TicTacToe {
 
                     //Extrapolate to a 4 var function with the backend and frontend positions
 
+                                                                //row1
+                    //vars will be positions inside an array { {{0,0},{1,3}} }
+                    //maybe even 3d
+
+
+                    //extrapolate this
+                    //below
+
                     //Check if the place is not taken already
                     if (backendGameBoard[0][0] == ' ') {
                         //If empty, fill it
@@ -318,6 +326,8 @@ public class TicTacToe {
                         status = true;
                         break;
                     }
+
+                    //above
 
                 case "2":
                 status = false;
