@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 //We're going for CPU mode bois - gonna get a 100%
 //CPU Mode is AI Mode in my game
 
-public class doubts {
+public class TicTacToe {
 
     //GLOBAL DECLARATIONS
     //Declared static Scanner for permanent usage, avoiding a resource leak if not closed later on
@@ -219,10 +219,10 @@ public class doubts {
 
     public static void cleanFrontEnd() {
         
-//attempt with for loops
+//This method is fine end effective, but put positions in an array
 
-        //write an array with the positions written
-        //to quickly go over the replacing of the blank spacess
+//write an array with the positions written
+//to quickly go over the replacing of the blank spacess
 
         // clean the frontend matrix
         //case 1
@@ -245,7 +245,6 @@ public class doubts {
         userGameBoard[5][15] = ' ';
     }
 
-   
 
     //Game resources
     //Player names
@@ -256,8 +255,7 @@ public class doubts {
     static char p1chip, p2chip;
     static final char aiChip = 'X';
 
-
-
+    
     //Extrapolated method to avoid repetition
     public static char chipSelector(String tag) {
         char chip = ' ';
