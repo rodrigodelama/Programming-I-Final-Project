@@ -24,3 +24,4 @@ hs_err_pid*
 
 # ignore the macOS generated file
 .DS_Store
+.DS_Store
