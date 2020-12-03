@@ -45,6 +45,50 @@ public class TicTacToe {
         try {Thread.sleep(i);} catch(InterruptedException intrx) {/* handle the exception */}
     }
 
+    //runtime counter, resets on program restart
+    static int timesRun = 0;
+
+    //IMPLEMENT SCOREBOARD
+    //Player wins
+    static byte p1Wins = 0, p2Wins = 0, aiWins = 0;
+
+    public static void scoreboardUpdate(int win) {
+        
+        if (win == 0) {
+            p1Wins++;
+        }
+        else if (win == 1) {
+            p2Wins++;
+        }
+        else if (win == 2) {
+            aiWins++;
+        }
+
+    }
+
+    //scoreboard presented to the user only if times run > 1
+    public static void scoreboard () {
+
+        if (timesRun == 0);
+        else {
+            System.out.println("\nSCOREBOARD\n");
+
+            System.out.println("Here's how the scoreboard is looking...\n");
+
+            sleep(1500);
+
+            System.out.println("Player 1 wins: " + p1Wins +
+                             "\nPlayer 2 wins: " + p2Wins +
+                             "\nAI wins: " + aiWins
+            );
+
+            int subMax = Math.max(p1Wins, p2Wins);
+            int overallMax = Math.max(subMax, aiWins);
+
+            //System.out.println("\n" + overallMax);
+        }
+    }
+
     //IMPORTANT
     public static void launcher() {
 
@@ -52,6 +96,8 @@ public class TicTacToe {
         clear();
 
         title();
+
+        scoreboard();
         
         //Declaring before the loop to not redeclare the variables every time the while loop runs
         String explanationAns;
@@ -184,6 +230,23 @@ public class TicTacToe {
     }
 
 
+    public static int playerWinCheck(String tag) {
+
+        int win = 0;
+
+        if (tag == p1tag) {
+            win = 0;
+        }
+        else if (tag == p2tag) {
+            win = 1;
+        }
+        else if (tag == ai) {
+            win = 2;
+        }
+        
+    return win;
+    }
+
     //Declared a global static game variables
 
     //Backend game board array
@@ -258,7 +321,7 @@ public class TicTacToe {
 
 */        
         //easy clean
-        
+
         // clean the frontend matrix
         //case 1
         userGameBoard[1][3]  = ' ';
@@ -562,17 +625,20 @@ public class TicTacToe {
         if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
             return false;
 
         }
         else if (backendGameBoard[1][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[1][2] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) );
             return false;
         }
         else if (backendGameBoard[2][0] == chip && backendGameBoard[2][1] == chip && backendGameBoard[2][2] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) );
             return false;
         }
 
@@ -580,16 +646,19 @@ public class TicTacToe {
         else if (backendGameBoard[0][0] == chip && backendGameBoard[1][0] == chip && backendGameBoard[2][0] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) );
             return false;
         }
         else if (backendGameBoard[0][1] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][1] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) );
             return false;
         }
         else if (backendGameBoard[0][2] == chip && backendGameBoard[1][2] == chip && backendGameBoard[2][2] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) );
             return false;
         }
 
@@ -597,11 +666,13 @@ public class TicTacToe {
         else if (backendGameBoard[0][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][2] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) );
             return false;
         }
         else if (backendGameBoard[0][2] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][0] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) );
             return false;
         }
 
@@ -610,7 +681,7 @@ public class TicTacToe {
                  backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ' &&
                  backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
         {
-            System.out.println("\nThe board is full- Draw!");
+            System.out.println("\nThe board is full: Draw!");
             return false;
         }
 
@@ -726,28 +797,17 @@ public class TicTacToe {
         cleanBackEnd();
         cleanFrontEnd();
         
+        //add to times run
+        timesRun++;
+
         reRun();
     }
 
-//IMPLEMENT SCOREBOARD
-        /*
-
-        //Print the wins
-        if (p1Wins > 0 || p2Wins > 0) {
-
-            System.out.println("Player 1 has won " + p1Wins + " time");
-        }
-        
-        */
-
-    
-    //Player wins
-    static byte p1Wins, p2Wins, aiWins;
-
+/*
     public static void scoreboard(String p1win, String p2win, String aiWins) {
         
     }
-
+*/
 
     public static void aiRandomPlacer(String tag, char chip) {
 
@@ -994,6 +1054,9 @@ public class TicTacToe {
 
         cleanBackEnd();
         cleanFrontEnd();
+
+        //add to times run
+        timesRun++;
 
         reRun();
     }
