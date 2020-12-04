@@ -83,25 +83,25 @@ public class TicTacToe {
             );
 
             //implement structure to figure out which player is leading in the puctuation
-            int subMax = Math.max(p1Wins, p2Wins);
-            int overallMax = Math.max(subMax, aiWins);
+            //int subMax = Math.max(p1Wins, p2Wins);
+            //int overallMax = Math.max(subMax, aiWins);
 
             String leader = " ";
 
-            if ( p1Wins < p2Wins || p1Wins < aiWins ) {
+            if ( p1Wins > p2Wins && p1Wins > aiWins ) {
 
                 leader = p1tag;
             }
-            else if ( p2Wins < p1Wins || p2Wins < aiWins ) {
+            else if ( p2Wins > p1Wins && p2Wins > aiWins ) {
 
                 leader = p2tag;
             }
-            else if ( aiWins < p1Wins || aiWins < p2Wins ) {
+            else if ( aiWins > p1Wins && aiWins > p2Wins ) {
 
                 leader = ai;
             }
 
-            System.out.println("\n" + leader + " you're dominating!");
+            System.out.println("\n" + leader + " you're dominating!\n");
         }
     }
 
@@ -382,10 +382,20 @@ public class TicTacToe {
 
                 //convert character to UpperCase
                 chip = Character.toUpperCase(chip);
-            
+
+//            char[] possibleChips = {'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M',
+//            'N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1'};
+
+//            for (int i = 0; i < possibleChips.length; i++) {
+//                chips = possibleChips[i];
+//            }
+
             switch (chip) {
                 //Maybe try to put in the options inside of an array
-                case 'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
+                //case 'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
+
+                case 'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M',
+                'N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
                     status = false;
                 break;
                 }
@@ -400,7 +410,7 @@ public class TicTacToe {
     }
 
 /*
-    //boolean to feed to chip placer
+    //boolean to feed to chip placer to delete X from the array of possible values
     static boolean ISai;
 
     public static void chipPlacingMethod(int b, char chip, int frontendRow, int frontendColumn, boolean ai) {
@@ -1136,8 +1146,7 @@ public class TicTacToe {
 
     public static void main(String[] args) {
 
-        //launcher();  
-        reRun();
+        launcher();
     }
 
 }
