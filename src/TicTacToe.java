@@ -88,9 +88,10 @@ public class TicTacToe {
 
             String leader = " ";
 
+            //logic for who's leading the charts
             if ( p1Wins > p2Wins && p1Wins > aiWins ) {
 
-                leader = p1tag;
+                leader = p1tag; //assigned leader variable to player X
             }
             else if ( p2Wins > p1Wins && p2Wins > aiWins ) {
 
@@ -652,6 +653,8 @@ public class TicTacToe {
         {
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
+            //add to times run
+            timesRun++; //game has been won by someone
             return false;
 
         }
@@ -659,12 +662,16 @@ public class TicTacToe {
         {
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) );
+            //add to times run
+            timesRun++;
             return false;
         }
         else if (backendGameBoard[2][0] == chip && backendGameBoard[2][1] == chip && backendGameBoard[2][2] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) );
+            //add to times run
+            timesRun++;
             return false;
         }
 
@@ -673,18 +680,24 @@ public class TicTacToe {
         {
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) );
+            //add to times run
+            timesRun++;
             return false;
         }
         else if (backendGameBoard[0][1] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][1] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) );
+            //add to times run
+            timesRun++;
             return false;
         }
         else if (backendGameBoard[0][2] == chip && backendGameBoard[1][2] == chip && backendGameBoard[2][2] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) );
+            //add to times run
+            timesRun++;
             return false;
         }
 
@@ -693,12 +706,17 @@ public class TicTacToe {
         {
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) );
+            //add to times run
+            timesRun++;
             return false;
         }
         else if (backendGameBoard[0][2] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][0] == chip)
         {
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) );
+
+            //add to times run
+            timesRun++;
             return false;
         }
 
@@ -823,8 +841,7 @@ public class TicTacToe {
         cleanBackEnd();
         cleanFrontEnd();
         
-        //add to times run
-        timesRun++;
+        //times run for scoreboard displayed is taken into account inside
 
         reRun();
     }
@@ -1079,9 +1096,6 @@ public class TicTacToe {
 
         cleanBackEnd();
         cleanFrontEnd();
-
-        //add to times run
-        timesRun++;
 
         reRun();
     }
