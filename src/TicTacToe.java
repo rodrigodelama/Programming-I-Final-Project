@@ -1,6 +1,7 @@
 //Rodrigo De Lama
 //100451775@alumnos.uc3m.es
 //@RDLF11
+//GitHub repository page- https://github.com/RDLF11/Programming-I-Final-Project
 
 //Scanner imported to read user inputs
 import java.util.Scanner;
@@ -8,8 +9,8 @@ import java.util.Scanner;
 //Used to generate random numbers without JAVA Math class
 import java.util.concurrent.ThreadLocalRandom;
 
+//delete below
 //We're going for CPU mode bois - gonna get a 100%
-//CPU Mode is AI Mode in my game
 
 public class TicTacToe {
 
@@ -24,7 +25,7 @@ public class TicTacToe {
     //global enter value to remain empty
     static String enter;
 
-
+    //adapt clear() for eclipse
     public static void clear() {
         //https://www.edureka.co/community/4668/how-to-clear-the-console-in-java
         //Command used to clear the console-- for later use to reload the game board
@@ -32,7 +33,6 @@ public class TicTacToe {
         System.out.print("\033[H\033[2J");  
         System.out.flush();
     }
-
 
     public static void title() {
         //Title method to avoid repetition
@@ -63,10 +63,10 @@ public class TicTacToe {
         else if (win == 2) {
             aiWins++;
         }
-
+        
     }
 
-    //scoreboard presented to the user only if times run > 1
+    //scoreboard presented to the user only if times run (with wins)> 1
     public static void scoreboard () {
 
         if (timesRun == 0);
@@ -75,23 +75,19 @@ public class TicTacToe {
 
             System.out.println("Here's how the scoreboard is looking...\n");
 
+            //time in miliseconds
             sleep(1500);
 
             System.out.println("Player 1 wins: " + p1Wins +
                              "\nPlayer 2 wins: " + p2Wins +
-                             "\nAI wins: " + aiWins
-            );
+                             "\nAI wins: " + aiWins);
 
-            //implement structure to figure out which player is leading in the puctuation
-            //int subMax = Math.max(p1Wins, p2Wins);
-            //int overallMax = Math.max(subMax, aiWins);
-
+            //structure to determine the leader
             String leader = " ";
 
-            //logic for who's leading the charts
             if ( p1Wins > p2Wins && p1Wins > aiWins ) {
 
-                leader = p1tag; //assigned leader variable to player X
+                leader = p1tag; //assign leader variable to player X
             }
             else if ( p2Wins > p1Wins && p2Wins > aiWins ) {
 
@@ -101,7 +97,6 @@ public class TicTacToe {
 
                 leader = ai;
             }
-
             System.out.println("\n" + leader + " you're dominating!\n");
         }
     }
@@ -112,8 +107,10 @@ public class TicTacToe {
         //Clear the users console before runtime
         clear();
 
+        //Present title
         title();
 
+        //if runtime++ was actuated, scoreboard should run
         scoreboard();
         
         //Declaring before the loop to not redeclare the variables every time the while loop runs
@@ -134,7 +131,6 @@ public class TicTacToe {
                     //after a valid input has been detected
                     status = false;
                     System.out.println("\nThis is how the game board looks:\n");
-
                     System.out.println("╔═════╦═════╦═════╗" + 
                                      "\n║  1  ║  2  ║  3  ║" +
                                      "\n╠═════╬═════╬═════╣" +
@@ -146,11 +142,9 @@ public class TicTacToe {
                     System.out.println("This is your game board. To place a chip on the board, just type a position's number and hit \"Enter\"" +
                                      "\nTo win the game, get three chips in a row, column, or diagonally and the win is yours!\n");
 
-                    sleep(2000);
+                    sleep(3000);
                     
-                    //idea de Mónica
                     System.out.println("\nThis is an example of a winning move:\n");
-
                     System.out.println("╔═════╦═════╦═════╗" + 
                                      "\n║  X  ║     ║  O  ║" +
                                      "\n╠═════╬═════╬═════╣" +
@@ -170,7 +164,7 @@ public class TicTacToe {
 
                 case "no", "nope", "nah", "n" -> {
                     status = false;
-                    System.out.println("\nOkay, lets get onto it!\n");
+                        System.out.println("\nOkay, lets get onto it!\n");
 
                 break;
                 }
@@ -178,12 +172,11 @@ public class TicTacToe {
                 default -> {
                     //status = true to rerun loop
                     status = true;
-                    System.out.println("Sorry, I didn't catch that. Please type yes or no");
+                        System.out.println("Sorry, I didn't catch that. Please type yes or no");
 
                 break;
                 }
             }
-
         }
 
         clear();
@@ -222,7 +215,7 @@ public class TicTacToe {
                 break;
                 }
 
-                //AI mode
+                //AI mode (CPU Mode in my game)
                 case "b" -> {
                     status = false;
                     System.out.println("\nGet ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
@@ -241,11 +234,9 @@ public class TicTacToe {
                 break;
                 }
             }
-
         }
     
     }
-
 
     public static int playerWinCheck(String tag) {
 
@@ -297,7 +288,6 @@ public class TicTacToe {
                                 { '╚', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╩', '═', '═', '═', '═', '═', '╝'}
     };
 
-
     public static void cleanFrontEnd() {
 //This method is fine end effective, attempt to put positions in an array
 
@@ -338,7 +328,6 @@ public class TicTacToe {
 
 */        
         //easy clean
-
         // clean the frontend matrix
         //case 1
         userGameBoard[1][3]  = ' ';
@@ -601,7 +590,6 @@ public class TicTacToe {
 
                 break;
                 }
-
             }
         }
 
@@ -769,13 +757,13 @@ public class TicTacToe {
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection 
-        p1chip = chipSelector(p1tag);
+        p1chip = chipSelector( p1tag );
         
-        //Same check as with the tag
+        //Same check as with the tag to avoid repeat use
         do {
 
             //Player 2 chip selection
-            p2chip = chipSelector(p2tag);
+            p2chip = chipSelector( p2tag );
 
             //If both are the same, throws error
             if (p2chip == p1chip) System.out.println("Error!" + "\nPlease choose another chip");
@@ -784,7 +772,8 @@ public class TicTacToe {
 
         clear();
 
-        //Test print of names and tags
+        /*
+        //Test print names and tags
         System.out.println("\nPlayer 1 data:" +
                            "\nTag: " + p1tag +
                            "\nChip: " + p1chip);
@@ -797,10 +786,10 @@ public class TicTacToe {
             //line below is to clear the scanners input
             input.nextLine();
             enter = input.nextLine();
-
+        */
 
         //Clear selections out to start the game
-        clear();
+        //clear();
 
         //Game mode selection 
         multiplayerTitle();
@@ -845,12 +834,6 @@ public class TicTacToe {
 
         reRun();
     }
-
-/*
-    public static void scoreboard(String p1win, String p2win, String aiWins) {
-        
-    }
-*/
 
     public static void aiRandomPlacer(String tag, char chip) {
 
@@ -1017,7 +1000,8 @@ public class TicTacToe {
                 chip = Character.toUpperCase(chip);
             
             switch (chip) {
-                case '0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
+                case '0','A','B','C','D','E','F','G','H','I','J','K','L','M',
+                'N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
                     status = false;
                 break;
                 }
@@ -1031,7 +1015,6 @@ public class TicTacToe {
     return chip;
     }
 
-        
     public static void aiTitle() {
         System.out.println("AI Deathmatch against a dumb random computer" +
                          "\nBy Rodrigo De Lama - Nov 2020\n");
@@ -1091,7 +1074,6 @@ public class TicTacToe {
 
                 //Check if AI has won-- not necessary since its the last move
                 if (status == false) break;
-
         }
 
         cleanBackEnd();
@@ -1099,8 +1081,6 @@ public class TicTacToe {
 
         reRun();
     }
-
-
 
     //reRun is used to ak if the user wants to restart the game
     public static void reRun() {
@@ -1125,10 +1105,9 @@ public class TicTacToe {
                     System.out.println("\nOkay, comming right up!");
 
                     sleep(1500);
-                    
                     clear();
 
-                    //re-runs the game
+                    //relaunch the game
                     launcher();
 
                 break;
@@ -1140,7 +1119,6 @@ public class TicTacToe {
                     System.out.println("\nOkay, thanks for playing!");
 
                     sleep(1500);
-
                     clear();
 
                 break;
@@ -1153,7 +1131,6 @@ public class TicTacToe {
                 break;
                 }
             }
-
         }
     
     }
