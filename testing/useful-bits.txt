@@ -9,3 +9,22 @@ for (int r = 0; r < backendGameBoard.length; r++) {
 }
 
 */
+
+        /*
+        //Test print names and tags
+        System.out.println("\nPlayer 1 data:" +
+                           "\nTag: " + p1tag +
+                           "\nChip: " + p1chip);
+        
+        System.out.println("\nPlayer 2 data:" +
+                           "\nTag: " + p2tag +
+                           "\nChip: " + p2chip);
+    
+        System.out.println("\nPress \"Enter\" when you're ready");
+            //line below is to clear the scanners input
+            input.nextLine();
+            enter = input.nextLine();
+        */
+
+        //Clear selections out to start the game
+        //clear();

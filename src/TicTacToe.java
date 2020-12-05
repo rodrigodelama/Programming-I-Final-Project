@@ -52,15 +52,15 @@ public class TicTacToe {
     //Player wins
     static byte p1Wins = 0, p2Wins = 0, aiWins = 0;
 
-    public static void scoreboardUpdate(int win) {
+    public static void scoreboardUpdate(int winIdentifier) {
         
-        if (win == 0) {
+        if (winIdentifier == 0) {
             p1Wins++;
         }
-        else if (win == 1) {
+        else if (winIdentifier == 1) {
             p2Wins++;
         }
-        else if (win == 2) {
+        else if (winIdentifier == 2) {
             aiWins++;
         }
         
@@ -277,7 +277,7 @@ public class TicTacToe {
         }
     }
 
-    //User
+    //User facing board
     static char[][] userGameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
                                 { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
@@ -292,7 +292,6 @@ public class TicTacToe {
 //This method is fine end effective, attempt to put positions in an array
 
 //write an array with the positions to quickly go over the replacing of the blank spacess
-
 /*
         final int[][] emptyUserGameBoard = {
                                             {1, 3},
@@ -325,7 +324,6 @@ public class TicTacToe {
 //            }
             
         }
-
 */        
         //easy clean
         // clean the frontend matrix
@@ -436,6 +434,8 @@ public class TicTacToe {
             System.out.println("\n" + tag + " in what square would you like to place your chip?");
                 //1-9
                 userInput = input.nextLine();
+                
+//ignore empty spaces, wait for actaul input
 
             switch (userInput) {
 
@@ -615,7 +615,6 @@ public class TicTacToe {
         
     }
 
-
 //Attempt to do it by scanning arrays
 
     public static boolean checkWin(String tag, char chip) {
@@ -639,7 +638,6 @@ public class TicTacToe {
 
         //every time a users array, row or column is filles (3/3), or diagonals i = j
         //array for row and column positions occipued
-
 
         //Rows
         if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
@@ -726,12 +724,10 @@ public class TicTacToe {
     return true;
     }
 
-
     public static void multiplayerTitle() {
         System.out.println("Multiplayer: 1v1" +
                          "\nBy Rodrigo De Lama - Nov 2020\n");
     }
-
 
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
@@ -747,7 +743,6 @@ public class TicTacToe {
         
         //do while to check that the chip is not already being utilized
         do {
-
             //Player 2 tag selection
             System.out.println("\nPlayer 2, whats your tag?");
                 p2tag = input.nextLine();
@@ -766,7 +761,6 @@ public class TicTacToe {
         
         //Same check as with the tag to avoid repeat use
         do {
-
             //Player 2 chip selection
             p2chip = chipSelector( p2tag );
 
@@ -776,25 +770,6 @@ public class TicTacToe {
         } while (p2chip == p1chip);
 
         clear();
-
-        /*
-        //Test print names and tags
-        System.out.println("\nPlayer 1 data:" +
-                           "\nTag: " + p1tag +
-                           "\nChip: " + p1chip);
-        
-        System.out.println("\nPlayer 2 data:" +
-                           "\nTag: " + p2tag +
-                           "\nChip: " + p2chip);
-    
-        System.out.println("\nPress \"Enter\" when you're ready");
-            //line below is to clear the scanners input
-            input.nextLine();
-            enter = input.nextLine();
-        */
-
-        //Clear selections out to start the game
-        //clear();
 
         //Game mode selection 
         multiplayerTitle();
