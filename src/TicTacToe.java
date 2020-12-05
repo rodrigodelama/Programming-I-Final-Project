@@ -581,6 +581,11 @@ public class TicTacToe {
                         break;
                     }
 
+                case " ":        
+                //if the inputed value isempty, reloop
+                status = true;
+                break;
+
                 default: {
                 status = true;
                     System.out.println("Please input a valid location, 1-9");
@@ -839,6 +844,7 @@ public class TicTacToe {
 
         //defined outside to avoid redeclarations
         int randomValue;
+        String randomValueSTR;
 
         //implementing loop for random chip placement
         status = true;
@@ -852,10 +858,12 @@ public class TicTacToe {
             // nextInt is INCLUSIVE in its lower value
             randomValue = ThreadLocalRandom.current().nextInt(1, 10);
                 //calculates a random number bewteen 1 and 9
-                
-            switch (randomValue) {
+            
+            randomValueSTR = String.valueOf(randomValue);
 
-                case 1: //Integer cases
+            switch (randomValueSTR) {
+
+                case "1": //Integer cases
                 status = false;
                     //Check if the place is not taken already
                     if (backendGameBoard[0][0] == ' ') {
@@ -869,7 +877,7 @@ public class TicTacToe {
                         break;
                     }
 
-                case 2:
+                case "2":
                 status = false;
                     if (backendGameBoard[0][1] == ' ') {
                         backendGameBoard[0][1] = chip;
@@ -881,7 +889,7 @@ public class TicTacToe {
                         break;
                     }
 
-                case 3:
+                case "3":
                 status = false;
                     if (backendGameBoard[0][2] == ' ') {
                         backendGameBoard[0][2] = chip;
@@ -893,7 +901,7 @@ public class TicTacToe {
                         break;
                     }
 
-                case 4:
+                case "4":
                 status = false;
                     if (backendGameBoard[1][0] == ' ') {
                         backendGameBoard[1][0] = chip;
@@ -905,7 +913,7 @@ public class TicTacToe {
                         break;
                     }
 
-                case 5:
+                case "5":
                 status = false;
                     if (backendGameBoard[1][1] == ' ') {
                         backendGameBoard[1][1] = chip;
@@ -917,7 +925,7 @@ public class TicTacToe {
                         break;
                     }
 
-                case 6:
+                case "6":
                 status = false;
                     if (backendGameBoard[1][2] == ' ') {
                         backendGameBoard[1][2] = chip;                        
@@ -929,7 +937,7 @@ public class TicTacToe {
                         break;
                     }
 
-                case 7:
+                case "7":
                 status = false;
                     if (backendGameBoard[2][0] == ' ') {
                         backendGameBoard[2][0] = chip;
@@ -941,7 +949,7 @@ public class TicTacToe {
                         break;
                     }
 
-                case 8:
+                case "8":
                 status = false;
                     if (backendGameBoard[2][1] == ' ') {
                         backendGameBoard[2][1] = chip;
@@ -953,7 +961,7 @@ public class TicTacToe {
                         break;
                     }
 
-                case 9:
+                case "9":
                 status = false;
                     if (backendGameBoard[2][2] == ' ') {
                         backendGameBoard[2][2] = chip;
@@ -964,6 +972,11 @@ public class TicTacToe {
                         status = true;
                         break;
                     }
+                
+                case " ":
+                //if empty reloop
+                status = true;
+                break;
 
                 default: {
                 status = true;
