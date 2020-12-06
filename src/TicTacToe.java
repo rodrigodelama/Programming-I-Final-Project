@@ -428,20 +428,53 @@ public class TicTacToe {
         boolean checkAI = false;
         if (tag == ai) checkAI = true;
 
-        //Declared outside to avoid redeclarations in loop
+        //ai value generator
+        //defined outside to avoid redeclarations inside loop
+        int randomValue;
+        String randomValueSTR;
+    
+        //real person input
         String userInput;
 
-        //implementing loop for one person placement
+        //global input initialized in case no codition was met
+        String inputChoice = "";
+
+        //implementing chip placement
         status = true;
         while (status) {
 
-            System.out.println("\n" + tag + " in what square would you like to place your chip?");
+            //Real player case
+            if ( checkAI == false ) {
+
+                System.out.println("\n" + tag + " in what square would you like to place your chip?");
                 //1-9
                 userInput = input.nextLine();
-                
+
+            inputChoice = userInput;
+            }
+            //AI case
+            else if ( checkAI == true ) {
+
+                System.out.println("Our stupid smart AI is thinking about it's move...");
+                sleep(2500);
+
+                // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
+			    // nextInt is EXCLUSIVE at its top value- so add 1 to make it inclusive
+                // nextInt is INCLUSIVE in its lower value
+                randomValue = ThreadLocalRandom.current().nextInt(1, 10);
+                //calculates a random number bewteen 1 and 9
+            
+            inputChoice = String.valueOf(randomValue);
+            }
+            //else reloop
+            else {
+                status = true;
+            }
+
+//develop code to
 //ignore empty spaces, wait for actual input
 
-            switch (userInput) {
+            switch (inputChoice) {
 
                 case "1": //Used double commas since tghe user input is declared as a string- 
                 status = false;
@@ -667,7 +700,13 @@ public class TicTacToe {
         clear();
 
         //Placing the game mode once again
-        multiplayerTitle();
+        if ( checkAI == false ) {
+            multiplayerTitle();
+        }
+        else if ( checkAI == true ) {
+            aiTitle();
+        }
+        else {/* ignore don't print */}
 
         //Printing the modified user box
         for (int r = 0; r < userGameBoard.length; r++) {
@@ -828,166 +867,6 @@ public class TicTacToe {
         reRun();
     }
 
-    public static void aiRandomPlacer(String tag, char chip) {
-
-        //defined outside to avoid redeclarations
-        int randomValue;
-        String randomValueSTR;
-
-        //implementing loop for random chip placement
-        status = true;
-        while (status) {
-
-            System.out.println("Our stupid smart AI is thinking about it's move...");
-            sleep(2500);
-
-            // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
-			// nextInt is EXCLUSIVE at its top value- so add 1 to make it inclusive
-            // nextInt is INCLUSIVE in its lower value
-            randomValue = ThreadLocalRandom.current().nextInt(1, 10);
-                //calculates a random number bewteen 1 and 9
-            
-            randomValueSTR = String.valueOf(randomValue);
-
-            switch (randomValueSTR) {
-
-                case "1": //Integer cases
-                status = false;
-                    //Check if the place is not taken already
-                    if (backendGameBoard[0][0] == ' ') {
-                        backendGameBoard[0][0] = chip;
-                        userGameBoard[1][3] = chip;
-                        break;
-                    }
-                    else {
-                        //reloop
-                        status = true;
-                        break;
-                    }
-
-                case "2":
-                status = false;
-                    if (backendGameBoard[0][1] == ' ') {
-                        backendGameBoard[0][1] = chip;
-                        userGameBoard[1][9] = chip;
-                        break;
-                    }
-                    else {
-                        status = true;
-                        break;
-                    }
-
-                case "3":
-                status = false;
-                    if (backendGameBoard[0][2] == ' ') {
-                        backendGameBoard[0][2] = chip;
-                        userGameBoard[1][15] = chip;
-                        break;
-                    }
-                    else {
-                        status = true;
-                        break;
-                    }
-
-                case "4":
-                status = false;
-                    if (backendGameBoard[1][0] == ' ') {
-                        backendGameBoard[1][0] = chip;
-                        userGameBoard[3][3] = chip; 
-                        break;
-                    }
-                    else {
-                        status = true;
-                        break;
-                    }
-
-                case "5":
-                status = false;
-                    if (backendGameBoard[1][1] == ' ') {
-                        backendGameBoard[1][1] = chip;
-                        userGameBoard[3][9] = chip; 
-                        break;
-                    }
-                    else {
-                        status = true;
-                        break;
-                    }
-
-                case "6":
-                status = false;
-                    if (backendGameBoard[1][2] == ' ') {
-                        backendGameBoard[1][2] = chip;                        
-                        userGameBoard[3][15] = chip; 
-                        break;
-                    }
-                    else {
-                        status = true;
-                        break;
-                    }
-
-                case "7":
-                status = false;
-                    if (backendGameBoard[2][0] == ' ') {
-                        backendGameBoard[2][0] = chip;
-                        userGameBoard[5][3] = chip; 
-                        break;
-                    }
-                    else {
-                        status = true;
-                        break;
-                    }
-
-                case "8":
-                status = false;
-                    if (backendGameBoard[2][1] == ' ') {
-                        backendGameBoard[2][1] = chip;
-                        userGameBoard[5][9] = chip; 
-                        break;
-                    }
-                    else {
-                        status = true;
-                        break;
-                    }
-
-                case "9":
-                status = false;
-                    if (backendGameBoard[2][2] == ' ') {
-                        backendGameBoard[2][2] = chip;
-                        userGameBoard[5][15] = chip; 
-                        break;
-                    }
-                    else {
-                        status = true;
-                        break;
-                    }
-                
-                case " ":
-                //if empty reloop
-                status = true;
-                break;
-
-                default: {
-                status = true;
-                break;
-                }
-            }
-        }
-
-        clear();
-
-        //Placing the game mode once again
-        aiTitle();
-
-        //Printing the modified user box
-        for (int r = 0; r < userGameBoard.length; r++) {
-            for (int c = 0; c < userGameBoard[0].length; c++) {
-                System.out.print(userGameBoard[r][c]);
-            }
-            System.out.println();
-        }
-        
-    }
-
     //Doesn't include X
     public static char AIchipSelector(String tag) {
         char chip = ' ';
@@ -1067,8 +946,8 @@ public class TicTacToe {
                 //Check if player 1 has already won
                 if (status == false) break;
 
-            //User 2 input
-            aiRandomPlacer(ai, aiChip);
+            //AI input
+            chipPlacer(ai, aiChip);
 
             //Check if AI has won
             status = checkWin(ai, aiChip);
