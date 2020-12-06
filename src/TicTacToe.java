@@ -639,6 +639,37 @@ public class TicTacToe {
         //every time a users array, row or column is filles (3/3), or diagonals i = j
         //array for row and column positions occipued
 
+        
+        //Diagonals
+        if ( (backendGameBoard[0][0] == backendGameBoard[1][1] && backendGameBoard[0][0] == backendGameBoard[2][2] && backendGameBoard[0][0] == 1)
+         ||  (backendGameBoard[0][2] == backendGameBoard[1][1] && backendGameBoard[0][2] == backendGameBoard[2][0] && backendGameBoard[0][2] == 1) ) {
+
+            System.out.println("\n" + tag  + " you won!");
+                scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
+            //add to times run
+            timesRun++; //game has been won by someone
+
+        return false;
+        }
+
+        //Rows and Columns
+        for (int i = 0; i < 3; ++i) {
+            if (( (backendGameBoard[i][0] == backendGameBoard[i][1] && backendGameBoard[i][0] == backendGameBoard[i][2] && backendGameBoard[i][0] == 1)
+             ||   (backendGameBoard[0][i] == backendGameBoard[1][i] && backendGameBoard[0][i] == backendGameBoard[2][i] && backendGameBoard[0][i] == 1) )) {
+
+                System.out.println("\n" + tag  + " you won!");
+                    scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
+                //add to times run
+                timesRun++; //game has been won by someone
+
+            return false;
+            }
+        }
+
+        //If none reloop
+        return true;
+
+/*
         //Rows
         if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
         {
@@ -722,6 +753,8 @@ public class TicTacToe {
 
     //If none, return true: reloops while
     return true;
+*/
+
     }
 
     public static void multiplayerTitle() {
