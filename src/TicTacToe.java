@@ -63,7 +63,6 @@ public class TicTacToe {
         else if (winIdentifier == 2) {
             aiWins++;
         }
-        
     }
 
     //scoreboard presented to the user only if times run (with wins)> 1
@@ -235,7 +234,6 @@ public class TicTacToe {
                 }
             }
         }
-    
     }
 
     public static int playerWinCheck(String tag) {
@@ -345,9 +343,29 @@ public class TicTacToe {
         userGameBoard[5][9]  = ' ';
         //case 9
         userGameBoard[5][15] = ' ';
-   
     }
 
+/*
+    //boolean to feed to chip placer to delete X from the array of possible values
+    static boolean ISai;
+    public static void chipPlacingMethod(int b, char chip, int frontendRow, int frontendColumn, boolean ai) {
+        if (backendGameBoard[b][b] == ' ') {
+            backendGameBoard[b][b] = chip;
+            userGameBoard[5][15] = chip; 
+        }
+        else {
+            //if were working with ai
+            if (ai = false) {
+                System.out.println("That space is alreay taken..." +
+                                           "\nTry again!");
+            }
+            
+            status = true;
+            break;
+        }
+        
+    }
+*/
 
     //Game resources
     //Player names
@@ -397,41 +415,15 @@ public class TicTacToe {
     return chip;
     }
 
-/*
-    //boolean to feed to chip placer to delete X from the array of possible values
-    static boolean ISai;
-
-    public static void chipPlacingMethod(int b, char chip, int frontendRow, int frontendColumn, boolean ai) {
-
-        if (backendGameBoard[b][b] == ' ') {
-            backendGameBoard[b][b] = chip;
-            userGameBoard[5][15] = chip; 
-        }
-        else {
-
-            //if were working with ai
-            if (ai = false) {
-                System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-            }
-            
-            status = true;
-            break;
-        }
-        
-    }
-*/
-
     public static void chipPlacer(String tag, char chip) {
 
         //add ai differentiator
         boolean checkAI = false;
         if (tag == ai) checkAI = true;
 
-        //ai value generator
         //defined outside to avoid redeclarations inside loop
+        //ai value for generator
         int randomValue;
-        String randomValueSTR;
     
         //real person input
         String userInput;
@@ -473,7 +465,6 @@ public class TicTacToe {
 
 //develop code to
 //ignore empty spaces, wait for actual input
-
             switch (inputChoice) {
 
                 case "1": //Used double commas since tghe user input is declared as a string- 
@@ -717,11 +708,9 @@ public class TicTacToe {
             }
             System.out.println();
         }
-        
     }
 
 //Attempt to do it by scanning arrays
-
     public static boolean checkWin (String tag, char chip) {
             
 //write an array with possible win values
@@ -772,8 +761,8 @@ public class TicTacToe {
             }
         }
 
-        //If none reloop
-        return true;
+    //If none reloop
+    return true;
     }
 
     public static void multiplayerTitle() {
@@ -1012,7 +1001,6 @@ public class TicTacToe {
                 }
             }
         }
-    
     }
 
     public static void main(String[] args) {
