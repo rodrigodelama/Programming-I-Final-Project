@@ -23,7 +23,7 @@ public class TicTacToe {
     static boolean status = true;
 
     //global enter value to remain empty
-    static String enter;
+    static String enterToContinue;
 
     //adapt clear() for eclipse
     public static void clear() {
@@ -153,7 +153,7 @@ public class TicTacToe {
 
                     //Press enter when the user is ready to continue
                     System.out.println("\nPress \"Enter\" when you're ready");
-                        enter = input.nextLine();
+                        enterToContinue = input.nextLine();
 
                 break;
                 }
@@ -406,6 +406,7 @@ public class TicTacToe {
                                                                 //row1
                     //vars will be positions inside an array { {{0,0},{1,3}} }
                     //maybe even 3d
+/*
                     int[][][] positions = { {{0,0}, {1,3}}, //0, 0, 1 & 1, 0, 1
                                             {{0,1}, {1,9}}, 
                                             {{0,2}, {1,15}},
@@ -416,7 +417,7 @@ public class TicTacToe {
                                             {{2,1}, {5,9}},
                                             {{2,2}, {5,15}}
                                           };
-
+*/
                     //extrapolate this
                     //below
 
