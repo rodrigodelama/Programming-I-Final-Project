@@ -418,6 +418,7 @@ public class TicTacToe {
     public static void chipPlacer(String tag, char chip) {
 
         //add ai differentiator
+        //boolean is always initialized as false
         boolean checkAI = false;
         if (tag == ai) checkAI = true;
 
