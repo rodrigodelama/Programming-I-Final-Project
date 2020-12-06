@@ -270,7 +270,6 @@ public class TicTacToe {
             for (int c = 0; c < backendGameBoard[0].length; c++) {
 
                 backendGameBoard[r][c] = ' ';
-
             }
         }
     }
@@ -345,28 +344,6 @@ public class TicTacToe {
         userGameBoard[5][15] = ' ';
     }
 
-/*
-    //boolean to feed to chip placer to delete X from the array of possible values
-    static boolean ISai;
-    public static void chipPlacingMethod(int b, char chip, int frontendRow, int frontendColumn, boolean ai) {
-        if (backendGameBoard[b][b] == ' ') {
-            backendGameBoard[b][b] = chip;
-            userGameBoard[5][15] = chip; 
-        }
-        else {
-            //if were working with ai
-            if (ai = false) {
-                System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-            }
-            
-            status = true;
-            break;
-        }
-        
-    }
-*/
-
     //Game resources
     //Player names
     static String p1tag, p2tag;
@@ -376,33 +353,31 @@ public class TicTacToe {
     static char p1chip, p2chip;
     static final char aiChip = 'X';
 
+    public static char chipSelector(String tag, boolean ai) {
 
-    //Extrapolated method to avoid repetition
-    public static char chipSelector(String tag) {
         char chip = ' ';
+
         status = true;
         while (status) {
+
             //Chip selection
             System.out.println("\n" + tag + " select your chip:");
                 chip = input.next().charAt(0);
 
-                //convert character to UpperCase
+                //convert char to UpperCase
                 chip = Character.toUpperCase(chip);
 
-//            char[] possibleChips = {'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M',
-//            'N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1'};
-
-//            for (int i = 0; i < possibleChips.length; i++) {
-//                chips = possibleChips[i];
-//            }
-
             switch (chip) {
-                //Maybe try to put in the options inside of an array
-                //case 'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
 
                 case 'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M',
                 'N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
-                    status = false;
+
+                    //Is the game mode AI?
+                    if (ai == true && chip == 'X') {
+                        status = true;
+                        System.out.println("Please introduce a valid chip:");
+                    }
+                    else status = false;
                 break;
                 }
                 default -> {
@@ -476,7 +451,16 @@ public class TicTacToe {
                                                                 //row1
                     //vars will be positions inside an array { {{0,0},{1,3}} }
                     //maybe even 3d
-
+                    int[][][] positions = { {{0,0}, {1,3}}, //0, 0, 1 & 1, 0, 1
+                                            {{0,1}, {1,9}}, 
+                                            {{0,2}, {1,15}},
+                                            {{1,0}, {3,3}},
+                                            {{1,1}, {3,9}},
+                                            {{1,2}, {3,15}},
+                                            {{2,0}, {5,3}},
+                                            {{2,1}, {5,9}},
+                                            {{2,2}, {5,15}}
+                                          };
 
                     //extrapolate this
                     //below
@@ -798,13 +782,13 @@ public class TicTacToe {
         System.out.println("\nGamers, you have these chips to choose from:" +
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
-        //Player 1 chip selection 
-        p1chip = chipSelector( p1tag );
+        //Player 1 chip selection + false for multiplayer mode
+        p1chip = chipSelector( p1tag, false );
         
         //Same check as with the tag to avoid repeat use
         do {
-            //Player 2 chip selection
-            p2chip = chipSelector( p2tag );
+            //Player 2 chip selection + false for multiplayer mode
+            p2chip = chipSelector( p2tag, false );
 
             //If both are the same, throws error
             if (p2chip == p1chip) System.out.println("Error!" + "\nPlease choose another chip");
@@ -857,34 +841,6 @@ public class TicTacToe {
         reRun();
     }
 
-    //Doesn't include X
-    public static char AIchipSelector(String tag) {
-        char chip = ' ';
-        status = true;
-        while (status) {
-            //Chip selection
-            System.out.println("\n" + tag + " select your chip:");
-                chip = input.next().charAt(0);
-
-                //convert character to UpperCase
-                chip = Character.toUpperCase(chip);
-            
-            switch (chip) {
-                case '0','A','B','C','D','E','F','G','H','I','J','K','L','M',
-                'N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
-                    status = false;
-                break;
-                }
-                default -> {
-                    status = true;
-                    System.out.println("Please introduce a valid chip:");
-                break;
-                }
-            }
-        }
-    return chip;
-    }
-
     public static void aiTitle() {
         System.out.println("AI Deathmatch against a dumb random computer" +
                          "\nBy Rodrigo De Lama - Nov 2020\n");
@@ -903,11 +859,11 @@ public class TicTacToe {
             p1tag = input.nextLine();
 
         //Player chip selection
-        System.out.println("\nGamer, you have these chips to choose from:" +
+        System.out.println("\nPlayer 1, you have these chips to choose from:" +
                             "\n0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
-        //Player 1 chip selection 
-        p1chip = AIchipSelector(p1tag);
+        //Player 1 chip selection + ture for ai mode
+        p1chip = chipSelector( p1tag, true );
 
         //Clear selections out to start the game
         clear();
