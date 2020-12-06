@@ -48,7 +48,6 @@ public class TicTacToe {
     //runtime counter, resets on program restart
     static int timesRun = 0;
 
-    //IMPLEMENT SCOREBOARD
     //Player wins
     static byte p1Wins = 0, p2Wins = 0, aiWins = 0;
 
@@ -65,10 +64,10 @@ public class TicTacToe {
         }
     }
 
-    //scoreboard presented to the user only if times run (with wins)> 1
+    //Scoreboard presented to the user only if times run (with wins)> 1
     public static void scoreboard () {
 
-        if (timesRun == 0);
+        if (timesRun == 0) {/* do nothing */}
         else {
             System.out.println("\nSCOREBOARD\n");
 
@@ -100,7 +99,6 @@ public class TicTacToe {
         }
     }
 
-    //IMPORTANT
     public static void launcher() {
 
         //Clear the users console before runtime
@@ -109,13 +107,13 @@ public class TicTacToe {
         //Present title
         title();
 
-        //if runtime++ was actuated, scoreboard should run
+        //if timesRun++ was actuated in a previous game, scoreboard should run
         scoreboard();
         
         //Declaring before the loop to not redeclare the variables every time the while loop runs
         String explanationAns;
         
-        //Making sure while loop always engages after rerun
+        //status = false making sure while loop always engages after rerun
         status = true;
         while (status) {
 
@@ -124,10 +122,9 @@ public class TicTacToe {
                 explanationAns = input.nextLine().toLowerCase();
 
             switch (explanationAns) {
-                case "yes", "yep", "yas", "sure", "y" -> {
+                case "yes", "y" -> {
                     
-                    //status to false because we want to break off from the while loop
-                    //after a valid input has been detected
+                    //status to false because we want to break off from the while loop after a valid input has been detected
                     status = false;
                     System.out.println("\nThis is how the game board looks:\n");
                     System.out.println("╔═════╦═════╦═════╗" + 
@@ -138,8 +135,8 @@ public class TicTacToe {
                                      "\n║  7  ║  8  ║  9  ║" +
                                      "\n╚═════╩═════╩═════╝" );
 
-                    System.out.println("This is your game board. To place a chip on the board, just type a position's number and hit \"Enter\"" +
-                                     "\nTo win the game, get three chips in a row, column, or diagonally and the win is yours!\n");
+                    System.out.println("To place a chip on the board, just type a position's number and hit \"Enter\"" +
+                                     "\nTo win the game, get three chips in a row, column, or diagonally, and the win is yours!\n");
 
                     sleep(3000);
                     
@@ -161,7 +158,7 @@ public class TicTacToe {
                 break;
                 }
 
-                case "no", "nope", "nah", "n" -> {
+                case "no", "n" -> {
                     status = false;
                         System.out.println("\nOkay, lets get onto it!\n");
 
@@ -169,7 +166,7 @@ public class TicTacToe {
                 }
 
                 default -> {
-                    //status = true to rerun loop
+                    //status = true to reloop
                     status = true;
                         System.out.println("Sorry, I didn't catch that. Please type yes or no");
 
@@ -189,7 +186,7 @@ public class TicTacToe {
         System.out.println("(A) Multiplayer: 1 versus 1\n" +
                            "(B) AI: a game against a random dumb computer");
         
-        //Declared out of the loop to avoid redeclaration
+        //Declared outside the loop to avoid redeclaration
         String gameModeAns;
 
         //Reusing the same global static status variable
@@ -205,10 +202,9 @@ public class TicTacToe {
                 //Multiplayer
                 case "a" -> {
                     status = false;
-                    System.out.print("\nSome one on one action comming your way!\n\n\n");
+                    System.out.print("\nSome one on one action comming your way!");
 
-                    sleep(1000);
-                    
+                    sleep(2000);
                     multiplayer();
 
                 break;
@@ -217,10 +213,9 @@ public class TicTacToe {
                 //AI mode (CPU Mode in my game)
                 case "b" -> {
                     status = false;
-                    System.out.println("\nGet ready to be destroyed by our super dumb but kinda smart AI...\n\n\n");
+                    System.out.println("\nGet ready to be destroyed by our super dumb but kinda smart AI...");
 
-                    sleep(1000);
-
+                    sleep(2000);
                     ai();
 
                 break;
@@ -256,7 +251,6 @@ public class TicTacToe {
     //Declared a global static game variables
 
     //Backend game board array
-    //Declaring empty for reruns-- so that upong reloading the code it always starts empty
     static char[][] backendGameBoard = {
                                         {' ', ' ', ' '},
                                         {' ', ' ', ' '},
@@ -274,7 +268,8 @@ public class TicTacToe {
         }
     }
 
-    //User facing board
+    //User facing board (front end game board)
+    // 5 spaces between columns
     static char[][] userGameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
                                 { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
@@ -286,62 +281,23 @@ public class TicTacToe {
     };
 
     public static void cleanFrontEnd() {
-//This method is fine end effective, attempt to put positions in an array
+//This method is fine end effective, but attempt to put positions in an array
 
-//write an array with the positions to quickly go over the replacing of the blank spacess
-/*
-        final int[][] emptyUserGameBoard = {
-                                            {1, 3},
-                                            {1, 9},
-                                            {1, 15},
-                                            {3, 3},
-                                            {3, 9},
-                                            {3, 15},
-                                            {5, 3},
-                                            {5, 9},
-                                            {5, 15}
-        };
-
-        //declared vars for subtituting in backendGameBoard positions
-        int i, j;
-
-        for (int r = 0; r < emptyUserGameBoard.length; r++) {
-
-            //assigning position value to our variable to clean
-            i = emptyUserGameBoard[r][0];
-            j = emptyUserGameBoard[r][1];
-
-            backendGameBoard[i][j] = ' ';
-            
-//            for (int c = 0; c < emptyUserGameBoard[0].length; c++) {
-//                
-//                for (int k = 1; k < emptyUserGameBoard[0].length; k++) {
-
-//                }
-//            }
-            
-        }
-*/        
         //easy clean
-        // clean the frontend matrix
-        //case 1
+        //could be done with arrays for future userGameBoard size flexibility, but I couldn't figure it out
+
+        // Position 1
         userGameBoard[1][3]  = ' ';
-        //case 2
+        // Position 2...
         userGameBoard[1][9]  = ' ';
-        //case 3
         userGameBoard[1][15] = ' ';
-        //case 4
         userGameBoard[3][3]  = ' ';
-        //case 5
         userGameBoard[3][9]  = ' ';
-        //case 6
         userGameBoard[3][15] = ' ';
-        //case 7
         userGameBoard[5][3]  = ' ';
-        //case 8
         userGameBoard[5][9]  = ' ';
-        //case 9
         userGameBoard[5][15] = ' ';
+
     }
 
     //Game resources
@@ -447,7 +403,6 @@ public class TicTacToe {
                 status = false;
 
                     //Extrapolate to a 4 var function with the backend and frontend positions
-
                                                                 //row1
                     //vars will be positions inside an array { {{0,0},{1,3}} }
                     //maybe even 3d
