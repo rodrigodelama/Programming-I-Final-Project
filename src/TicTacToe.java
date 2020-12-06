@@ -424,6 +424,10 @@ public class TicTacToe {
 
     public static void chipPlacer(String tag, char chip) {
 
+        //add ai differentiator
+        boolean checkAI = false;
+        if (tag == ai) checkAI = true;
+
         //Declared outside to avoid redeclarations in loop
         String userInput;
 
@@ -435,7 +439,7 @@ public class TicTacToe {
                 //1-9
                 userInput = input.nextLine();
                 
-//ignore empty spaces, wait for actaul input
+//ignore empty spaces, wait for actual input
 
             switch (userInput) {
 
@@ -460,11 +464,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        //Invalid option, reloop switch
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                     //above
@@ -477,10 +487,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                 case "3":
@@ -491,10 +508,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                 case "4":
@@ -505,10 +529,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                 case "5":
@@ -519,10 +550,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                 case "6":
@@ -533,10 +571,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                 case "7":
@@ -547,10 +592,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                 case "8":
@@ -561,10 +613,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                 case "9":
@@ -575,10 +634,17 @@ public class TicTacToe {
                         break;
                     }
                     else {
-                        System.out.println("That space is alreay taken..." +
-                                           "\nTry again!");
-                        status = true;
+                        if (checkAI == true) {
+                            //Do nothing
                         break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                            status = true;
+                        break;
+                        }
                     }
 
                 case " ":        
@@ -617,21 +683,8 @@ public class TicTacToe {
 
 //Attempt to do it by scanning arrays
 
-    public static boolean checkWin(String tag, char chip) {
+    public static boolean checkWin (String tag, char chip) {
             
-        //Implement code for a 3-in-a-row check or for a full board
-        //Check for 3-in-a-row
-
-        //Tried for loop-- broken
-            /*
-            for (int r = 0; r < backendGameBoard.length; r++){
-                if (backendGameBoard[0][r] != ' '){
-                    status = false;
-                System.out.println("You won!");
-                }
-            }
-            */
-
 //write an array with possible win values
 
         //try to do things with rows and columns
@@ -639,10 +692,21 @@ public class TicTacToe {
         //every time a users array, row or column is filles (3/3), or diagonals i = j
         //array for row and column positions occipued
 
+        //Full board- don't advance
+        if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ' &&
+            backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ' &&
+            backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
+        {
+            System.out.println("\nThe board is full: Draw!");
+            //no one won the game so we wont add to timesRun
         
-        //Diagonals
-        if ( (backendGameBoard[0][0] == backendGameBoard[1][1] && backendGameBoard[0][0] == backendGameBoard[2][2] && backendGameBoard[0][0] == 1)
-         ||  (backendGameBoard[0][2] == backendGameBoard[1][1] && backendGameBoard[0][2] == backendGameBoard[2][0] && backendGameBoard[0][2] == 1) ) {
+        return false;
+        }
+
+        //Diagonals (else try diagonals first)
+        else if ( (backendGameBoard[0][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][2] == chip)
+            ||    (backendGameBoard[0][2] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][0] == chip) )
+        {
 
             System.out.println("\n" + tag  + " you won!");
                 scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
@@ -651,12 +715,15 @@ public class TicTacToe {
 
         return false;
         }
+        //If no diagonals are full, try rows and columns
 
         //Rows and Columns
-        for (int i = 0; i < 3; ++i) {
-            if (( (backendGameBoard[i][0] == backendGameBoard[i][1] && backendGameBoard[i][0] == backendGameBoard[i][2] && backendGameBoard[i][0] == 1)
-             ||   (backendGameBoard[0][i] == backendGameBoard[1][i] && backendGameBoard[0][i] == backendGameBoard[2][i] && backendGameBoard[0][i] == 1) )) {
+        for (int i = 0; i < backendGameBoard.length; i++) {
 
+            //Either rows or columns
+            if (( (backendGameBoard[i][0] == chip && backendGameBoard[i][1] == chip && backendGameBoard[i][2] == chip)
+               || (backendGameBoard[0][i] == chip && backendGameBoard[1][i] == chip && backendGameBoard[2][i] == chip) ))
+            {
                 System.out.println("\n" + tag  + " you won!");
                     scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
                 //add to times run
@@ -668,93 +735,6 @@ public class TicTacToe {
 
         //If none reloop
         return true;
-
-/*
-        //Rows
-        if (backendGameBoard[0][0] == chip && backendGameBoard[0][1] == chip && backendGameBoard[0][2] == chip)
-        {
-            System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
-            //add to times run
-            timesRun++; //game has been won by someone
-            return false;
-
-        }
-        else if (backendGameBoard[1][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[1][2] == chip)
-        {
-            System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) );
-            //add to times run
-            timesRun++;
-            return false;
-        }
-        else if (backendGameBoard[2][0] == chip && backendGameBoard[2][1] == chip && backendGameBoard[2][2] == chip)
-        {
-            System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) );
-            //add to times run
-            timesRun++;
-            return false;
-        }
-
-        //Columns
-        else if (backendGameBoard[0][0] == chip && backendGameBoard[1][0] == chip && backendGameBoard[2][0] == chip)
-        {
-            System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) );
-            //add to times run
-            timesRun++;
-            return false;
-        }
-        else if (backendGameBoard[0][1] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][1] == chip)
-        {
-            System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) );
-            //add to times run
-            timesRun++;
-            return false;
-        }
-        else if (backendGameBoard[0][2] == chip && backendGameBoard[1][2] == chip && backendGameBoard[2][2] == chip)
-        {
-            System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) );
-            //add to times run
-            timesRun++;
-            return false;
-        }
-
-        //Diagonals
-        else if (backendGameBoard[0][0] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][2] == chip)
-        {
-            System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) );
-            //add to times run
-            timesRun++;
-            return false;
-        }
-        else if (backendGameBoard[0][2] == chip && backendGameBoard[1][1] == chip && backendGameBoard[2][0] == chip)
-        {
-            System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) );
-
-            //add to times run
-            timesRun++;
-            return false;
-        }
-
-        //Full board
-        else if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ' &&
-                 backendGameBoard[1][0] != ' ' && backendGameBoard[1][1] != ' ' && backendGameBoard[2][2] != ' ' &&
-                 backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
-        {
-            System.out.println("\nThe board is full: Draw!");
-            return false;
-        }
-
-    //If none, return true: reloops while
-    return true;
-*/
-
     }
 
     public static void multiplayerTitle() {
