@@ -346,22 +346,32 @@ public class TicTacToe {
     return chip;
     }
 
+    //switch only to fill in the backend and front end, check if the square is empty or full beforehand
 
-    //how to get rid of the extra enter
+    public static void checkFilled() {
+
+        //Method to check if the array is full
+        
+    }
+
+    public static void fillIn(int a, int b, int c, int d, char chip) {
+
+        backendGameBoard[a][b] = chip;
+        userGameBoard[c][d] = chip;
+        
+    }
+      //how to get rid of the extra enter
     /*
-
     while ( input.hasNext("\n") ) {
         input.nex();
     }
     
     */
-
 //clean word buffer
 
     public static boolean alreadyTaken(boolean checkAI) {
 
         boolean whileStatus = false; //avoid global variables
-
         if (checkAI == false) {
             System.out.println("That space is alreay taken..." +
                                "\nTry again!");
@@ -373,9 +383,8 @@ public class TicTacToe {
     }
 
     public static void aiPrint(String num) {
-
+        
         System.out.println(num);
-
     }
 
     public static void chipPlacer(String tag, char chip) {
@@ -404,9 +413,6 @@ public class TicTacToe {
 
                 System.out.println("\n" + tag + " in what square would you like to place your chip?");
                 //1-9
-                while ( input.hasNext("\n") ) {
-                    input.next();
-                }
                 userInput = input.nextLine();
 
             inputChoice = userInput;
@@ -437,37 +443,27 @@ public class TicTacToe {
                 case "1": //Used double commas since tghe user input is declared as a string- 
                 status = false;
 
-                    //Extrapolate to a 4 var function with the backend and frontend positions
-                                                                //row1
-                    //vars will be positions inside an array { {{0,0},{1,3}} }
-                    //maybe even 3d
-/*
-                    int[][][] positions = { {{0,0}, {1,3}}, //0, 0, 1 & 1, 0, 1
-                                            {{0,1}, {1,9}}, 
-                                            {{0,2}, {1,15}},
-                                            {{1,0}, {3,3}},
-                                            {{1,1}, {3,9}},
-                                            {{1,2}, {3,15}},
-                                            {{2,0}, {5,3}},
-                                            {{2,1}, {5,9}},
-                                            {{2,2}, {5,15}}
-                                          };
-*/
-                    //extrapolate this
-                    //below
-
                     //Check if the place is not taken already
                     if (backendGameBoard[0][0] == ' ') {
                         //If empty, fill it
-                        backendGameBoard[0][0] = chip;
-                        userGameBoard[1][3] = chip;
+//check here for fill in method                        
+                        fillIn(0, 0, 1, 3, chip);
+                        break;
                     }
                     else {
-                        status = alreadyTaken(checkAI);
+                        if (checkAI == true) {
+                            //Do nothing
+                        break;
+                        }
+                        else {
+                            System.out.println("That space is alreay taken..." +
+                                               "\nTry again!");
+                            //Invalid option, reloop switch
+                        }
+                        status = true;
+                        break;
                     }
-                    break; //Only one break because it'll exit anyway --> if else, if the arg is in both, its redundant, get it outside.
 
-                    //above
 
                 case "2":
                 status = false;
@@ -484,8 +480,8 @@ public class TicTacToe {
                             System.out.println("That space is alreay taken..." +
                                                "\nTry again!");
                             //Invalid option, reloop switch
-                            status = true;
                         }
+                        status = true;
                         break;
                     }
 
@@ -499,15 +495,14 @@ public class TicTacToe {
                     else {
                         if (checkAI == true) {
                             //Do nothing
-                        break;
                         }
                         else {
                             System.out.println("That space is alreay taken..." +
                                                "\nTry again!");
                             //Invalid option, reloop switch
-                            status = true;
-                        break;
                         }
+                        status = true;
+                        break;
                     }
 
                 case "4":
@@ -520,15 +515,14 @@ public class TicTacToe {
                     else {
                         if (checkAI == true) {
                             //Do nothing
-                        break;
                         }
                         else {
                             System.out.println("That space is alreay taken..." +
                                                "\nTry again!");
                             //Invalid option, reloop switch
-                            status = true;
-                        break;
                         }
+                        status = true;
+                        break;
                     }
 
                 case "5":
@@ -541,15 +535,14 @@ public class TicTacToe {
                     else {
                         if (checkAI == true) {
                             //Do nothing
-                        break;
                         }
                         else {
                             System.out.println("That space is alreay taken..." +
                                                "\nTry again!");
                             //Invalid option, reloop switch
-                            status = true;
-                        break;
                         }
+                        status = true;
+                        break;
                     }
 
                 case "6":
@@ -562,15 +555,14 @@ public class TicTacToe {
                     else {
                         if (checkAI == true) {
                             //Do nothing
-                        break;
                         }
                         else {
                             System.out.println("That space is alreay taken..." +
                                                "\nTry again!");
                             //Invalid option, reloop switch
-                            status = true;
-                        break;
                         }
+                        status = true;
+                        break;
                     }
 
                 case "7":
@@ -583,15 +575,14 @@ public class TicTacToe {
                     else {
                         if (checkAI == true) {
                             //Do nothing
-                        break;
                         }
                         else {
                             System.out.println("That space is alreay taken..." +
                                                "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
+                            //Invalid option, reloop switch   
                         }
+                        status = true;
+                        break;
                     }
 
                 case "8":
@@ -610,9 +601,9 @@ public class TicTacToe {
                             System.out.println("That space is alreay taken..." +
                                                "\nTry again!");
                             //Invalid option, reloop switch
-                            status = true;
-                        break;
                         }
+                        status = true;
+                        break;
                     }
 
                 case "9":
@@ -631,9 +622,9 @@ public class TicTacToe {
                             System.out.println("That space is alreay taken..." +
                                                "\nTry again!");
                             //Invalid option, reloop switch
-                            status = true;
-                        break;
                         }
+                        status = true;
+                        break;
                     }
 
                 case " ":        
@@ -655,12 +646,6 @@ public class TicTacToe {
 
         clear();
 
-//
-
-        if (checkAI == true) aiPrint(inputChoice);
-
-//
-
         //Placing the game mode once again
         if ( checkAI == false ) {
             multiplayerTitle();
@@ -668,7 +653,7 @@ public class TicTacToe {
         else if ( checkAI == true ) {
             aiTitle();
         }
-        else {/* ignore - don't print */}
+        else {/* ignore don't print */}
 
         //Printing the modified user box
         for (int r = 0; r < userGameBoard.length; r++) {
@@ -894,10 +879,6 @@ public class TicTacToe {
         reRun();
     }
 
-    public static void minimax() {
-        //This function will determine the most optimal move for the AI to try to win, or block your win        
-    }
-
     //reRun is used to ak if the user wants to restart the game
     public static void reRun() {
         
@@ -915,7 +896,7 @@ public class TicTacToe {
 
             switch (userAns) {
 
-                case "yes", "y" -> {
+                case "yes", "yea", "yuh", "ye", "yessir", "y" -> {
                     status = false;
 
                     System.out.println("\nOkay, comming right up!");
@@ -929,7 +910,7 @@ public class TicTacToe {
                 break;
                 }
 
-                case "no", "n" -> {
+                case "no", "nah", "nope", "n" -> {
                     status = false;
                     //Thank the user and ends the program
                     System.out.println("\nOkay, thanks for playing!");
