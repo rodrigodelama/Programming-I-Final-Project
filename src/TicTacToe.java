@@ -48,8 +48,8 @@ public class TicTacToe {
     //runtime counter, resets on program restart
     static int timesRun = 0;
 
-    //Player wins
-    static byte p1Wins = 0, p2Wins = 0, aiWins = 0;
+    //Wins and draws count
+    static byte p1Wins = 0, p2Wins = 0, aiWins = 0, draws = 0;
 
     public static void scoreboardUpdate(int winIdentifier) {
         
@@ -78,7 +78,8 @@ public class TicTacToe {
 
             System.out.println("Player 1 wins: " + p1Wins +
                              "\nPlayer 2 wins: " + p2Wins +
-                             "\nAI wins: " + aiWins);
+                             "\nAI wins: " + aiWins +
+                             "\nThere have been " + draws + " draws");
 
             //structure to determine the leader
             String leader = " ";
@@ -334,6 +335,7 @@ public class TicTacToe {
                         System.out.println("Please introduce a valid chip:");
                     }
                     else status = false;
+
                 break;
                 }
                 default -> {
@@ -344,6 +346,46 @@ public class TicTacToe {
             }
         }
     return chip;
+    }
+
+    public static boolean checkFull(int back0, int back1, boolean checkAI) {
+
+        //Check if the position is taken already
+        boolean taken = false;
+
+        if (backendGameBoard[back0][back1] != ' ') {
+            taken = true; 
+            if (checkAI == false) {
+                System.out.println("That space is alreay taken..." +
+                                   "\nTry again!");
+            }
+            else { System.out.println("\nOopss, that place was taken, our bad"); }
+        }
+    
+    return taken;
+    }
+
+    public static void fillIn(int back0, int back1, int front0, int front1, char chip) {
+
+        //Place chips
+        backendGameBoard[back0][back1] = chip;
+        userGameBoard[front0][front1] = chip;
+    }
+    
+    /*
+    //how to get rid of the extra enter
+
+    while ( input.hasNext("\n") ) {
+        input.next();
+    }
+    */
+
+//alternative: clean scanner buffer
+
+    //Check what position was chosen
+    public static void posSelected(String num) {
+
+        System.out.println(num);
     }
 
     public static void chipPlacer(String tag, char chip) {
@@ -358,12 +400,13 @@ public class TicTacToe {
         int randomValue;
     
         //real person input
-        String userInput;
+        String userInput = "";
 
         //global input initialized in case no codition was met
         String inputChoice = "";
 
         //implementing chip placement
+        int back0, back1, front0, front1;
         status = true;
         while (status) {
 
@@ -372,7 +415,17 @@ public class TicTacToe {
 
                 System.out.println("\n" + tag + " in what square would you like to place your chip?");
                 //1-9
-                userInput = input.nextLine();
+                // if the scaner
+                while (status) {
+                    status = true;
+
+                    if ( input.hasNextLine() ) {
+
+                        userInput = input.nextLine();
+                        status = false;
+                    }
+                }
+                
 
             inputChoice = userInput;
             }
@@ -390,231 +443,151 @@ public class TicTacToe {
             
             inputChoice = String.valueOf(randomValue);
             }
-            //else reloop
+            //else wouldnt make sense / not possible --> reloop
             else {
                 status = true;
             }
 
 //develop code to
 //ignore empty spaces, wait for actual input
+
             switch (inputChoice) {
 
-                case "1": //Used double commas since tghe user input is declared as a string- 
-                status = false;
+                case "1": //Used double commas since the user input is declared as a string
 
-                    //Extrapolate to a 4 var function with the backend and frontend positions
-                                                                //row1
-                    //vars will be positions inside an array { {{0,0},{1,3}} }
-                    //maybe even 3d
-/*
-                    int[][][] positions = { {{0,0}, {1,3}}, //0, 0, 1 & 1, 0, 1
-                                            {{0,1}, {1,9}}, 
-                                            {{0,2}, {1,15}},
-                                            {{1,0}, {3,3}},
-                                            {{1,1}, {3,9}},
-                                            {{1,2}, {3,15}},
-                                            {{2,0}, {5,3}},
-                                            {{2,1}, {5,9}},
-                                            {{2,2}, {5,15}}
-                                          };
-*/
-                    //extrapolate this
-                    //below
+                //If if is not fulfilled, it must reloop
+                status = true;
 
-                    //Check if the place is not taken already
-                    if (backendGameBoard[0][0] == ' ') {
-                        //If empty, fill it
-                        backendGameBoard[0][0] = chip;
-                        userGameBoard[1][3] = chip;
-                        break;
-                    }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
+                    //Positions in the frontend and backend matrix
+                    back0 = 0; back1 = 0;
+                    front0 = 1; front1 = 3;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { //If backend is empty 
+
+                        //Fill both the backend and the user game board
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    //Exit loop command
+                    status = false;
                     }
 
-                    //above
+                break;
 
                 case "2":
-                status = false;
-                    if (backendGameBoard[0][1] == ' ') {
-                        backendGameBoard[0][1] = chip;
-                        userGameBoard[1][9] = chip;
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 0; back1 = 1;
+                    front0 = 1; front1 = 9;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
-                    }
+
+                break;
 
                 case "3":
-                status = false;
-                    if (backendGameBoard[0][2] == ' ') {
-                        backendGameBoard[0][2] = chip;
-                        userGameBoard[1][15] = chip;
-                        break;
+                status = true;
+
+                    back0 = 0; back1 = 2;
+                    front0 = 1; front1 = 15;
+
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
-                    }
+                break;
 
                 case "4":
-                status = false;
-                    if (backendGameBoard[1][0] == ' ') {
-                        backendGameBoard[1][0] = chip;
-                        userGameBoard[3][3] = chip; 
-                        break;
+                status = true;
+
+                    back0 = 1; back1 = 0;
+                    front0 = 3; front1 = 3;
+
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
-                    }
+                break;
 
                 case "5":
-                status = false;
-                    if (backendGameBoard[1][1] == ' ') {
-                        backendGameBoard[1][1] = chip;
-                        userGameBoard[3][9] = chip; 
-                        break;
+                status = true;
+
+                    back0 = 1; back1 = 1;
+                    front0 = 3; front1 = 9;
+
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
-                    }
+                break;
 
                 case "6":
-                status = false;
-                    if (backendGameBoard[1][2] == ' ') {
-                        backendGameBoard[1][2] = chip;                        
-                        userGameBoard[3][15] = chip; 
-                        break;
+                status = true;
+
+                    back0 = 1; back1 = 2;
+                    front0 = 3; front1 = 15;
+
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
-                    }
+                break;
 
                 case "7":
-                status = false;
-                    if (backendGameBoard[2][0] == ' ') {
-                        backendGameBoard[2][0] = chip;
-                        userGameBoard[5][3] = chip; 
-                        break;
+                status = true;
+
+                    back0 = 2; back1 = 0;
+                    front0 = 5; front1 = 3;
+
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
-                    }
+                break;
 
                 case "8":
-                status = false;
-                    if (backendGameBoard[2][1] == ' ') {
-                        backendGameBoard[2][1] = chip;
-                        userGameBoard[5][9] = chip; 
-                        break;
+                status = true;
+
+                    back0 = 2; back1 = 1;
+                    front0 = 5; front1 = 9;
+
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
-                    }
+                break;
 
                 case "9":
-                status = false;
-                    if (backendGameBoard[2][2] == ' ') {
-                        backendGameBoard[2][2] = chip;
-                        userGameBoard[5][15] = chip; 
-                        break;
-                    }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                            status = true;
-                        break;
-                        }
-                    }
-
-                case " ":        
-                //if the inputed value isempty, reloop
                 status = true;
+
+                    back0 = 2; back1 = 2;
+                    front0 = 5; front1 = 15;
+
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
+                    }
                 break;
 
                 default: {
@@ -649,6 +622,9 @@ public class TicTacToe {
             }
             System.out.println();
         }
+
+        //Check chosen place both AI and Player
+        posSelected(inputChoice);
     }
 
 //Attempt to do it by scanning arrays
@@ -667,6 +643,7 @@ public class TicTacToe {
             backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
         {
             System.out.println("\nThe board is full: Draw!");
+            draws++;
             //no one won the game so we wont add to timesRun
         
         return false;
@@ -694,9 +671,8 @@ public class TicTacToe {
                || (backendGameBoard[0][i] == chip && backendGameBoard[1][i] == chip && backendGameBoard[2][i] == chip) ))
             {
                 System.out.println("\n" + tag  + " you won!");
-                    scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
-                //add to times run
-                timesRun++; //game has been won by someone
+                    scoreboardUpdate( playerWinCheck(tag) );
+                timesRun++;
 
             return false;
             }
