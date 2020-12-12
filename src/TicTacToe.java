@@ -483,14 +483,11 @@ public class TicTacToe {
                 case "3":
                 status = true;
 
-                    //Positions
                     back0 = 0; back1 = 2;
                     front0 = 1; front1 = 15;
 
-                    //Check backend
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
-                        //Fill both boards
                         fillIn(back0, back1, front0, front1, chip);
 
                     status = false;
@@ -500,14 +497,11 @@ public class TicTacToe {
                 case "4":
                 status = true;
 
-                    //Positions
                     back0 = 1; back1 = 0;
-                    front0 = 2; front1 = 3;
+                    front0 = 3; front1 = 3;
 
-                    //Check backend
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
-                        //Fill both boards
                         fillIn(back0, back1, front0, front1, chip);
 
                     status = false;
@@ -517,14 +511,11 @@ public class TicTacToe {
                 case "5":
                 status = true;
 
-                    //Positions
                     back0 = 1; back1 = 1;
-                    front0 = 2; front1 = 9;
+                    front0 = 3; front1 = 9;
 
-                    //Check backend
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
-                        //Fill both boards
                         fillIn(back0, back1, front0, front1, chip);
 
                     status = false;
@@ -534,14 +525,11 @@ public class TicTacToe {
                 case "6":
                 status = true;
 
-                    //Positions
                     back0 = 1; back1 = 2;
-                    front0 = 2; front1 = 15;
+                    front0 = 3; front1 = 15;
 
-                    //Check backend
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
-                        //Fill both boards
                         fillIn(back0, back1, front0, front1, chip);
 
                     status = false;
@@ -551,14 +539,11 @@ public class TicTacToe {
                 case "7":
                 status = true;
 
-                    //Positions
                     back0 = 2; back1 = 0;
-                    front0 = 3; front1 = 3;
+                    front0 = 5; front1 = 3;
 
-                    //Check backend
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
-                        //Fill both boards
                         fillIn(back0, back1, front0, front1, chip);
 
                     status = false;
@@ -568,14 +553,11 @@ public class TicTacToe {
                 case "8":
                 status = true;
 
-                    //Positions
                     back0 = 2; back1 = 1;
-                    front0 = 3; front1 = 9;
+                    front0 = 5; front1 = 9;
 
-                    //Check backend
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
-                        //Fill both boards
                         fillIn(back0, back1, front0, front1, chip);
 
                     status = false;
@@ -585,14 +567,11 @@ public class TicTacToe {
                 case "9":
                 status = true;
 
-                    //Positions
                     back0 = 2; back1 = 2;
-                    front0 = 3; front1 = 15;
+                    front0 = 5; front1 = 15;
 
-                    //Check backend
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
-                        //Fill both boards
                         fillIn(back0, back1, front0, front1, chip);
 
                     status = false;
