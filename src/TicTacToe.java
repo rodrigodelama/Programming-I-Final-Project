@@ -335,6 +335,7 @@ public class TicTacToe {
                         System.out.println("Please introduce a valid chip:");
                     }
                     else status = false;
+
                 break;
                 }
                 default -> {
@@ -358,6 +359,7 @@ public class TicTacToe {
                 System.out.println("That space is alreay taken..." +
                                    "\nTry again!");
             }
+            else { System.out.println("\nOopss, that place was taken, our bad"); }
         }
     
     return taken;
@@ -398,7 +400,7 @@ public class TicTacToe {
         int randomValue;
     
         //real person input
-        String userInput;
+        String userInput = "";
 
         //global input initialized in case no codition was met
         String inputChoice = "";
@@ -413,7 +415,17 @@ public class TicTacToe {
 
                 System.out.println("\n" + tag + " in what square would you like to place your chip?");
                 //1-9
-                userInput = input.nextLine();
+                // if the scaner
+                while (status) {
+                    status = true;
+
+                    if ( input.hasNextLine() ) {
+
+                        userInput = input.nextLine();
+                        status = false;
+                    }
+                }
+                
 
             inputChoice = userInput;
             }
