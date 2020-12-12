@@ -36,7 +36,7 @@ public class TicTacToe {
 
     public static void title() {
         //Title method to avoid repetition
-        System.out.println("\n\nHello, welcome to TicTacToe JAVA edition!" +
+        System.out.println("Hello, welcome to TicTacToe JAVA edition!" +
                            "\nBy Rodrigo De Lama - Nov 2020\n");
     }
 
@@ -151,6 +151,8 @@ public class TicTacToe {
                                      "\n╚═════╩═════╩═════╝" );
                     
                     System.out.println("\nPlayer X would win!\n");
+
+                    System.out.println("\nYou may type \"exit\" in-game at any point to head back to the main menu");
 
                     //Press enter when the user is ready to continue
                     System.out.println("\nPress \"Enter\" when you're ready");
@@ -388,7 +390,7 @@ public class TicTacToe {
         System.out.println(num);
     }
 
-    public static void chipPlacer(String tag, char chip) {
+    public static void chipPlacer(String tag, char chip, int avoidFirstError) {
 
         //add ai differentiator
         //boolean is always initialized as false
@@ -415,7 +417,13 @@ public class TicTacToe {
 
                 System.out.println("\n" + tag + " in what square would you like to place your chip?");
                 //1-9
-                // if the scaner
+
+                // attempt to avoid reading "enter" value from last input
+                //couldnt figure out how to avoid the error, so I made a counter to avoid displaying the first error message
+                while ( input.hasNext("\n") ) {
+                    input.next();
+                }
+
                 while (status) {
                     status = true;
 
@@ -432,7 +440,7 @@ public class TicTacToe {
             //AI case
             else if ( checkAI == true ) {
 
-                System.out.println("Our stupid smart AI is thinking about it's move...");
+                System.out.println("\nOur stupid smart AI is thinking about it's move...");
                 sleep(2500);
 
                 // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
@@ -590,15 +598,24 @@ public class TicTacToe {
                     }
                 break;
 
-                default: {
+                case "exit":
+                status = false;
+
+                    launcher();
+                break;
+
+                default: 
                 status = true;
+
+                    //hacky way of fixing it
+                    if (avoidFirstError == 0) break;
+
                     System.out.println("Please input a valid location, 1-9");
 
                     //Inform the user of an invalid input and loop
                     sleep(1500);
-
                 break;
-                }
+                
             }
         }
 
@@ -624,7 +641,7 @@ public class TicTacToe {
         }
 
         //Check chosen place both AI and Player
-        posSelected(inputChoice);
+        posSelected("\n" + tag + " placed their chip on square " + inputChoice);
     }
 
 //Attempt to do it by scanning arrays
@@ -690,6 +707,8 @@ public class TicTacToe {
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
 
+        int avoidFirstError = 0;
+
         clear();
 
         //Informing the user about theur game mode selection 
@@ -745,7 +764,10 @@ public class TicTacToe {
         while (status) {
 
             //User 1 input
-            chipPlacer(p1tag, p1chip);
+            chipPlacer(p1tag, p1chip, avoidFirstError);
+            
+            //add to display error messages after first input
+            avoidFirstError++;
 
             //Check if player 1 has won
             status = checkWin(p1tag, p1chip);
@@ -754,7 +776,7 @@ public class TicTacToe {
                 if (status == false) break;
 
             //User 2 input
-            chipPlacer(p2tag, p2chip);
+            chipPlacer(p2tag, p2chip, avoidFirstError);
 
             //Check if player 2 has won
             status = checkWin(p2tag, p2chip);
@@ -780,6 +802,8 @@ public class TicTacToe {
 
     //ai mode is to play a game against a dumb (random) machine
     public static void ai() {
+
+        int avoidFirstError = 0;
 
         clear();
 
@@ -816,7 +840,9 @@ public class TicTacToe {
         while (status) {
 
             //User 1 input
-            chipPlacer(p1tag, p1chip);
+            chipPlacer(p1tag, p1chip, avoidFirstError);
+
+            avoidFirstError++;
 
             //Check if player 1 has won
             status = checkWin(p1tag, p1chip);
@@ -825,7 +851,7 @@ public class TicTacToe {
                 if (status == false) break;
 
             //AI input
-            chipPlacer(ai, aiChip);
+            chipPlacer(ai, aiChip, avoidFirstError);
 
             //Check if AI has won
             status = checkWin(ai, aiChip);
