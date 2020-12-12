@@ -347,21 +347,6 @@ public class TicTacToe {
     return chip;
     }
 
-/*
-    public static boolean alreadyTaken(boolean checkAI) {
-
-        boolean whileStatus = false; //avoid global variables
-        if (checkAI == false) {
-            System.out.println("That space is alreay taken..." +
-                               "\nTry again!");
-            //Invalid option, reloop switch
-            whileStatus = true;
-        }
-    
-    return whileStatus;
-    }
-*/
-
     public static boolean checkFull(int back0, int back1, boolean checkAI) {
 
         //Check if the position is taken already
@@ -386,24 +371,14 @@ public class TicTacToe {
     }
     
     /*
-    public static void caseX(int back0, int back1, int front0, int front1, char chip) {
-
-        //Only check backend
-        checkFull(back0, back1);
-
-        //Fill both the backend and the user game board
-        fillIn(back0, back1, front0, front1, chip);
-        
-    }
-    
     //how to get rid of the extra enter
 
     while ( input.hasNext("\n") ) {
-        input.nex();
+        input.next();
     }
-    
     */
-//alternative: clean word buffer
+
+//alternative: clean scanner buffer
 
     //Check what value the AI chose
     public static void aiPrintCheck(String num) {
@@ -456,13 +431,14 @@ public class TicTacToe {
             
             inputChoice = String.valueOf(randomValue);
             }
-            //else wouldnt make sense/ not possible --> reloop
+            //else wouldnt make sense / not possible --> reloop
             else {
                 status = true;
             }
 
 //develop code to
 //ignore empty spaces, wait for actual input
+
             switch (inputChoice) {
 
                 case "1": //Used double commas since the user input is declared as a string
@@ -480,176 +456,151 @@ public class TicTacToe {
                         //Fill both the backend and the user game board
                         fillIn(back0, back1, front0, front1, chip);
 
-                        //Exit loop command
-                        status = false;
+                    //Exit loop command
+                    status = false;
                     }
 
                 break;
 
                 case "2":
-                status = false;
-                    if (backendGameBoard[0][1] == ' ') {
-                        backendGameBoard[0][1] = chip;
-                        userGameBoard[1][9] = chip;
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 0; back1 = 1;
+                    front0 = 1; front1 = 9;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                        }
-                        status = true;
-                        break;
-                    }
+
+                break;
 
                 case "3":
-                status = false;
-                    if (backendGameBoard[0][2] == ' ') {
-                        backendGameBoard[0][2] = chip;
-                        userGameBoard[1][15] = chip;
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 0; back1 = 2;
+                    front0 = 1; front1 = 15;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                        }
-                        status = true;
-                        break;
-                    }
+                break;
 
                 case "4":
-                status = false;
-                    if (backendGameBoard[1][0] == ' ') {
-                        backendGameBoard[1][0] = chip;
-                        userGameBoard[3][3] = chip; 
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 1; back1 = 0;
+                    front0 = 2; front1 = 3;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                        }
-                        status = true;
-                        break;
-                    }
+                break;
 
                 case "5":
-                status = false;
-                    if (backendGameBoard[1][1] == ' ') {
-                        backendGameBoard[1][1] = chip;
-                        userGameBoard[3][9] = chip; 
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 1; back1 = 1;
+                    front0 = 2; front1 = 9;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                        }
-                        status = true;
-                        break;
-                    }
+                break;
 
                 case "6":
-                status = false;
-                    if (backendGameBoard[1][2] == ' ') {
-                        backendGameBoard[1][2] = chip;                        
-                        userGameBoard[3][15] = chip; 
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 1; back1 = 2;
+                    front0 = 2; front1 = 15;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                        }
-                        status = true;
-                        break;
-                    }
+                break;
 
                 case "7":
-                status = false;
-                    if (backendGameBoard[2][0] == ' ') {
-                        backendGameBoard[2][0] = chip;
-                        userGameBoard[5][3] = chip; 
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 2; back1 = 0;
+                    front0 = 3; front1 = 3;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch   
-                        }
-                        status = true;
-                        break;
-                    }
+                break;
 
                 case "8":
-                status = false;
-                    if (backendGameBoard[2][1] == ' ') {
-                        backendGameBoard[2][1] = chip;
-                        userGameBoard[5][9] = chip; 
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 2; back1 = 1;
+                    front0 = 3; front1 = 9;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                        }
-                        status = true;
-                        break;
-                    }
+                break;
 
                 case "9":
-                status = false;
-                    if (backendGameBoard[2][2] == ' ') {
-                        backendGameBoard[2][2] = chip;
-                        userGameBoard[5][15] = chip; 
-                        break;
+                status = true;
+
+                    //Positions
+                    back0 = 2; back1 = 2;
+                    front0 = 3; front1 = 15;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { 
+
+                        //Fill both boards
+                        fillIn(back0, back1, front0, front1, chip);
+
+                    status = false;
                     }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                        }
-                        status = true;
-                        break;
-                    }
+                break;
 
                 case " ":        
-                //if the inputed value isempty, reloop
+//if the inputed value is empty, reloop
                 status = true;
                 break;
 
