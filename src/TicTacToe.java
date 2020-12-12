@@ -48,8 +48,8 @@ public class TicTacToe {
     //runtime counter, resets on program restart
     static int timesRun = 0;
 
-    //Player wins
-    static byte p1Wins = 0, p2Wins = 0, aiWins = 0;
+    //Wins and draws count
+    static byte p1Wins = 0, p2Wins = 0, aiWins = 0, draws = 0;
 
     public static void scoreboardUpdate(int winIdentifier) {
         
@@ -78,7 +78,8 @@ public class TicTacToe {
 
             System.out.println("Player 1 wins: " + p1Wins +
                              "\nPlayer 2 wins: " + p2Wins +
-                             "\nAI wins: " + aiWins);
+                             "\nAI wins: " + aiWins +
+                             "\nThere have been " + draws + " draws");
 
             //structure to determine the leader
             String leader = " ";
@@ -346,29 +347,7 @@ public class TicTacToe {
     return chip;
     }
 
-    //switch only to fill in the backend and front end, check if the square is empty or full beforehand
-
-    public static void checkFilled() {
-
-        //Method to check if the array is full
-        
-    }
-
-    public static void fillIn(int a, int b, int c, int d, char chip) {
-
-        backendGameBoard[a][b] = chip;
-        userGameBoard[c][d] = chip;
-        
-    }
-      //how to get rid of the extra enter
-    /*
-    while ( input.hasNext("\n") ) {
-        input.nex();
-    }
-    
-    */
-//clean word buffer
-
+/*
     public static boolean alreadyTaken(boolean checkAI) {
 
         boolean whileStatus = false; //avoid global variables
@@ -381,9 +360,54 @@ public class TicTacToe {
     
     return whileStatus;
     }
+*/
 
-    public static void aiPrint(String num) {
+    public static boolean checkFull(int back0, int back1, boolean checkAI) {
+
+        //Check if the position is taken already
+        boolean taken = false;
+
+        if (backendGameBoard[back0][back1] != ' ') {
+            taken = true; 
+            if (checkAI == false) {
+                System.out.println("That space is alreay taken..." +
+                                   "\nTry again!");
+            }
+        }
+    
+    return taken;
+    }
+
+    public static void fillIn(int back0, int back1, int front0, int front1, char chip) {
+
+        //Place chips
+        backendGameBoard[back0][back1] = chip;
+        userGameBoard[front0][front1] = chip;
+    }
+    
+    /*
+    public static void caseX(int back0, int back1, int front0, int front1, char chip) {
+
+        //Only check backend
+        checkFull(back0, back1);
+
+        //Fill both the backend and the user game board
+        fillIn(back0, back1, front0, front1, chip);
         
+    }
+    
+    //how to get rid of the extra enter
+
+    while ( input.hasNext("\n") ) {
+        input.nex();
+    }
+    
+    */
+//alternative: clean word buffer
+
+    //Check what value the AI chose
+    public static void aiPrintCheck(String num) {
+
         System.out.println(num);
     }
 
@@ -405,6 +429,7 @@ public class TicTacToe {
         String inputChoice = "";
 
         //implementing chip placement
+        int back0, back1, front0, front1;
         status = true;
         while (status) {
 
@@ -431,7 +456,7 @@ public class TicTacToe {
             
             inputChoice = String.valueOf(randomValue);
             }
-            //else reloop
+            //else wouldnt make sense/ not possible --> reloop
             else {
                 status = true;
             }
@@ -440,30 +465,26 @@ public class TicTacToe {
 //ignore empty spaces, wait for actual input
             switch (inputChoice) {
 
-                case "1": //Used double commas since tghe user input is declared as a string- 
-                status = false;
+                case "1": //Used double commas since the user input is declared as a string
 
-                    //Check if the place is not taken already
-                    if (backendGameBoard[0][0] == ' ') {
-                        //If empty, fill it
-//check here for fill in method                        
-                        fillIn(0, 0, 1, 3, chip);
-                        break;
-                    }
-                    else {
-                        if (checkAI == true) {
-                            //Do nothing
-                        break;
-                        }
-                        else {
-                            System.out.println("That space is alreay taken..." +
-                                               "\nTry again!");
-                            //Invalid option, reloop switch
-                        }
-                        status = true;
-                        break;
+                //If if is not fulfilled, it must reloop
+                status = true;
+
+                    //Positions in the frontend and backend matrix
+                    back0 = 0; back1 = 0;
+                    front0 = 1; front1 = 3;
+
+                    //Check backend
+                    if ( checkFull(back0, back1, checkAI) == false ) { //If backend is empty 
+
+                        //Fill both the backend and the user game board
+                        fillIn(back0, back1, front0, front1, chip);
+
+                        //Exit loop command
+                        status = false;
                     }
 
+                break;
 
                 case "2":
                 status = false;
@@ -664,6 +685,9 @@ public class TicTacToe {
             }
             System.out.println();
         }
+
+        //Check ai 
+        aiPrintCheck(inputChoice);
     }
 
 //Attempt to do it by scanning arrays
