@@ -380,8 +380,8 @@ public class TicTacToe {
 
 //alternative: clean scanner buffer
 
-    //Check what value the AI chose
-    public static void aiPrintCheck(String num) {
+    //Check what position was chosen
+    public static void posSelected(String num) {
 
         System.out.println(num);
     }
@@ -578,11 +578,6 @@ public class TicTacToe {
                     }
                 break;
 
-                case " ":        
-//if the inputed value is empty, reloop
-                status = true;
-                break;
-
                 default: {
                 status = true;
                     System.out.println("Please input a valid location, 1-9");
@@ -616,8 +611,8 @@ public class TicTacToe {
             System.out.println();
         }
 
-        //Check ai 
-        aiPrintCheck(inputChoice);
+        //Check chosen place both AI and Player
+        posSelected(inputChoice);
     }
 
 //Attempt to do it by scanning arrays
@@ -636,6 +631,7 @@ public class TicTacToe {
             backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
         {
             System.out.println("\nThe board is full: Draw!");
+            draws++;
             //no one won the game so we wont add to timesRun
         
         return false;
@@ -663,9 +659,8 @@ public class TicTacToe {
                || (backendGameBoard[0][i] == chip && backendGameBoard[1][i] == chip && backendGameBoard[2][i] == chip) ))
             {
                 System.out.println("\n" + tag  + " you won!");
-                    scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
-                //add to times run
-                timesRun++; //game has been won by someone
+                    scoreboardUpdate( playerWinCheck(tag) );
+                timesRun++;
 
             return false;
             }
