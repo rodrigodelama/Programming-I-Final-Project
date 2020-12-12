@@ -94,10 +94,11 @@ public class TicTacToe {
                 leader = ai;
             }
             //display only if there's actually someone winning
-            if (leader != " ") System.out.println("\n" + leader + " you're dominating!\n");
+            if (leader != " ") System.out.println("\n" + leader + " you're dominating!");
             
             //wait and display loading animation
             sleep(1500);
+                System.out.println(); //spacing
             for (int i = 0; i < 3; i++) {
                 System.out.print(".");
             sleep(1000);
@@ -119,7 +120,7 @@ public class TicTacToe {
         //Present title
         title();
 
-        //if we have already seen the scoreboard dont show it again
+        //if we have already seen the scoreboard dont show it again unless requestes by the user, see below
         if (launcherRun == 0) {
             //if timesRun++ was actuated in a previous game, scoreboard should run
             scoreboard();
