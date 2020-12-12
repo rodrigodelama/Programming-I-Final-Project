@@ -9,9 +9,7 @@ import java.util.Scanner;
 //Used to generate random numbers without JAVA Math class
 import java.util.concurrent.ThreadLocalRandom;
 
-//delete below
-//We're going for CPU mode bois - gonna get a 100%
-
+//Main container of my methods
 public class TicTacToe {
 
     //GLOBAL DECLARATIONS
@@ -67,8 +65,7 @@ public class TicTacToe {
     //Scoreboard presented to the user only if times run (with wins)> 1
     public static void scoreboard () {
 
-        if (timesRun == 0) {/* do nothing */}
-        else {
+        if (timesRun > 0) {
             System.out.println("\nSCOREBOARD\n");
 
             System.out.println("Here's how the scoreboard is looking...\n");
@@ -96,10 +93,24 @@ public class TicTacToe {
 
                 leader = ai;
             }
-            System.out.println("\n" + leader + " you're dominating!\n");
+            //display only if there's actually someone winning
+            if (leader != " ") System.out.println("\n" + leader + " you're dominating!\n");
+            
+            //wait and display loading animation
+            sleep(1500);
+            for (int i = 0; i < 3; i++) {
+                System.out.print(".");
+            sleep(1000);
+            }
+
+            //Press enter when the user is ready to continue
+            System.out.println("\n\nPress \"Enter\" when you're ready");
+                enterToContinue = input.nextLine();
         }
     }
 
+    static int explanation;
+    static int launcherRun;
     public static void launcher() {
 
         //Clear the users console before runtime
@@ -108,72 +119,87 @@ public class TicTacToe {
         //Present title
         title();
 
-        //if timesRun++ was actuated in a previous game, scoreboard should run
-        scoreboard();
-        
+        //if we have already seen the scoreboard dont show it again
+        if (launcherRun == 0) {
+            //if timesRun++ was actuated in a previous game, scoreboard should run
+            scoreboard();
+        }
+
         //Declaring before the loop to not redeclare the variables every time the while loop runs
         String explanationAns;
         
-        //status = false making sure while loop always engages after rerun
-        status = true;
-        while (status) {
+        if (explanation == 0) {
+            //status = false making sure while loop always engages after rerun
+            status = true;
+            while (status) {
 
-            //Asking the user if they want an explanation as to how the game works
-            System.out.println("\nWould you like a quick explanation on how to play?");
-                explanationAns = input.nextLine().toLowerCase();
-
-            switch (explanationAns) {
-                case "yes", "y" -> {
-                    
-                    //status to false because we want to break off from the while loop after a valid input has been detected
-                    status = false;
-                    System.out.println("\nThis is how the game board looks:\n");
-                    System.out.println("╔═════╦═════╦═════╗" + 
-                                     "\n║  1  ║  2  ║  3  ║" +
-                                     "\n╠═════╬═════╬═════╣" +
-                                     "\n║  4  ║  5  ║  6  ║" +
-                                     "\n╠═════╬═════╬═════╣" +
-                                     "\n║  7  ║  8  ║  9  ║" +
-                                     "\n╚═════╩═════╩═════╝" );
-
-                    System.out.println("To place a chip on the board, just type a position's number and hit \"Enter\"" +
-                                     "\nTo win the game, get three chips in a row, column, or diagonally, and the win is yours!\n");
-
-                    sleep(3000);
-                    
-                    System.out.println("\nThis is an example of a winning move:\n");
-                    System.out.println("╔═════╦═════╦═════╗" + 
-                                     "\n║  X  ║     ║  O  ║" +
-                                     "\n╠═════╬═════╬═════╣" +
-                                     "\n║     ║  X  ║     ║" +
-                                     "\n╠═════╬═════╬═════╣" +
-                                     "\n║  O  ║  O  ║  X  ║" +
-                                     "\n╚═════╩═════╩═════╝" );
-                    
-                    System.out.println("\nPlayer X would win!\n");
-
-                    System.out.println("\nYou may type \"exit\" in-game at any point to head back to the main menu");
-
-                    //Press enter when the user is ready to continue
-                    System.out.println("\nPress \"Enter\" when you're ready");
-                        enterToContinue = input.nextLine();
-
-                break;
-                }
-
-                case "no", "n" -> {
-                    status = false;
-                        System.out.println("\nOkay, lets get onto it!\n");
-
-                break;
-                }
-
-                default -> {
-                    //status = true to reloop
-                    status = true;
-                        System.out.println("Sorry, I didn't catch that. Please type yes or no");
-
-                break;
+                //Asking the user if they want an explanation as to how the game works
+                System.out.println("\nWould you like a quick explanation on how to play?");
+                //System.out.println("(You will only be able to see the instructions one time," +
+                //                   " but you may go forth and check them out later)");
+                    explanationAns = input.nextLine().toLowerCase();
+    
+                switch (explanationAns) {
+                    case "yes", "y" -> {
+                        
+                        //status to false because we want to break off from the while loop after a valid input has been detected
+                        status = false;
+                        System.out.println("\nThis is how the game board looks:\n");
+                        System.out.println("╔═════╦═════╦═════╗" + 
+                                         "\n║  1  ║  2  ║  3  ║" +
+                                         "\n╠═════╬═════╬═════╣" +
+                                         "\n║  4  ║  5  ║  6  ║" +
+                                         "\n╠═════╬═════╬═════╣" +
+                                         "\n║  7  ║  8  ║  9  ║" +
+                                         "\n╚═════╩═════╩═════╝" );
+    
+                        System.out.println("To place a chip on the board, just type a position's number and hit \"Enter\"" +
+                                         "\nTo win the game, get three chips in a row, column, or diagonally, and the win is yours!\n");
+    
+                        sleep(3000);
+                        
+                        System.out.println("\nThis is an example of a winning move:\n");
+                        System.out.println("╔═════╦═════╦═════╗" + 
+                                         "\n║  X  ║     ║  O  ║" +
+                                         "\n╠═════╬═════╬═════╣" +
+                                         "\n║     ║  X  ║     ║" +
+                                         "\n╠═════╬═════╬═════╣" +
+                                         "\n║  O  ║  O  ║  X  ║" +
+                                         "\n╚═════╩═════╩═════╝" );
+                        
+                        System.out.println("\nPlayer X would win!\n");
+    
+                        System.out.println("\nYou may type \"exit\" in-game at any point to head back to the main menu");
+    
+                        System.out.println("\nPress \"Enter\" when you're ready");
+                            enterToContinue = input.nextLine();
+    
+                        //dont show the explanation in the future
+                        explanation++;
+                    break;
+                    }
+    
+                    case "no", "n" -> {
+                        status = false;
+                            System.out.println("\nOkay, lets get onto it!\n");
+    
+                    break;
+                    }
+    
+                    case "exit" -> {
+                        //exit loop
+                        status = false;
+                            //exit program
+                            System.exit(0); //exit(0) ends the program with no error code
+                    break;
+                    }
+    
+                    default -> {
+                        //status = true to reloop
+                        status = true;
+                            System.out.println("Sorry, I didn't catch that. Please type yes or no");
+                    break;
+                    }
                 }
             }
         }
@@ -198,6 +224,7 @@ public class TicTacToe {
 
             //Asking the user if they want an explanation as to how the game works
             System.out.println("\n\nType A or B to select the game mode:");
+            System.out.println("\nIf you would like to check the instructions again, just type \"back\"\n");
                 gameModeAns = input.nextLine().toLowerCase();
             
             switch (gameModeAns) {
@@ -222,6 +249,20 @@ public class TicTacToe {
                     ai();
 
                 break;
+                }
+
+                case "back" -> {
+                    //gives the user the possibility to go back for an explanation
+                    explanation = 0;
+                    launcherRun = 1;
+                    launcher();
+                    break;
+                }
+
+                case "exit" -> {
+                    status = false;
+                        System.exit(0);
+                    break;
                 }
 
                 default -> {
@@ -300,7 +341,6 @@ public class TicTacToe {
         userGameBoard[5][3]  = ' ';
         userGameBoard[5][9]  = ' ';
         userGameBoard[5][15] = ' ';
-
     }
 
     //Game resources
@@ -361,7 +401,7 @@ public class TicTacToe {
                 System.out.println("That space is alreay taken..." +
                                    "\nTry again!");
             }
-            else { System.out.println("\nOopss, that place was taken, our bad"); }
+            else { System.out.println("\nOoops, our AI selected a place that was taken, our bad"); }
         }
     
     return taken;
@@ -374,16 +414,6 @@ public class TicTacToe {
         userGameBoard[front0][front1] = chip;
     }
     
-    /*
-    //how to get rid of the extra enter
-
-    while ( input.hasNext("\n") ) {
-        input.next();
-    }
-    */
-
-//alternative: clean scanner buffer
-
     //Check what position was chosen
     public static void posSelected(String num) {
 
@@ -415,25 +445,25 @@ public class TicTacToe {
             //Real player case
             if ( checkAI == false ) {
 
-                System.out.println("\n" + tag + " in what square would you like to place your chip?");
-                //1-9
+                System.out.println("\n" + tag + " in what square would you like to place your chip?"); //1-9
 
-                // attempt to avoid reading "enter" value from last input
-                //couldnt figure out how to avoid the error, so I made a counter to avoid displaying the first error message
+                //couldnt figure out how to avoid the error of the scanner reading "enter" value from last input
+                //I made a counter to avoid displaying the first error message
+
+                //Wait for the next input
                 while ( input.hasNext("\n") ) {
-                    input.next();
+                    input.nextLine();
                 }
 
                 while (status) {
                     status = true;
 
                     if ( input.hasNextLine() ) {
-
+                        //if there's an input, exit the loop
                         userInput = input.nextLine();
                         status = false;
                     }
                 }
-                
 
             inputChoice = userInput;
             }
@@ -444,8 +474,8 @@ public class TicTacToe {
                 sleep(2500);
 
                 // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
-			    // nextInt is EXCLUSIVE at its top value- so add 1 to make it inclusive
-                // nextInt is INCLUSIVE in its lower value
+			    // ThreadLocalRandom is EXCLUSIVE at its top value- so add 1 to make it inclusive
+                // ThreadLocalRandom is INCLUSIVE in its lower value
                 randomValue = ThreadLocalRandom.current().nextInt(1, 10);
                 //calculates a random number bewteen 1 and 9
             
@@ -456,13 +486,9 @@ public class TicTacToe {
                 status = true;
             }
 
-//develop code to
-//ignore empty spaces, wait for actual input
-
             switch (inputChoice) {
 
                 case "1": //Used double commas since the user input is declared as a string
-
                 //If if is not fulfilled, it must reloop
                 status = true;
 
@@ -479,7 +505,6 @@ public class TicTacToe {
                     //Exit loop command
                     status = false;
                     }
-
                 break;
 
                 case "2":
@@ -497,7 +522,6 @@ public class TicTacToe {
 
                     status = false;
                     }
-
                 break;
 
                 case "3":
@@ -615,7 +639,6 @@ public class TicTacToe {
                     //Inform the user of an invalid input and loop
                     sleep(1500);
                 break;
-                
             }
         }
 
@@ -644,15 +667,7 @@ public class TicTacToe {
         posSelected("\n" + tag + " placed their chip on square " + inputChoice);
     }
 
-//Attempt to do it by scanning arrays
     public static boolean checkWin (String tag, char chip) {
-            
-//write an array with possible win values
-
-        //try to do things with rows and columns
-
-        //every time a users array, row or column is filles (3/3), or diagonals i = j
-        //array for row and column positions occipued
 
         //Full board- don't advance
         if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ' &&
@@ -660,8 +675,10 @@ public class TicTacToe {
             backendGameBoard[2][0] != ' ' && backendGameBoard[2][1] != ' ' && backendGameBoard[2][2] != ' ' )
         {
             System.out.println("\nThe board is full: Draw!");
+
+            //times run is added to show scoreboard with draws
+            timesRun++;
             draws++;
-            //no one won the game so we wont add to timesRun
         
         return false;
         }
@@ -695,7 +712,7 @@ public class TicTacToe {
             }
         }
 
-    //If none reloop
+    //If no win situation is encountered
     return true;
     }
 
@@ -715,17 +732,17 @@ public class TicTacToe {
         multiplayerTitle();
 
         //Player 1 name (tag) selection
-        System.out.println("\nPlayer 1, whats your tag?");
+        System.out.println("\nPlayer 1, whats your name?");
             p1tag = input.nextLine();
         
         //do while to check that the chip is not already being utilized
         do {
             //Player 2 tag selection
-            System.out.println("\nPlayer 2, whats your tag?");
+            System.out.println("\nPlayer 2, whats your name?");
                 p2tag = input.nextLine();
 
             //If both are the same, throws error
-            if (p2tag == p1tag) System.out.println("Error!" + "\nPlease choose another tag");
+            if (p2tag == p1tag) System.out.println("Error!" + "\nPlease choose another name");
 
         } while (p2tag == p1tag); //Do while that condition is true
 
@@ -783,7 +800,6 @@ public class TicTacToe {
 
                 //Check if player 2 has won-- not necessary since its the last move
                 if (status == false) break;
-
         }
         
         //Clean Arrays for possible next play
@@ -811,11 +827,11 @@ public class TicTacToe {
         aiTitle();
         
         //Player 1 name (tag) selection
-        System.out.println("\nPlayer 1, whats your tag?");
+        System.out.println("\nPlayer 1, whats your name?");
             p1tag = input.nextLine();
 
         //Player chip selection
-        System.out.println("\nPlayer 1, you have these chips to choose from:" +
+        System.out.println("\nYou have these chips to choose from:" +
                             "\n0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection + ture for ai mode
@@ -922,5 +938,4 @@ public class TicTacToe {
 
         launcher();
     }
-
 }

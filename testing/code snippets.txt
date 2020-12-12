@@ -94,3 +94,41 @@ clean userGameBoard with arrays:
             }
         }
 */
+
+
+
+
+
+//Real player case
+            if ( checkAI == false ) {
+
+                System.out.println("\n" + tag + " in what square would you like to place your chip?");
+                //1-9
+
+                userInput = input.nextLine();
+            /*
+                attempt to avoid reading "enter" value from last input
+                couldnt figure out how to avoid the error, so I made a counter to avoid displaying the first error message
+                
+                This method just delays the appearance of the "enter" input
+                while ( input.hasNext("\n") ) {
+                    input.next();
+                }
+                alternative: clean scanner buffer
+            */
+
+            userInput = input.nextLine();
+
+            /*
+                while (status) {
+                    status = true;
+
+                    if ( input.hasNextLine() ) {
+
+                        userInput = input.nextLine();
+                        status = false;
+                    }
+                }
+            */
+            inputChoice = userInput;
+            }
