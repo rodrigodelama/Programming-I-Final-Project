@@ -146,16 +146,28 @@ public class TicTacToe {
                         //status to false because we want to break off from the while loop after a valid input has been detected
                         status = false;
                         System.out.println("\nThis is how the game board looks:\n");
-                        System.out.println("╔═════╦═════╦═════╗" + 
-                                         "\n║  1  ║  2  ║  3  ║" +
-                                         "\n╠═════╬═════╬═════╣" +
-                                         "\n║  4  ║  5  ║  6  ║" +
-                                         "\n╠═════╬═════╬═════╣" +
-                                         "\n║  7  ║  8  ║  9  ║" +
-                                         "\n╚═════╩═════╩═════╝" );
+/*                        System.out.println("y"                      +
+                                         "\n   ╔═════╦═════╦═════╗" + 
+                                         "\n1  ║     ║     ║     ║" +
+                                         "\n   ╠═════╬═════╬═════╣" +
+                                         "\n2  ║     ║     ║     ║" +
+                                         "\n   ╠═════╬═════╬═════╣" +
+                                         "\n3  ║     ║     ║     ║" +
+                                         "\n   ╚═════╩═════╩═════╝" + 
+                                         "\n      1     2     3    x");
+*/                                         
+                        System.out.println("      1     2     3     x" +
+                                         "\n   ╔═════╦═════╦═════╗"    + 
+                                         "\n1  ║     ║     ║     ║"    +
+                                         "\n   ╠═════╬═════╬═════╣"    +
+                                         "\n2  ║     ║     ║     ║"    +
+                                         "\n   ╠═════╬═════╬═════╣"    +
+                                         "\n3  ║     ║     ║     ║"    +
+                                         "\n   ╚═════╩═════╩═════╝"    + 
+                                         "\ny"                         );
     
-                        System.out.println("To place a chip on the board, just type a position's number and hit \"Enter\"" +
-                                         "\nTo win the game, get three chips in a row, column, or diagonally, and the win is yours!\n");
+                        System.out.println("\nTo place a chip on the board, just type a position's coordinates in the format \"(x,y)\" and hit \"Enter\"" +
+                                           "\nTo win the game, get three chips in a row, column, or diagonally, and the win is yours!\n");
     
                         sleep(3000);
                         
@@ -489,9 +501,10 @@ public class TicTacToe {
 
             switch (inputChoice) {
 
-                case "1": //Used double commas since the user input is declared as a string
+                case "(1,1)", "1": //Used double commas since the user input is declared as a string
                 //If if is not fulfilled, it must reloop
                 status = true;
+                    if (inputChoice == "1") inputChoice = "(1,1)";
 
                     //Positions in the frontend and backend matrix
                     back0 = 0; back1 = 0;
@@ -508,8 +521,10 @@ public class TicTacToe {
                     }
                 break;
 
-                case "2":
+                case "(1,2)", "2":
                 status = true;
+                    if (inputChoice == "2") inputChoice = "(1,2)";
+
 
                     //Positions
                     back0 = 0; back1 = 1;
@@ -525,8 +540,9 @@ public class TicTacToe {
                     }
                 break;
 
-                case "3":
+                case "(1,3)", "3":
                 status = true;
+                    if (inputChoice == "3") inputChoice = "(1,3)";
 
                     back0 = 0; back1 = 2;
                     front0 = 1; front1 = 15;
@@ -539,8 +555,9 @@ public class TicTacToe {
                     }
                 break;
 
-                case "4":
+                case "(2,1)", "4":
                 status = true;
+                    if (inputChoice == "4") inputChoice = "(2,1)";
 
                     back0 = 1; back1 = 0;
                     front0 = 3; front1 = 3;
@@ -553,8 +570,9 @@ public class TicTacToe {
                     }
                 break;
 
-                case "5":
+                case "(2,2)", "5":
                 status = true;
+                    if (inputChoice == "5") inputChoice = "(2,2)";
 
                     back0 = 1; back1 = 1;
                     front0 = 3; front1 = 9;
@@ -567,8 +585,9 @@ public class TicTacToe {
                     }
                 break;
 
-                case "6":
+                case "(2,3)", "6":
                 status = true;
+                    if (inputChoice == "6") inputChoice = "(2,3)";
 
                     back0 = 1; back1 = 2;
                     front0 = 3; front1 = 15;
@@ -581,8 +600,9 @@ public class TicTacToe {
                     }
                 break;
 
-                case "7":
+                case "(3,1)", "7":
                 status = true;
+                    if (inputChoice == "7") inputChoice = "(3,1)";
 
                     back0 = 2; back1 = 0;
                     front0 = 5; front1 = 3;
@@ -595,8 +615,9 @@ public class TicTacToe {
                     }
                 break;
 
-                case "8":
+                case "(3,2)", "8":
                 status = true;
+                    if (inputChoice == "8") inputChoice = "(3,2)";
 
                     back0 = 2; back1 = 1;
                     front0 = 5; front1 = 9;
@@ -609,8 +630,9 @@ public class TicTacToe {
                     }
                 break;
 
-                case "9":
+                case "(3,3)", "9":
                 status = true;
+                    if (inputChoice == "9") inputChoice = "(3,3)";
 
                     back0 = 2; back1 = 2;
                     front0 = 5; front1 = 15;
@@ -635,7 +657,7 @@ public class TicTacToe {
                     //hacky way of fixing it
                     if (avoidFirstError == 0) break;
 
-                    System.out.println("Please input a valid location, 1-9");
+                    System.out.println("Please input the a valid position in the correct format: (x,y)");
 
                     //Inform the user of an invalid input and loop
                     sleep(1500);
