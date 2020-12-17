@@ -504,7 +504,8 @@ public class TicTacToe {
                 case "(1,1)", "1": //Used double commas since the user input is declared as a string
                 //If if is not fulfilled, it must reloop
                 status = true;
-                    if (inputChoice == "1") inputChoice = "(1,1)";
+                    //Changing the inputChoice to be shown correctly to the user when AI selects a number position
+                    inputChoice = "(1,1)";
 
                     //Positions in the frontend and backend matrix
                     back0 = 0; back1 = 0;
@@ -523,8 +524,7 @@ public class TicTacToe {
 
                 case "(1,2)", "2":
                 status = true;
-                    if (inputChoice == "2") inputChoice = "(1,2)";
-
+                    inputChoice = "(1,2)";
 
                     //Positions
                     back0 = 0; back1 = 1;
@@ -542,7 +542,7 @@ public class TicTacToe {
 
                 case "(1,3)", "3":
                 status = true;
-                    if (inputChoice == "3") inputChoice = "(1,3)";
+                    inputChoice = "(1,3)";
 
                     back0 = 0; back1 = 2;
                     front0 = 1; front1 = 15;
@@ -557,7 +557,7 @@ public class TicTacToe {
 
                 case "(2,1)", "4":
                 status = true;
-                    if (inputChoice == "4") inputChoice = "(2,1)";
+                    inputChoice = "(2,1)";
 
                     back0 = 1; back1 = 0;
                     front0 = 3; front1 = 3;
@@ -572,7 +572,7 @@ public class TicTacToe {
 
                 case "(2,2)", "5":
                 status = true;
-                    if (inputChoice == "5") inputChoice = "(2,2)";
+                    inputChoice = "(2,2)";
 
                     back0 = 1; back1 = 1;
                     front0 = 3; front1 = 9;
@@ -587,7 +587,7 @@ public class TicTacToe {
 
                 case "(2,3)", "6":
                 status = true;
-                    if (inputChoice == "6") inputChoice = "(2,3)";
+                    inputChoice = "(2,3)";
 
                     back0 = 1; back1 = 2;
                     front0 = 3; front1 = 15;
@@ -602,7 +602,7 @@ public class TicTacToe {
 
                 case "(3,1)", "7":
                 status = true;
-                    if (inputChoice == "7") inputChoice = "(3,1)";
+                    inputChoice = "(3,1)";
 
                     back0 = 2; back1 = 0;
                     front0 = 5; front1 = 3;
@@ -617,7 +617,7 @@ public class TicTacToe {
 
                 case "(3,2)", "8":
                 status = true;
-                    if (inputChoice == "8") inputChoice = "(3,2)";
+                    inputChoice = "(3,2)";
 
                     back0 = 2; back1 = 1;
                     front0 = 5; front1 = 9;
@@ -632,7 +632,7 @@ public class TicTacToe {
 
                 case "(3,3)", "9":
                 status = true;
-                    if (inputChoice == "9") inputChoice = "(3,3)";
+                    inputChoice = "(3,3)";
 
                     back0 = 2; back1 = 2;
                     front0 = 5; front1 = 15;
@@ -657,7 +657,7 @@ public class TicTacToe {
                     //hacky way of fixing it
                     if (avoidFirstError == 0) break;
 
-                    System.out.println("Please input the a valid position in the correct format: (x,y)");
+                    System.out.println("Please input a valid position in the correct format: (x,y)");
 
                     //Inform the user of an invalid input and loop
                     sleep(1500);
