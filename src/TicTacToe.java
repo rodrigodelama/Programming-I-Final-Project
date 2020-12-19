@@ -12,7 +12,6 @@ import java.util.concurrent.ThreadLocalRandom;
 //Main container of my methods
 public class TicTacToe {
 
-    //GLOBAL DECLARATIONS
     //Declared static Scanner for permanent usage, avoiding a resource leak if not closed later on
     static Scanner input = new Scanner(System.in);
 
@@ -62,7 +61,7 @@ public class TicTacToe {
         }
     }
 
-    //Scoreboard presented to the user only if times run (with wins)> 1
+    //Scoreboard presented to the user only if times run (with wins) > 1
     public static void scoreboard () {
 
         if (timesRun > 0) {
@@ -112,6 +111,7 @@ public class TicTacToe {
 
     static int explanation;
     static int launcherRun;
+
     public static void launcher() {
 
         //Clear the users console before runtime
@@ -145,17 +145,7 @@ public class TicTacToe {
                         
                         //status to false because we want to break off from the while loop after a valid input has been detected
                         status = false;
-                        System.out.println("\nThis is how the game board looks:\n");
-/*                        System.out.println("y"                      +
-                                         "\n   ╔═════╦═════╦═════╗" + 
-                                         "\n1  ║     ║     ║     ║" +
-                                         "\n   ╠═════╬═════╬═════╣" +
-                                         "\n2  ║     ║     ║     ║" +
-                                         "\n   ╠═════╬═════╬═════╣" +
-                                         "\n3  ║     ║     ║     ║" +
-                                         "\n   ╚═════╩═════╩═════╝" + 
-                                         "\n      1     2     3    x");
-*/                                         
+                        System.out.println("\nThis is how the game board looks:\n");                                        
                         System.out.println("      1     2     3     x" +
                                          "\n   ╔═════╦═════╦═════╗"    + 
                                          "\n1  ║     ║     ║     ║"    +
@@ -195,7 +185,6 @@ public class TicTacToe {
                     case "no", "n" -> {
                         status = false;
                             System.out.println("\nOkay, lets get onto it!\n");
-    
                     break;
                     }
     
@@ -249,7 +238,6 @@ public class TicTacToe {
 
                     sleep(2000);
                     multiplayer();
-
                 break;
                 }
 
@@ -260,7 +248,6 @@ public class TicTacToe {
 
                     sleep(2000);
                     ai();
-
                 break;
                 }
 
@@ -269,13 +256,13 @@ public class TicTacToe {
                     explanation = 0;
                     launcherRun = 1;
                     launcher();
-                    break;
+                break;
                 }
 
                 case "exit" -> {
                     status = false;
                         System.exit(0);
-                    break;
+                break;
                 }
 
                 default -> {
@@ -301,7 +288,6 @@ public class TicTacToe {
         else if (tag == ai) {
             win = 2;
         }
-        
     return win;
     }
 
@@ -338,10 +324,6 @@ public class TicTacToe {
     };
 
     public static void cleanFrontEnd() {
-//This method is fine end effective, but attempt to put positions in an array
-
-        //easy clean
-        //could be done with arrays for future userGameBoard size flexibility, but I couldn't figure it out
 
         // Position 1
         userGameBoard[1][3]  = ' ';
@@ -390,7 +372,6 @@ public class TicTacToe {
                         System.out.println("Please introduce a valid chip:");
                     }
                     else status = false;
-
                 break;
                 }
                 default -> {
@@ -416,7 +397,6 @@ public class TicTacToe {
             }
             else { System.out.println("\nOoops, our AI selected a place that was taken, our bad"); }
         }
-    
     return taken;
     }
 
@@ -751,7 +731,7 @@ public class TicTacToe {
 
         clear();
 
-        //Informing the user about theur game mode selection 
+        //Informing the user about their game mode selection 
         multiplayerTitle();
 
         //Player 1 name (tag) selection
@@ -765,9 +745,10 @@ public class TicTacToe {
                 p2tag = input.nextLine();
 
             //If both are the same, throws error
-            if (p2tag == p1tag) System.out.println("Error!" + "\nPlease choose another name");
+            //use .equals() to compare strings
+            if (p2tag.equals(p1tag)) System.out.println("Error!" + "\nPlease choose another name");
 
-        } while (p2tag == p1tag); //Do while that condition is true
+        } while (p2tag.equals(p1tag)); //Do while that condition is true
 
         //Player chip selection
         System.out.println("\nGamers, you have these chips to choose from:" +
@@ -932,7 +913,6 @@ public class TicTacToe {
 
                     //relaunch the game
                     launcher();
-
                 break;
                 }
 
@@ -943,14 +923,12 @@ public class TicTacToe {
 
                     sleep(1500);
                     clear();
-
                 break;
                 }
 
                 default -> {
                     status = true;
                     System.out.println("\nSorry, I didn't catch that. Please try again:");
-
                 break;
                 }
             }
