@@ -26,9 +26,12 @@ public class TicTacToe {
     public static void clear() {
         //https://www.edureka.co/community/4668/how-to-clear-the-console-in-java
         //Command used to clear the console-- for later use to reload the game board
-        //ANSI escape code
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
+        //Couldn't use ANSI escape codes
+        //System.out.print("\033[H\033[2J");  
+        //System.out.flush();
+
+        //Changed clear method to printing lines
+        for(int i=0 ; i < 100; i++) System.out.println();
     }
 
     public static void title() {
@@ -69,7 +72,7 @@ public class TicTacToe {
 
             System.out.println("Here's how the scoreboard is looking...\n");
 
-            //time in miliseconds
+            //time in milliseconds
             sleep(1500);
 
             System.out.println("Player 1 wins: " + p1Wins +
@@ -120,7 +123,7 @@ public class TicTacToe {
         //Present title
         title();
 
-        //if we have already seen the scoreboard dont show it again unless requestes by the user, see below
+        //if we have already seen the scoreboard don't show it again unless requests by the user, see below
         if (launcherRun == 0) {
             //if timesRun++ was actuated in a previous game, scoreboard should run
             scoreboard();
@@ -177,7 +180,7 @@ public class TicTacToe {
                         System.out.println("\nPress \"Enter\" when you're ready");
                             enterToContinue = input.nextLine();
     
-                        //dont show the explanation in the future
+                        //don't show the explanation in the future
                         explanation++;
                     break;
                     }
@@ -208,7 +211,7 @@ public class TicTacToe {
 
         clear();
 
-        //Mantain the title
+        //Maintain the title
         title();
 
         System.out.println("\nIn which mode would you like to play?");
@@ -415,19 +418,19 @@ public class TicTacToe {
 
     public static void chipPlacer(String tag, char chip, int avoidFirstError) {
 
-        //add ai differentiator
+        //add AI differentiator
         //boolean is always initialized as false
         boolean checkAI = false;
         if (tag == ai) checkAI = true;
 
         //defined outside to avoid redeclarations inside loop
-        //ai value for generator
+        //AI value for generator
         int randomValue;
     
         //real person input
         String userInput = "";
 
-        //global input initialized in case no codition was met
+        //global input initialized in case no condition was met
         String inputChoice = "";
 
         //implementing chip placement
@@ -440,7 +443,7 @@ public class TicTacToe {
 
                 System.out.println("\n" + tag + " in what square would you like to place your chip?"); //1-9
 
-                //couldnt figure out how to avoid the error of the scanner reading "enter" value from last input
+                //Couldn't figure out how to avoid the error of the scanner reading "enter" value from last input
                 //I made a counter to avoid displaying the first error message
 
                 //Wait for the next input
@@ -470,11 +473,11 @@ public class TicTacToe {
 			    // ThreadLocalRandom is EXCLUSIVE at its top value- so add 1 to make it inclusive
                 // ThreadLocalRandom is INCLUSIVE in its lower value
                 randomValue = ThreadLocalRandom.current().nextInt(1, 10);
-                //calculates a random number bewteen 1 and 9
+                //calculates a random number between 1 and 9
             
             inputChoice = String.valueOf(randomValue);
             }
-            //else wouldnt make sense / not possible --> reloop
+            //else wouldn't make sense / not possible --> reloop
             else {
                 status = true;
             }
@@ -634,8 +637,14 @@ public class TicTacToe {
                 default: 
                 status = true;
 
-                    //hacky way of fixing it
+                    //This is hacky fix
+                
+                	//I know it's not really a good way of avoiding the scanner from reading the first input
+                	//(the enter key value carried over from the last scanner input), but it the only way
+                	//I could figure how to do it cleanly and reliably
                     if (avoidFirstError == 0) break;
+                    //To see the effect of this first error and to understand why I added it, just comment out the line
+                	//It is a brief error, but its not optimal whatsoever
 
                     System.out.println("Please input a valid position in the correct format: (x,y)");
 
@@ -787,7 +796,7 @@ public class TicTacToe {
             //User 1 input
             chipPlacer(p1tag, p1chip, avoidFirstError);
             
-            //add to display error messages after first input
+            //add to display error messages after first error is thrown
             avoidFirstError++;
 
             //Check if player 1 has won
@@ -820,14 +829,14 @@ public class TicTacToe {
                          "\nBy Rodrigo De Lama - Nov 2020\n");
     }
 
-    //ai mode is to play a game against a dumb (random) machine
+    //AI mode is to play a game against a dumb (random) machine
     public static void ai() {
 
         int avoidFirstError = 0;
 
         clear();
 
-        //Game mode salection
+        //Game mode selection
         aiTitle();
         
         //Player 1 name (tag) selection
@@ -838,7 +847,7 @@ public class TicTacToe {
         System.out.println("\nYou have these chips to choose from:" +
                             "\n0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
-        //Player 1 chip selection + ture for ai mode
+        //Player 1 chip selection + true for AI mode
         p1chip = chipSelector( p1tag, true );
 
         //Clear selections out to start the game
@@ -886,7 +895,7 @@ public class TicTacToe {
         reRun();
     }
 
-    //reRun is used to ak if the user wants to restart the game
+    //reRun is used to ask if the user wants to restart the game
     public static void reRun() {
         
         //Declared beforehand to avoid looped string declaration
