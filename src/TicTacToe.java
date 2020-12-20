@@ -51,8 +51,18 @@ public class TicTacToe {
     //Wins and draws count
     static byte p1Wins = 0, p2Wins = 0, aiWins = 0, draws = 0;
 
-    public static void scoreboardUpdate(int winIdentifier) {
+    public static void scoreboardUpdate(int winIdentifier, int playerAssignment) {
         
+        //Assigning Player selection to correctly display in the scoreboard
+        if (playerAssignment == 1) {
+            pXchip = p1chip;
+            pXtag = p1tag;
+
+        } else if (playerAssignment == 2) {
+            pXchip = p2chip;
+            pXtag = p2tag;
+        } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); }
+
         if (winIdentifier == 0) {
             p1Wins++;
         }
@@ -112,6 +122,7 @@ public class TicTacToe {
         }
     }
 
+    //Used to determine if the user has already seen the explanation, to not promt them the question again in a future run
     static int explanation;
     static int launcherRun;
 
@@ -343,12 +354,15 @@ public class TicTacToe {
 
     //Game resources
     //Player names
-    static String p1tag, p2tag;
+    static String p1tag, p2tag, pXtag;
     static final String ai = "AI";
 
     //Player chips
-    static char p1chip, p2chip;
-    static final char aiChip = 'X';
+    static char p1chip, p2chip, pXchip;
+    static final char aiChip = '0';
+
+    //player selection identifier for when playing in AI mode
+    static int playerAssignment = 0; //value is initialized for error reporting
 
     public static char chipSelector(String tag, boolean ai) {
 
@@ -370,7 +384,7 @@ public class TicTacToe {
                 'N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
 
                     //Is the game mode AI?
-                    if (ai == true && chip == 'X') {
+                    if (ai == true && chip == '0') {
                         status = true;
                         System.out.println("Please introduce a valid chip:");
                     }
@@ -679,7 +693,7 @@ public class TicTacToe {
         posSelected("\n" + tag + " placed their chip on square " + inputChoice);
     }
 
-    public static boolean checkWin (String tag, char chip) {
+    public static boolean checkWin (String tag, char chip, int playerAssignment) {
 
         //Full board- don't advance
         if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ' &&
@@ -701,7 +715,7 @@ public class TicTacToe {
         {
 
             System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
+                scoreboardUpdate( playerWinCheck(tag), playerAssignment ); //assign win to the correct user and return an identifier to update the scoreboard
             //add to times run
             timesRun++; //game has been won by someone
 
@@ -717,7 +731,7 @@ public class TicTacToe {
                || (backendGameBoard[0][i] == chip && backendGameBoard[1][i] == chip && backendGameBoard[2][i] == chip) ))
             {
                 System.out.println("\n" + tag  + " you won!");
-                    scoreboardUpdate( playerWinCheck(tag) );
+                    scoreboardUpdate( playerWinCheck(tag), playerAssignment );
                 timesRun++;
 
             return false;
@@ -812,7 +826,7 @@ public class TicTacToe {
             avoidFirstError++;
 
             //Check if player 1 has won
-            status = checkWin(p1tag, p1chip);
+            status = checkWin(p1tag, p1chip, playerAssignment);
 
                 //Check if player 1 has already won
                 if (status == false) break;
@@ -821,7 +835,7 @@ public class TicTacToe {
             chipPlacer(p2tag, p2chip, avoidFirstError);
 
             //Check if player 2 has won
-            status = checkWin(p2tag, p2chip);
+            status = checkWin(p2tag, p2chip, playerAssignment);
 
                 //Check if player 2 has won-- not necessary since its the last move
                 if (status == false) break;
@@ -851,20 +865,53 @@ public class TicTacToe {
         //Game mode selection
         aiTitle();
         
-        do {
-            //Player 1 name (tag) selection
-            System.out.println("\nPlayer 1, whats your name?");
-                p1tag = input.nextLine();
+        String playerSelection;
+        
+        status = true;
+            while (status) {
 
-                if (p1tag.trim().isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
-        } while (p1tag.isBlank());
+                System.out.println("\nWould you like to play as Player 1 or Player 2");
+                    playerSelection = input.nextLine();
+
+                switch (playerSelection) {
+                    case "Player 1", "P1", "p1", "1": 
+            
+                        System.out.println("You have chosen Player 1");
+                        playerAssignment = 1;
+
+                    status = false;
+                    break;
+
+                    case "Player 2", "P2", "p2", "2":
+
+                        System.out.println("You have chosen Player 2");
+                        playerAssignment = 2;
+
+                    status = false;
+                    break;
+    
+                    default:
+
+                        System.out.println("Please choose a valid player in the format: Player X, PX, pX or X");
+                    status = true;
+                    break;
+                }
+            }
+
+        do {
+            //Player name (tag) selection
+            System.out.println("\nWhat's your name?");
+                pXtag = input.nextLine();
+
+                if (pXtag.trim().isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
+        } while (pXtag.isBlank());
 
         //Player chip selection
         System.out.println("\nYou have these chips to choose from:" +
-                            "\n0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
+                            "\nX, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
         
         //Player 1 chip selection + true for AI mode
-        p1chip = chipSelector( p1tag, true );
+        pXchip = chipSelector( pXtag, true );
 
         //Clear selections out to start the game
         clear();
@@ -885,12 +932,12 @@ public class TicTacToe {
         while (status) {
 
             //User 1 input
-            chipPlacer(p1tag, p1chip, avoidFirstError);
+            chipPlacer(pXtag, pXchip, avoidFirstError);
 
             avoidFirstError++;
 
             //Check if player 1 has won
-            status = checkWin(p1tag, p1chip);
+            status = checkWin(pXtag, pXchip, playerAssignment);
 
                 //Check if player 1 has already won
                 if (status == false) break;
@@ -899,11 +946,20 @@ public class TicTacToe {
             chipPlacer(ai, aiChip, avoidFirstError);
 
             //Check if AI has won
-            status = checkWin(ai, aiChip);
+            status = checkWin(ai, aiChip, playerAssignment);
 
                 //Check if AI has won-- not necessary since its the last move
                 if (status == false) break;
         }
+
+        if (playerAssignment == 1) {
+            pXchip = p1chip;
+            pXtag = p1tag;
+
+        } else if (playerAssignment == 2) {
+            pXchip = p2chip;
+            pXtag = p2tag;
+        } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); }
 
         cleanBackEnd();
         cleanFrontEnd();
@@ -928,7 +984,7 @@ public class TicTacToe {
 
             switch (userAns) {
 
-                case "yes", "yea", "yuh", "ye", "yessir", "y" -> {
+                case "yes", "y" -> {
                     status = false;
 
                     System.out.println("\nOkay, comming right up!");
@@ -941,7 +997,7 @@ public class TicTacToe {
                 break;
                 }
 
-                case "no", "nah", "nope", "n" -> {
+                case "no", "n" -> {
                     status = false;
                     //Thank the user and ends the program
                     System.out.println("\nOkay, thanks for playing!");
