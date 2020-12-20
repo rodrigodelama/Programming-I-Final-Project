@@ -743,15 +743,27 @@ public class TicTacToe {
         //Informing the user about their game mode selection 
         multiplayerTitle();
 
-        //Player 1 name (tag) selection
-        System.out.println("\nPlayer 1, whats your name?");
-            p1tag = input.nextLine();
+        do {
+            //Player 1 name (tag) selection
+                System.out.println("\nPlayer 1, whats your name?");
+                p1tag = input.nextLine();
+
+                //make sure the tag is not blank
+                if (p1tag.isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
+
+          //If blank reloop until there's a valid name
+        } while (p1tag.isBlank());
+        
         
         //do while to check that the chip is not already being utilized
         do {
-            //Player 2 tag selection
-            System.out.println("\nPlayer 2, whats your name?");
-                p2tag = input.nextLine();
+            do {
+                //Player 2 tag selection
+                System.out.println("\nPlayer 2, whats your name?");
+                    p2tag = input.nextLine();
+
+                    if (p2tag.isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
+            } while (p2tag.isBlank());
 
             //If both are the same, throws error
             //use .equals() to compare strings
@@ -839,9 +851,13 @@ public class TicTacToe {
         //Game mode selection
         aiTitle();
         
-        //Player 1 name (tag) selection
-        System.out.println("\nPlayer 1, whats your name?");
-            p1tag = input.nextLine();
+        do {
+            //Player 1 name (tag) selection
+            System.out.println("\nPlayer 1, whats your name?");
+                p1tag = input.nextLine();
+
+                if (p1tag.trim().isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
+        } while (p1tag.isBlank());
 
         //Player chip selection
         System.out.println("\nYou have these chips to choose from:" +
