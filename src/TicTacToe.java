@@ -51,20 +51,7 @@ public class TicTacToe {
     //Wins and draws count
     static byte p1Wins = 0, p2Wins = 0, aiWins = 0, draws = 0;
 
-    public static void scoreboardUpdate(int winIdentifier, boolean checkAI) {
-        
-        //Assigning Player selection to correctly display in the scoreboard
-        if (playerAssignment == 1) {
-            pXtag = p1tag;
-            winIdentifier = 0;
-
-        } else if (playerAssignment == 2) {
-            pXtag = p2tag;
-            winIdentifier = 1;
-
-        } else if (checkAI == true) {
-            System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000);
-        }
+    public static void scoreboardUpdate(int winIdentifier) {
 
         if (winIdentifier == 0) {
             p1Wins++;
@@ -88,15 +75,8 @@ public class TicTacToe {
             //time in milliseconds
             sleep(1500);
 
-            if (playerAssignment == 1) {
-                p1tag = pXtag;
-                
-            } else if (playerAssignment == 2) {
-                p2tag = pXtag;  
-            }
-
             System.out.println("Player 1 (" + p1tag + ") wins: " + p1Wins +
-                             "\nplayer 1 (" + p2tag + ") wins: " + p2Wins +
+                             "\nPlayer 2 (" + p2tag + ") wins: " + p2Wins +
                              "\nAI wins: " + aiWins +
                              "\nThere have been " + draws + " draws");
 
@@ -301,14 +281,7 @@ public class TicTacToe {
         }
     }
 
-    public static int playerWinCheck(String tag, boolean checkAI) {
-        
-        //Assigning Player selection to correctly display in the scoreboard
-        if (playerAssignment == 1) {
-            p1tag = pXtag;
-        } else if (playerAssignment == 2) {
-            p2tag = pXtag;
-        }
+    public static int playerWinCheck(String tag) {
 
         int win = 0;
 
@@ -712,7 +685,7 @@ public class TicTacToe {
         posSelected("\n" + tag + " placed their chip on square " + inputChoice);
     }
 
-    public static boolean checkWin (String tag, char chip, boolean checkAI) {
+    public static boolean checkWin (String tag, char chip) {
 
         //Full board- don't advance
         if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ' &&
@@ -734,7 +707,7 @@ public class TicTacToe {
         {
 
             System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag, checkAI), checkAI);
+                scoreboardUpdate( playerWinCheck(tag) ); //assign win to the correct user and return an identifier to update the scoreboard
             //add to times run
             timesRun++; //game has been won by someone
 
@@ -750,7 +723,7 @@ public class TicTacToe {
                || (backendGameBoard[0][i] == chip && backendGameBoard[1][i] == chip && backendGameBoard[2][i] == chip) ))
             {
                 System.out.println("\n" + tag  + " you won!");
-                    scoreboardUpdate( playerWinCheck(tag, checkAI), checkAI);
+                    scoreboardUpdate( playerWinCheck(tag) );
                 timesRun++;
 
             return false;
@@ -811,13 +784,14 @@ public class TicTacToe {
                 if (p2tag.equals(p1tag)) System.out.println("Error!" + "\nPlease choose another name");
 
             } while (p2tag.equals(p1tag)); //Do while that condition is true
+
         }
-      
+
         if ( p1chip == ' ' &&  p2chip == ' ' ) {
 
             //Player chip selection
             System.out.println("\nGamers, you have these chips to choose from:" +
-                            "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
+                               "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
 
             //Player 1 chip selection + false for multiplayer mode
                 p1chip = chipSelector( p1tag, false );
@@ -835,7 +809,7 @@ public class TicTacToe {
 
         clear();
 
-        //Game mode selection 
+        //Game mode title 
         multiplayerTitle();
 
         //First print of the empty user end game board
@@ -856,22 +830,16 @@ public class TicTacToe {
             //add to display error messages after first error is thrown
             avoidFirstError++;
 
-            //Check if player 1 has won (multiplayer mode so checkAI boolean = false)
-            status = checkWin(p1tag, p1chip, false);
-
-                //Check if player 1 has already won
-                if (status == false) break;
+            //Check if player 1 has already won
+            if (checkWin(p1tag, p1chip) == false) { status = false; break; }
 
             //User 2 input
             chipPlacer(p2tag, p2chip, avoidFirstError);
 
             //Check if player 2 has won
-            status = checkWin(p2tag, p2chip, false);
-
-                //Check if player 2 has won-- not necessary since its the last move
-                if (status == false) break;
+            if (checkWin(p2tag, p2chip) == false) { status = false; break; }
         }
-    
+
         reRun();
     }
 
@@ -891,11 +859,11 @@ public class TicTacToe {
 
         clear();
 
-        //Game mode title
+        //Game mode selection
         aiTitle();
         
+        //Always prompt the user which player they would like to use
         String playerSelection;
-        
         status = true;
         while (status) {
 
@@ -908,7 +876,10 @@ public class TicTacToe {
                     System.out.println("You have chosen Player 1");
 
                     //Check if the player has already been named
-                    if ( p1tag.length() != 0 ) pXtag = p1tag;
+                    if ( p1tag.length() != 0 ) {
+                        pXtag = p1tag;
+                        pXchip = p1chip;
+                    }
 
                     playerAssignment = 1;
                 status = false; //exit loop
@@ -918,7 +889,10 @@ public class TicTacToe {
 
                     System.out.println("You have chosen Player 2");
 
-                    if ( p2tag.length() != 0 ) pXtag = p2tag;
+                    if ( p2tag.length() != 0 ) {
+                        pXtag = p2tag;
+                        pXchip = p2chip;
+                    }
 
                     playerAssignment = 2;
                 status = false;
@@ -970,36 +944,33 @@ public class TicTacToe {
         status = true;
         while (status) {
 
-            //User 1 input
+            //Player input
             chipPlacer(pXtag, pXchip, avoidFirstError);
 
             avoidFirstError++;
 
-            //Check if player X has won
-            
-            status = checkWin(pXtag, pXchip, true);
+            if (playerAssignment == 1) {
 
-                //Check if player X has already won
-                if (status == false) break;
+                //Data assignment in case there werent previous Player 1 or 2 data
+                p1tag = pXtag;
+                p1chip = pXchip;
+                //Check if player X has won
+                if (checkWin(p1tag, p1chip) == false) break;
+    
+            } else if (playerAssignment == 2) {
+
+                p2tag = pXtag;
+                p2chip = pXchip;
+                if (checkWin(p2tag, p1chip) == false) break;
+
+            } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); }
 
             //AI input
             chipPlacer(ai, aiChip, avoidFirstError);
 
-            //Check if AI has won (checkAI boolean = false to avoid thrown errors with AI wins)
-            status = checkWin(ai, aiChip, false);
-
-                //Check if AI has won
-                if (status == false) break;
+            //Check if AI has won
+            if (checkWin(ai, aiChip) == false) break;
         }
-
-        if (playerAssignment == 1) {
-            p1chip = pXchip;
-            p1tag = pXtag;
-
-        } else if (playerAssignment == 2) {
-            p2chip = pXchip;
-            p2tag = pXtag;
-        } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); }
 
         reRun();
     }
