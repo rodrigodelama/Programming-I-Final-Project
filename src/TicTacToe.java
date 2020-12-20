@@ -51,17 +51,20 @@ public class TicTacToe {
     //Wins and draws count
     static byte p1Wins = 0, p2Wins = 0, aiWins = 0, draws = 0;
 
-    public static void scoreboardUpdate(int winIdentifier, int playerAssignment) {
+    public static void scoreboardUpdate(int winIdentifier, boolean checkAI) {
         
         //Assigning Player selection to correctly display in the scoreboard
         if (playerAssignment == 1) {
-            pXchip = p1chip;
             pXtag = p1tag;
+            winIdentifier = 0;
 
         } else if (playerAssignment == 2) {
-            pXchip = p2chip;
             pXtag = p2tag;
-        } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); }
+            winIdentifier = 1;
+
+        } else if (checkAI == true) {
+            System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000);
+        }
 
         if (winIdentifier == 0) {
             p1Wins++;
@@ -85,8 +88,15 @@ public class TicTacToe {
             //time in milliseconds
             sleep(1500);
 
-            System.out.println("Player 1 wins: " + p1Wins +
-                             "\nPlayer 2 wins: " + p2Wins +
+            if (playerAssignment == 1) {
+                p1tag = pXtag;
+                
+            } else if (playerAssignment == 2) {
+                p2tag = pXtag;  
+            }
+
+            System.out.println("Player 1 (" + p1tag + ") wins: " + p1Wins +
+                             "\nplayer 1 (" + p2tag + ") wins: " + p2Wins +
                              "\nAI wins: " + aiWins +
                              "\nThere have been " + draws + " draws");
 
@@ -138,8 +148,10 @@ public class TicTacToe {
         if (launcherRun == 0) {
             //if timesRun++ was actuated in a previous game, scoreboard should run
             scoreboard();
+            clear();
         }
 
+        title();
         //Declaring before the loop to not redeclare the variables every time the while loop runs
         String explanationAns;
         
@@ -289,7 +301,14 @@ public class TicTacToe {
         }
     }
 
-    public static int playerWinCheck(String tag) {
+    public static int playerWinCheck(String tag, boolean checkAI) {
+        
+        //Assigning Player selection to correctly display in the scoreboard
+        if (playerAssignment == 1) {
+            p1tag = pXtag;
+        } else if (playerAssignment == 2) {
+            p2tag = pXtag;
+        }
 
         int win = 0;
 
@@ -693,7 +712,7 @@ public class TicTacToe {
         posSelected("\n" + tag + " placed their chip on square " + inputChoice);
     }
 
-    public static boolean checkWin (String tag, char chip, int playerAssignment) {
+    public static boolean checkWin (String tag, char chip, boolean checkAI) {
 
         //Full board- don't advance
         if (backendGameBoard[0][0] != ' ' && backendGameBoard[0][1] != ' ' && backendGameBoard[0][2] != ' ' &&
@@ -715,7 +734,7 @@ public class TicTacToe {
         {
 
             System.out.println("\n" + tag  + " you won!");
-                scoreboardUpdate( playerWinCheck(tag), playerAssignment ); //assign win to the correct user and return an identifier to update the scoreboard
+                scoreboardUpdate( playerWinCheck(tag, checkAI), checkAI);
             //add to times run
             timesRun++; //game has been won by someone
 
@@ -731,7 +750,7 @@ public class TicTacToe {
                || (backendGameBoard[0][i] == chip && backendGameBoard[1][i] == chip && backendGameBoard[2][i] == chip) ))
             {
                 System.out.println("\n" + tag  + " you won!");
-                    scoreboardUpdate( playerWinCheck(tag), playerAssignment );
+                    scoreboardUpdate( playerWinCheck(tag, checkAI), checkAI);
                 timesRun++;
 
             return false;
@@ -750,6 +769,10 @@ public class TicTacToe {
     //Multiplayer mode is for 1v1
     public static void multiplayer() {
 
+        //Clean Arrays
+        cleanBackEnd();
+        cleanFrontEnd();
+
         int avoidFirstError = 0;
 
         clear();
@@ -763,7 +786,8 @@ public class TicTacToe {
             do {
             //Player 1 name (tag) selection
                 System.out.println("\nPlayer 1, whats your name?");
-                p1tag = input.nextLine();
+                System.out.println("You may only choose your name once, choose wisely");
+                    p1tag = input.nextLine();
 
                 //make sure the tag is not blank
                 if (p1tag.isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
@@ -776,6 +800,7 @@ public class TicTacToe {
                 do {
                     //Player 2 tag selection
                     System.out.println("\nPlayer 2, whats your name?");
+                    System.out.println("You may only choose your name once, choose wisely");
                         p2tag = input.nextLine();
 
                         if (p2tag.isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
@@ -831,8 +856,8 @@ public class TicTacToe {
             //add to display error messages after first error is thrown
             avoidFirstError++;
 
-            //Check if player 1 has won
-            status = checkWin(p1tag, p1chip, playerAssignment);
+            //Check if player 1 has won (multiplayer mode so checkAI boolean = false)
+            status = checkWin(p1tag, p1chip, false);
 
                 //Check if player 1 has already won
                 if (status == false) break;
@@ -841,18 +866,12 @@ public class TicTacToe {
             chipPlacer(p2tag, p2chip, avoidFirstError);
 
             //Check if player 2 has won
-            status = checkWin(p2tag, p2chip, playerAssignment);
+            status = checkWin(p2tag, p2chip, false);
 
                 //Check if player 2 has won-- not necessary since its the last move
                 if (status == false) break;
         }
-        
-        //Clean Arrays for possible next play
-        cleanBackEnd();
-        cleanFrontEnd();
-        
-        //times run for scoreboard displayed is taken into account inside
-
+    
         reRun();
     }
 
@@ -864,11 +883,15 @@ public class TicTacToe {
     //AI mode is to play a game against a dumb (random) machine
     public static void ai() {
 
+        //Clean Arrays
+        cleanBackEnd();
+        cleanFrontEnd();
+
         int avoidFirstError = 0;
 
         clear();
 
-        //Game mode selection
+        //Game mode title
         aiTitle();
         
         String playerSelection;
@@ -883,6 +906,10 @@ public class TicTacToe {
                 case "Player 1", "P1", "p1", "1": 
         
                     System.out.println("You have chosen Player 1");
+
+                    //Check if the player has already been named
+                    if ( p1tag.length() != 0 ) pXtag = p1tag;
+
                     playerAssignment = 1;
                 status = false; //exit loop
                 break;
@@ -890,6 +917,9 @@ public class TicTacToe {
                 case "Player 2", "P2", "p2", "2":
 
                     System.out.println("You have chosen Player 2");
+
+                    if ( p2tag.length() != 0 ) pXtag = p2tag;
+
                     playerAssignment = 2;
                 status = false;
                 break;
@@ -906,13 +936,14 @@ public class TicTacToe {
             do {
                 //Player name (tag) selection
                 System.out.println("\nWhat's your name?");
+                System.out.println("You may only choose your name once, choose wisely");
                     pXtag = input.nextLine();
 
                     if (pXtag.trim().isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
             } while (pXtag.isBlank());
         }
 
-        if ( String.valueOf(p1chip).isEmpty() && String.valueOf(p2chip).isEmpty() ) {
+        if ( p1chip == ' ' && p2chip == ' ' ) {
             //Player chip selection
             System.out.println("\nYou have these chips to choose from:" +
                                "\nX, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
@@ -944,33 +975,31 @@ public class TicTacToe {
 
             avoidFirstError++;
 
-            //Check if player 1 has won
-            status = checkWin(pXtag, pXchip, playerAssignment);
+            //Check if player X has won
+            
+            status = checkWin(pXtag, pXchip, true);
 
-                //Check if player 1 has already won
+                //Check if player X has already won
                 if (status == false) break;
 
             //AI input
             chipPlacer(ai, aiChip, avoidFirstError);
 
-            //Check if AI has won
-            status = checkWin(ai, aiChip, playerAssignment);
+            //Check if AI has won (checkAI boolean = false to avoid thrown errors with AI wins)
+            status = checkWin(ai, aiChip, false);
 
-                //Check if AI has won-- not necessary since its the last move
+                //Check if AI has won
                 if (status == false) break;
         }
 
         if (playerAssignment == 1) {
-            pXchip = p1chip;
-            pXtag = p1tag;
+            p1chip = pXchip;
+            p1tag = pXtag;
 
         } else if (playerAssignment == 2) {
-            pXchip = p2chip;
-            pXtag = p2tag;
+            p2chip = pXchip;
+            p2tag = pXtag;
         } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); }
-
-        cleanBackEnd();
-        cleanFrontEnd();
 
         reRun();
     }
