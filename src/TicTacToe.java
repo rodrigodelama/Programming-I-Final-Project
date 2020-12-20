@@ -36,7 +36,7 @@ public class TicTacToe {
 
     public static void title() {
         //Title method to avoid repetition
-        System.out.println("Hello, welcome to TicTacToe JAVA edition!" +
+        System.out.println("Welcome to TicTacToe JAVA edition!" +
                            "\nBy Rodrigo De Lama - Nov 2020\n");
     }
 
@@ -830,14 +830,17 @@ public class TicTacToe {
             //add to display error messages after first error is thrown
             avoidFirstError++;
 
-            //Check if player 1 has already won
-            if (checkWin(p1tag, p1chip) == false) { status = false; break; }
+            //Update status to continue to reloop untils status = false
+            status = checkWin(p1tag, p1chip);
+                //Check if player 1 has already won
+                if (status == false) break;
 
             //User 2 input
             chipPlacer(p2tag, p2chip, avoidFirstError);
 
-            //Check if player 2 has won
-            if (checkWin(p2tag, p2chip) == false) { status = false; break; }
+            status = checkWin(p2tag, p2chip);
+                //Check if player 2 has won
+                if (status == false) break;
         }
 
         reRun();
@@ -944,32 +947,38 @@ public class TicTacToe {
         status = true;
         while (status) {
 
-            //Player input
-            chipPlacer(pXtag, pXchip, avoidFirstError);
-
-            avoidFirstError++;
-
             if (playerAssignment == 1) {
 
                 //Data assignment in case there werent previous Player 1 or 2 data
                 p1tag = pXtag;
                 p1chip = pXchip;
-                //Check if player X has won
-                if (checkWin(p1tag, p1chip) == false) break;
+                
+                //Player input
+                chipPlacer(p1tag, p1chip, avoidFirstError); avoidFirstError++; //added to promt errors after the first scanner (enter key carry over) input
+
+                //Update status to latest
+                status = checkWin(p1tag, p1chip);
+                    //Check if player X has won
+                    if (status == false) break;
     
             } else if (playerAssignment == 2) {
 
                 p2tag = pXtag;
                 p2chip = pXchip;
-                if (checkWin(p2tag, p1chip) == false) break;
+
+                chipPlacer(p2tag, p2chip, avoidFirstError); avoidFirstError++;
+
+                status = checkWin(p2tag, p1chip);
+                    if (status == false) break;
 
             } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); }
 
             //AI input
             chipPlacer(ai, aiChip, avoidFirstError);
 
-            //Check if AI has won
-            if (checkWin(ai, aiChip) == false) break;
+            status = checkWin(ai, aiChip);
+                //Check if AI has won
+                if (status == false) break;
         }
 
         reRun();
