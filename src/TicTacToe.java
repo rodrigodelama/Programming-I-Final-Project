@@ -354,14 +354,14 @@ public class TicTacToe {
 
     //Game resources
     //Player names
-    static String p1tag, p2tag, pXtag;
+    static String p1tag = "", p2tag = "", pXtag = "";
     static final String ai = "AI";
 
     //Player chips
-    static char p1chip, p2chip, pXchip;
+    static char p1chip = ' ', p2chip = ' ', pXchip = ' ';
     static final char aiChip = '0';
 
-    //player selection identifier for when playing in AI mode
+    //Player selection identifier for when playing in AI mode
     static int playerAssignment = 0; //value is initialized for error reporting
 
     public static char chipSelector(String tag, boolean ai) {
@@ -757,7 +757,10 @@ public class TicTacToe {
         //Informing the user about their game mode selection 
         multiplayerTitle();
 
-        do {
+        //Only let users select thier name once (while the variable is empty)
+        if ( p1tag.isEmpty() && p2tag.isEmpty() ) {
+
+            do {
             //Player 1 name (tag) selection
                 System.out.println("\nPlayer 1, whats your name?");
                 p1tag = input.nextLine();
@@ -765,42 +768,45 @@ public class TicTacToe {
                 //make sure the tag is not blank
                 if (p1tag.isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
 
-          //If blank reloop until there's a valid name
-        } while (p1tag.isBlank());
-        
-        
-        //do while to check that the chip is not already being utilized
-        do {
+                //If blank reloop until there's a valid name
+            } while (p1tag.isBlank());
+
+            //do while to check that the chip is not already being utilized
             do {
-                //Player 2 tag selection
-                System.out.println("\nPlayer 2, whats your name?");
-                    p2tag = input.nextLine();
+                do {
+                    //Player 2 tag selection
+                    System.out.println("\nPlayer 2, whats your name?");
+                        p2tag = input.nextLine();
 
-                    if (p2tag.isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
-            } while (p2tag.isBlank());
+                        if (p2tag.isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
+                } while (p2tag.isBlank());
 
-            //If both are the same, throws error
-            //use .equals() to compare strings
-            if (p2tag.equals(p1tag)) System.out.println("Error!" + "\nPlease choose another name");
+                //If both are the same, throws error
+                //use .equals() to compare strings
+                if (p2tag.equals(p1tag)) System.out.println("Error!" + "\nPlease choose another name");
 
-        } while (p2tag.equals(p1tag)); //Do while that condition is true
+            } while (p2tag.equals(p1tag)); //Do while that condition is true
+        }
+      
+        if ( p1chip == ' ' &&  p2chip == ' ' ) {
 
-        //Player chip selection
-        System.out.println("\nGamers, you have these chips to choose from:" +
+            //Player chip selection
+            System.out.println("\nGamers, you have these chips to choose from:" +
                             "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
-        
-        //Player 1 chip selection + false for multiplayer mode
-        p1chip = chipSelector( p1tag, false );
-        
-        //Same check as with the tag to avoid repeat use
-        do {
-            //Player 2 chip selection + false for multiplayer mode
-            p2chip = chipSelector( p2tag, false );
 
-            //If both are the same, throws error
-            if (p2chip == p1chip) System.out.println("Error!" + "\nPlease choose another chip");
+            //Player 1 chip selection + false for multiplayer mode
+                p1chip = chipSelector( p1tag, false );
 
-        } while (p2chip == p1chip);
+            //Same check as with the tag to avoid repeat use
+            do {
+                //Player 2 chip selection + false for multiplayer mode
+                p2chip = chipSelector( p2tag, false );
+
+                //If both are the same, throws error
+                if (p2chip == p1chip) System.out.println("Error!" + "\nPlease choose another chip");
+
+            } while (p2chip == p1chip);
+        }
 
         clear();
 
@@ -868,50 +874,52 @@ public class TicTacToe {
         String playerSelection;
         
         status = true;
-            while (status) {
+        while (status) {
 
-                System.out.println("\nWould you like to play as Player 1 or Player 2");
-                    playerSelection = input.nextLine();
+            System.out.println("\nWould you like to play as Player 1 or Player 2");
+                playerSelection = input.nextLine();
 
-                switch (playerSelection) {
-                    case "Player 1", "P1", "p1", "1": 
-            
-                        System.out.println("You have chosen Player 1");
-                        playerAssignment = 1;
-
-                    status = false;
-                    break;
-
-                    case "Player 2", "P2", "p2", "2":
-
-                        System.out.println("You have chosen Player 2");
-                        playerAssignment = 2;
-
-                    status = false;
-                    break;
-    
-                    default:
-
-                        System.out.println("Please choose a valid player in the format: Player X, PX, pX or X");
-                    status = true;
-                    break;
-                }
-            }
-
-        do {
-            //Player name (tag) selection
-            System.out.println("\nWhat's your name?");
-                pXtag = input.nextLine();
-
-                if (pXtag.trim().isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
-        } while (pXtag.isBlank());
-
-        //Player chip selection
-        System.out.println("\nYou have these chips to choose from:" +
-                            "\nX, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
+            switch (playerSelection) {
+                case "Player 1", "P1", "p1", "1": 
         
-        //Player 1 chip selection + true for AI mode
-        pXchip = chipSelector( pXtag, true );
+                    System.out.println("You have chosen Player 1");
+                    playerAssignment = 1;
+                status = false; //exit loop
+                break;
+
+                case "Player 2", "P2", "p2", "2":
+
+                    System.out.println("You have chosen Player 2");
+                    playerAssignment = 2;
+                status = false;
+                break;
+
+                default:
+
+                    System.out.println("Please choose a valid player in the format: Player X, PX, pX or X");
+                status = true; //reloop
+                break;
+            }
+        }
+            
+        if ( p1tag.isEmpty() && p2tag.isEmpty() ) {
+            do {
+                //Player name (tag) selection
+                System.out.println("\nWhat's your name?");
+                    pXtag = input.nextLine();
+
+                    if (pXtag.trim().isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
+            } while (pXtag.isBlank());
+        }
+
+        if ( String.valueOf(p1chip).isEmpty() && String.valueOf(p2chip).isEmpty() ) {
+            //Player chip selection
+            System.out.println("\nYou have these chips to choose from:" +
+                               "\nX, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
+        
+            //Player 1 chip selection + true for AI mode
+            pXchip = chipSelector( pXtag, true );
+        }
 
         //Clear selections out to start the game
         clear();
