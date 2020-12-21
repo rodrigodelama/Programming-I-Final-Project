@@ -16,7 +16,7 @@ public class TicTacToe {
     static Scanner input = new Scanner(System.in);
 
     //Declared static boolean for global use in while loops
-    //Boolean to check the while condition- if true, reloops
+    //Boolean to check the while condition- if true, re-loops
     static boolean status = true;
 
     //Global enter value- to remain empty (for click enter to continue)
@@ -35,7 +35,7 @@ public class TicTacToe {
 
     public static void title() {
         //Created a title method to avoid repetition
-        System.out.println("Welcome to TicTacToe JAVA edition!" +
+        System.out.println("Welcome to TicTacToe JAVA Edition!" +
                            "\nBy Rodrigo De Lama - Nov 2020\n");
     }
 
@@ -77,12 +77,12 @@ public class TicTacToe {
                              "\nAI wins: " + aiWins +
                              "\nThere have been " + draws + " draw(s)");
 
-            //structure to determine the leader
+            //Structure to determine the leader
             String leader = " ";
 
             if ( p1Wins > p2Wins && p1Wins > aiWins ) {
 
-                leader = p1tag; //assign leader variable to player X
+                leader = p1tag; //Assign leader variable to player X
             }
             else if ( p2Wins > p1Wins && p2Wins > aiWins ) {
 
@@ -92,12 +92,12 @@ public class TicTacToe {
 
                 leader = ai;
             }
-            //display only if there's actually someone winning
+            //Display only if there's actually someone winning
             if (leader != " ") System.out.println("\n" + leader + " you're dominating!");
             
-            //wait and display loading animation
+            //Wait and display loading animation
             sleep(1500);
-                System.out.println(); //spacing
+                System.out.println(); //Spacing
             for (int i = 0; i < 3; i++) {
                 System.out.print(".");
             sleep(1000);
@@ -109,7 +109,7 @@ public class TicTacToe {
         }
     }
 
-    //Used to determine if the user has already seen the explanation, to not promt them the question again in a future run
+    //Used to determine if the user has already seen the explanation, to not prompt them the question again in a future run
     static int explanation;
     static int launcherRun;
 
@@ -195,7 +195,7 @@ public class TicTacToe {
                     break;
                     }
                     default -> {
-                        //status = true to reloop
+                        //status = true to re-loop
                         status = true;
                             System.out.println("Sorry, I didn't catch that. Please type yes or no");
                     break;
@@ -227,7 +227,7 @@ public class TicTacToe {
                 //Multiplayer
                 case "a" -> {
                     status = false;
-                    System.out.print("\nSome one on one action comming your way!");
+                    System.out.print("\nSome one on one action coming your way!");
 
                     sleep(2000);
                     multiplayer();
@@ -243,7 +243,7 @@ public class TicTacToe {
                 break;
                 }
                 case "back" -> {
-                    //gives the user the possibility to go back for an explanation
+                    //Gives the user the possibility to go back for an explanation
                     explanation = 0;
                     launcherRun = 1;
                     launcher();
@@ -251,7 +251,7 @@ public class TicTacToe {
                 }
                 case "exit" -> {
                     status = false;
-                        System.exit(0); //exit without any error codes
+                        System.exit(0); //Exit without any error codes
                 break;
                 }
 
@@ -281,7 +281,7 @@ public class TicTacToe {
     }
 
     //Game Assets
-    //Backend game board array
+    //Back-end game board array
     static char[][] backendGameBoard = {
                                         {' ', ' ', ' '},
                                         {' ', ' ', ' '},
@@ -289,7 +289,7 @@ public class TicTacToe {
     };
 
     public static void cleanBackEnd() {
-        //clean the backend matrix
+        //Clean the back-end matrix
         for (int r = 0; r < backendGameBoard.length; r++) {
             for (int c = 0; c < backendGameBoard[0].length; c++) {
                 backendGameBoard[r][c] = ' ';
@@ -297,7 +297,7 @@ public class TicTacToe {
         }
     }
 
-    //User facing board (front end game board)
+    //User facing board (front-end game board)
     //5 spaces between columns
     static char[][] userGameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
@@ -375,7 +375,7 @@ public class TicTacToe {
         if (backendGameBoard[back0][back1] != ' ') {
             taken = true; 
             if (checkAI == false) {
-                System.out.println("That space is alreay taken..." +
+                System.out.println("That space is already taken..." +
                                    "\nTry again!");
             }
             else { System.out.println("\nOoops, our AI selected a place that was taken, our bad"); }
@@ -396,7 +396,7 @@ public class TicTacToe {
 
     public static void chipPlacer(String tag, char chip, int avoidFirstError) {
 
-        //boolean is always initialized as false
+        //Boolean is always initialized as false
         boolean checkAI = false;
         if (tag == ai) checkAI = true;
 
@@ -405,10 +405,10 @@ public class TicTacToe {
     
         String userInput = "";
 
-        //global input initialized in case no condition was met
+        //Global input initialized in case no condition was met
         String inputChoice = "";
 
-        //implementing chip placement
+        //Implementing chip placement
         int back0, back1, front0, front1;
 
         status = true;
@@ -429,7 +429,7 @@ public class TicTacToe {
                     status = true;
 
                     if ( input.hasNextLine() ) {
-                        //if there's an input, exit the loop
+                        //If there's an input, exit the loop
                         userInput = input.nextLine();
                         status = false;
                     }
@@ -448,7 +448,7 @@ public class TicTacToe {
             
             inputChoice = String.valueOf(randomValue);
             }
-            //else wouldn't make sense / not possible --> reloop
+            //else wouldn't make sense / not possible --> re-loop
             else {
                 status = true;
             }
@@ -456,19 +456,19 @@ public class TicTacToe {
             switch (inputChoice) {
 
                 case "(1,1)", "1": //Used double commas since the user input is declared as a string
-                //If if is not fulfilled, it must reloop
+                //If if is not fulfilled, it must re-loop
                 status = true;
                     //Changing the inputChoice to be shown correctly to the user when AI selects a number position
                     inputChoice = "(1,1)";
 
-                    //Positions in the frontend and backend matrix
+                    //Positions in the front-end and back-end matrix
                     back0 = 0; back1 = 0;
                     front0 = 1; front1 = 3;
 
-                    //Check backend
-                    if ( checkFull(back0, back1, checkAI) == false ) { //If backend is empty 
+                    //Check back-end
+                    if ( checkFull(back0, back1, checkAI) == false ) { //If back-end is empty 
 
-                        //Fill both the backend and the user game board
+                        //Fill both the back-end and the user game board
                         fillIn(back0, back1, front0, front1, chip);
                     //Exit loop command
                     status = false;
@@ -483,7 +483,7 @@ public class TicTacToe {
                     back0 = 0; back1 = 1;
                     front0 = 1; front1 = 9;
 
-                    //Check backend
+                    //Check back-end
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
                         //Fill both boards
@@ -703,7 +703,7 @@ public class TicTacToe {
 
         multiplayerTitle();
 
-        //Only let users select thier name once (while the name is empty)
+        //Only let users select their name once (while the name is empty)
         if ( p1tag.isEmpty() || p2tag.isEmpty() ) {
             
             if ( p1tag.isEmpty() ) {
@@ -717,7 +717,7 @@ public class TicTacToe {
                             //make sure the tag is not blank
                             if (p1tag.isBlank()) System.out.println("Error!" + "\nPlease choose a valid name");
         
-                        //If blank reloop until there's a valid name
+                        //If blank re-loop until there's a valid name
                     } while (p1tag.isBlank());
 
                     //If both are the same, throws error
@@ -790,7 +790,7 @@ public class TicTacToe {
                 //add to correctly display error messages after first "error" is thrown
                 avoidFirstError++;
 
-            //Update status to continue to reloop untils status = false
+            //Update status to continue to re-loop until status = false
             status = checkWin(p1tag, p1chip);
                 //Check if player 1 has already won
                 if (status == false) break;
@@ -857,7 +857,7 @@ public class TicTacToe {
                 break;
 
                 default:
-                status = true; //reloop
+                status = true; //re-loop
                     System.out.println("Please choose a valid player in the format: Player X, PX, pX or X");
                 break;
             }
@@ -932,12 +932,12 @@ public class TicTacToe {
 
             if (playerAssignment == 1) {
 
-                //Data assignment in case there werent previous Player 1 or 2 data
+                //Data assignment in case there weren't previous Player 1 or 2 data
                 p1tag = pXtag;
                 p1chip = pXchip;
                 
                 //Player input
-                chipPlacer(p1tag, p1chip, avoidFirstError); avoidFirstError++; //added to promt errors after the first scanner (enter key carry over) input
+                chipPlacer(p1tag, p1chip, avoidFirstError); avoidFirstError++; //added to prompt errors after the first scanner (enter key carry over) input
 
                 //Update status to latest
                 status = checkWin(p1tag, p1chip);
@@ -987,11 +987,11 @@ public class TicTacToe {
                 case "yes", "y" -> {
                 status = false;
 
-                    System.out.println("\nOkay, comming right up!");
+                    System.out.println("\nOkay, coming right up!");
                     sleep(1500);
                     clear();
 
-                    //relaunch the game
+                    //re-launch the game
                     launcher();
                 break;
                 }
