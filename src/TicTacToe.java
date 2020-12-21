@@ -12,36 +12,36 @@ import java.util.concurrent.ThreadLocalRandom;
 //Main container of my methods
 public class TicTacToe {
 
-    //Declared static Scanner for permanent usage, avoiding a resource leak if not closed later on
+    //Declared a static Scanner for permanent usage, avoiding a resource leak if not closed later on
     static Scanner input = new Scanner(System.in);
 
     //Declared static boolean for global use in while loops
-    //Boolean to check the while condition- if true, loops
+    //Boolean to check the while condition- if true, reloops
     static boolean status = true;
 
-    //global enter value to remain empty
+    //Global enter value- to remain empty (for click enter to continue)
     static String enterToContinue;
 
-    //adapt clear() for eclipse
     public static void clear() {
         //https://www.edureka.co/community/4668/how-to-clear-the-console-in-java
-        //Command used to clear the console-- for later use to reload the game board
-        //Couldn't use ANSI escape codes
-        //System.out.print("\033[H\033[2J");  
-        //System.out.flush();
+        //Command used to clear the console
+            //Couldn't use ANSI escape codes
+            //System.out.print("\033[H\033[2J");  
+            //System.out.flush();
 
         //Changed clear method to printing lines
-        for(int i=0 ; i < 100; i++) System.out.println();
+        for(int i = 0 ; i < 100; i++) System.out.println();
     }
 
     public static void title() {
-        //Title method to avoid repetition
+        //Created a title method to avoid repetition
         System.out.println("Welcome to TicTacToe JAVA edition!" +
                            "\nBy Rodrigo De Lama - Nov 2020\n");
     }
 
     public static void sleep(int i) {
         //https://stackoverflow.com/questions/2517022/wait-function-in-java
+        //Used to pause the execution for a set time in milliseconds
         try {Thread.sleep(i);} catch(InterruptedException intrx) {/* handle the exception */}
     }
 
@@ -52,7 +52,6 @@ public class TicTacToe {
     static byte p1Wins = 0, p2Wins = 0, aiWins = 0, draws = 0;
 
     public static void scoreboardUpdate(int winIdentifier) {
-
         if (winIdentifier == 0) {
             p1Wins++;
         }
@@ -69,10 +68,8 @@ public class TicTacToe {
 
         if (timesRun > 0) {
             System.out.println("\nSCOREBOARD\n");
-
             System.out.println("Here's how the scoreboard is looking...\n");
 
-            //time in milliseconds
             sleep(1500);
 
             System.out.println("Player 1 (" + p1tag + ") wins: " + p1Wins +
@@ -124,7 +121,7 @@ public class TicTacToe {
         //Present title
         title();
 
-        //if we have already seen the scoreboard don't show it again unless requests by the user, see below
+        //Present the scoreboard to the user before each run
         if (launcherRun == 0) {
             //if timesRun++ was actuated in a previous game, scoreboard should run
             scoreboard();
@@ -132,23 +129,21 @@ public class TicTacToe {
         }
 
         title();
-        //Declaring before the loop to not redeclare the variables every time the while loop runs
+
+        //Declaring before the loop to not redeclare the variables every time the loop runs
         String explanationAns;
         
         if (explanation == 0) {
-            //status = false making sure while loop always engages after rerun
+            //status = false making sure while loop always engages after a rerun
             status = true;
             while (status) {
 
                 //Asking the user if they want an explanation as to how the game works
                 System.out.println("\nWould you like a quick explanation on how to play?");
-                //System.out.println("(You will only be able to see the instructions one time," +
-                //                   " but you may go forth and check them out later)");
                     explanationAns = input.nextLine().toLowerCase();
     
                 switch (explanationAns) {
                     case "yes", "y" -> {
-                        
                         //status to false because we want to break off from the while loop after a valid input has been detected
                         status = false;
                         System.out.println("\nThis is how the game board looks:\n");                                        
@@ -183,17 +178,15 @@ public class TicTacToe {
                         System.out.println("\nPress \"Enter\" when you're ready");
                             enterToContinue = input.nextLine();
     
-                        //don't show the explanation in the future
+                        //don't show the explanation in the future unless requested by the user
                         explanation++;
                     break;
                     }
-    
                     case "no", "n" -> {
                         status = false;
                             System.out.println("\nOkay, lets get onto it!\n");
                     break;
                     }
-    
                     case "exit" -> {
                         //exit loop
                         status = false;
@@ -201,7 +194,6 @@ public class TicTacToe {
                             System.exit(0); //exit(0) ends the program with no error code
                     break;
                     }
-    
                     default -> {
                         //status = true to reloop
                         status = true;
@@ -211,22 +203,18 @@ public class TicTacToe {
                 }
             }
         }
-
         clear();
 
-        //Maintain the title
         title();
 
         System.out.println("\nIn which mode would you like to play?");
-
         //Present the available game modes
         System.out.println("(A) Multiplayer: 1 versus 1\n" +
                            "(B) AI: a game against a random dumb computer");
         
-        //Declared outside the loop to avoid redeclaration
         String gameModeAns;
 
-        //Reusing the same global static status variable
+        //Reusing the same global static status variable, resetting before each use
         status = true;
         while (status) {
 
@@ -236,7 +224,6 @@ public class TicTacToe {
                 gameModeAns = input.nextLine().toLowerCase();
             
             switch (gameModeAns) {
-                
                 //Multiplayer
                 case "a" -> {
                     status = false;
@@ -246,7 +233,6 @@ public class TicTacToe {
                     multiplayer();
                 break;
                 }
-
                 //AI mode (CPU Mode in my game)
                 case "b" -> {
                     status = false;
@@ -256,7 +242,6 @@ public class TicTacToe {
                     ai();
                 break;
                 }
-
                 case "back" -> {
                     //gives the user the possibility to go back for an explanation
                     explanation = 0;
@@ -264,17 +249,15 @@ public class TicTacToe {
                     launcher();
                 break;
                 }
-
                 case "exit" -> {
                     status = false;
-                        System.exit(0);
+                        System.exit(0); //exit without any error codes
                 break;
                 }
 
                 default -> {
                     status = true;
                     System.out.println("Sorry, I didn't catch that. Please type A or B");
-
                 break;
                 }
             }
@@ -297,8 +280,7 @@ public class TicTacToe {
     return win;
     }
 
-    //Declared a global static game variables
-
+    //Game Assets
     //Backend game board array
     static char[][] backendGameBoard = {
                                         {' ', ' ', ' '},
@@ -307,18 +289,16 @@ public class TicTacToe {
     };
 
     public static void cleanBackEnd() {
-        // clean the backend matrix
+        //clean the backend matrix
         for (int r = 0; r < backendGameBoard.length; r++) {
-
             for (int c = 0; c < backendGameBoard[0].length; c++) {
-
                 backendGameBoard[r][c] = ' ';
             }
         }
     }
 
     //User facing board (front end game board)
-    // 5 spaces between columns
+    //5 spaces between columns
     static char[][] userGameBoard = {
                                 { '╔', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╦', '═', '═', '═', '═', '═', '╗'},
                                 { '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║', ' ', ' ', ' ', ' ', ' ', '║'},
@@ -330,7 +310,6 @@ public class TicTacToe {
     };
 
     public static void cleanFrontEnd() {
-
         // Position 1
         userGameBoard[1][3]  = ' ';
         // Position 2...
@@ -344,7 +323,6 @@ public class TicTacToe {
         userGameBoard[5][15] = ' ';
     }
 
-    //Game resources
     //Player names
     static String p1tag = "", p2tag = "", pXtag = "";
     static final String ai = "AI";
@@ -353,7 +331,7 @@ public class TicTacToe {
     static char p1chip = ' ', p2chip = ' ', pXchip = ' ';
     static final char aiChip = '0';
 
-    //Player selection identifier for when playing in AI mode
+    //Player selection identifier (in AI mode)
     static int playerAssignment = 0; //value is initialized for error reporting
 
     public static char chipSelector(String tag, boolean ai) {
@@ -365,13 +343,10 @@ public class TicTacToe {
 
             //Chip selection
             System.out.println("\n" + tag + " select your chip:");
-                chip = input.next().charAt(0);
-
-                //convert char to UpperCase
-                chip = Character.toUpperCase(chip);
+                //Select chip and convert char to UpperCase
+                chip = Character.toUpperCase(input.next().charAt(0));
 
             switch (chip) {
-
                 case 'X','0','A','B','C','D','E','F','G','H','I','J','K','L','M',
                 'N','O','P','Q','R','S','T','U','V','W','Y','Z','+','*','-','@','1' -> {
 
@@ -394,7 +369,6 @@ public class TicTacToe {
     }
 
     public static boolean checkFull(int back0, int back1, boolean checkAI) {
-
         //Check if the position is taken already
         boolean taken = false;
 
@@ -410,30 +384,25 @@ public class TicTacToe {
     }
 
     public static void fillIn(int back0, int back1, int front0, int front1, char chip) {
-
-        //Place chips
+        //Place chips in available squares
         backendGameBoard[back0][back1] = chip;
         userGameBoard[front0][front1] = chip;
     }
     
-    //Check what position was chosen
+    //Show the user what position was chosen in the last move
     public static void posSelected(String num) {
-
         System.out.println(num);
     }
 
     public static void chipPlacer(String tag, char chip, int avoidFirstError) {
 
-        //add AI differentiator
         //boolean is always initialized as false
         boolean checkAI = false;
         if (tag == ai) checkAI = true;
 
-        //defined outside to avoid redeclarations inside loop
-        //AI value for generator
+        //AI value for value generator
         int randomValue;
     
-        //real person input
         String userInput = "";
 
         //global input initialized in case no condition was met
@@ -441,18 +410,17 @@ public class TicTacToe {
 
         //implementing chip placement
         int back0, back1, front0, front1;
+
         status = true;
         while (status) {
-
             //Real player case
             if ( checkAI == false ) {
 
-                System.out.println("\n" + tag + " in what square would you like to place your chip?"); //1-9
-
+                System.out.println("\n" + tag + " in what square would you like to place your chip?");
                 //Couldn't figure out how to avoid the error of the scanner reading "enter" value from last input
                 //I made a counter to avoid displaying the first error message
 
-                //Wait for the next input
+                //Wait for the next input -- still briefly shows first error without avoidFirstError fix
                 while ( input.hasNext("\n") ) {
                     input.nextLine();
                 }
@@ -466,7 +434,6 @@ public class TicTacToe {
                         status = false;
                     }
                 }
-
             inputChoice = userInput;
             }
             //AI case
@@ -476,10 +443,8 @@ public class TicTacToe {
                 sleep(2500);
 
                 // https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
-			    // ThreadLocalRandom is EXCLUSIVE at its top value- so add 1 to make it inclusive
-                // ThreadLocalRandom is INCLUSIVE in its lower value
-                randomValue = ThreadLocalRandom.current().nextInt(1, 10);
-                //calculates a random number between 1 and 9
+			    // ThreadLocalRandom is EXCLUSIVE at its top value- so add 1 to make it inclusive, and its INCLUSIVE in its lower value (dont modify)
+                randomValue = ThreadLocalRandom.current().nextInt(1, 10); //calculates a random number between 1 and 9
             
             inputChoice = String.valueOf(randomValue);
             }
@@ -505,7 +470,6 @@ public class TicTacToe {
 
                         //Fill both the backend and the user game board
                         fillIn(back0, back1, front0, front1, chip);
-
                     //Exit loop command
                     status = false;
                     }
@@ -524,7 +488,6 @@ public class TicTacToe {
 
                         //Fill both boards
                         fillIn(back0, back1, front0, front1, chip);
-
                     status = false;
                     }
                 break;
@@ -539,7 +502,6 @@ public class TicTacToe {
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
                         fillIn(back0, back1, front0, front1, chip);
-
                     status = false;
                     }
                 break;
@@ -554,7 +516,6 @@ public class TicTacToe {
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
                         fillIn(back0, back1, front0, front1, chip);
-
                     status = false;
                     }
                 break;
@@ -569,7 +530,6 @@ public class TicTacToe {
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
                         fillIn(back0, back1, front0, front1, chip);
-
                     status = false;
                     }
                 break;
@@ -584,7 +544,6 @@ public class TicTacToe {
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
                         fillIn(back0, back1, front0, front1, chip);
-
                     status = false;
                     }
                 break;
@@ -599,7 +558,6 @@ public class TicTacToe {
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
                         fillIn(back0, back1, front0, front1, chip);
-
                     status = false;
                     }
                 break;
@@ -614,7 +572,6 @@ public class TicTacToe {
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
                         fillIn(back0, back1, front0, front1, chip);
-
                     status = false;
                     }
                 break;
@@ -629,32 +586,28 @@ public class TicTacToe {
                     if ( checkFull(back0, back1, checkAI) == false ) { 
 
                         fillIn(back0, back1, front0, front1, chip);
-
                     status = false;
                     }
                 break;
 
                 case "exit":
                 status = false;
-
                     launcher();
                 break;
 
                 default: 
                 status = true;
-
                     //This is hacky fix
                 
                 	//I know it's not really a good way of avoiding the scanner from reading the first input
-                	//(the enter key value carried over from the last scanner input), but it the only way
-                	//I could figure how to do it cleanly and reliably
+                    //(the enter key value carried over from the last scanner interaction), but it the only
+                    //way I could figure how to do it cleanly and reliably
                     if (avoidFirstError == 0) break;
-                    //To see the effect of this first error and to understand why I added it, just comment out the line
-                	//It is a brief error, but its not optimal whatsoever
-
-                    System.out.println("Please input a valid position in the correct format: (x,y)");
-
+                    //To see the effect of this first error and to understand why I added it, just comment out the line above
+                    //It is a brief error, but its not optimal whatsoever
+                    
                     //Inform the user of an invalid input and loop
+                    System.out.println("Please input a valid position in the correct format: (x,y)");
                     sleep(1500);
                 break;
             }
@@ -662,26 +615,25 @@ public class TicTacToe {
 
         clear();
 
-        //Placing the game mode once again
+        //Place the game mode again
         if ( checkAI == false ) {
             multiplayerTitle();
         }
         else if ( checkAI == true ) {
             aiTitle();
         }
-        else {/* ignore don't print */}
 
         //Printing the modified user box
         for (int r = 0; r < userGameBoard.length; r++) {
 
-            //selects the row to grab its length
+            //selects each row to use its length
             for (int c = 0; c < userGameBoard[0].length; c++) {
                 System.out.print(userGameBoard[r][c]);
             }
             System.out.println();
         }
 
-        //Check chosen place both AI and Player
+        //Show the last move
         posSelected("\n" + tag + " placed their chip on square " + inputChoice);
     }
 
@@ -729,7 +681,6 @@ public class TicTacToe {
             return false;
             }
         }
-
     //If no win situation is encountered
     return true;
     }
@@ -750,10 +701,9 @@ public class TicTacToe {
 
         clear();
 
-        //Informing the user about their game mode selection 
         multiplayerTitle();
 
-        //Only let users select thier name once (while the variable is empty)
+        //Only let users select thier name once (while the name is empty)
         if ( p1tag.isEmpty() || p2tag.isEmpty() ) {
             
             if ( p1tag.isEmpty() ) {
@@ -789,12 +739,11 @@ public class TicTacToe {
                     } while (p2tag.isBlank());
 
                     if (p2tag.equals(p1tag)) System.out.println("Error!" + "\nPlease choose another name");
-                } while (p2tag.equals(p1tag)); //Do while that condition is true
+                } while (p2tag.equals(p1tag));
             }
         }
 
         if ( p1chip == ' ' ||  p2chip == ' ' ) {
-
             //Player chip selection
             System.out.println("\nYou have these chips to choose from:" +
                                "\nX, 0, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, Z, +, *, -, @ or 1");
@@ -820,8 +769,7 @@ public class TicTacToe {
         }
 
         clear();
-
-        //Game mode title 
+ 
         multiplayerTitle();
 
         //First print of the empty user end game board
@@ -833,14 +781,14 @@ public class TicTacToe {
             System.out.println();
         }
 
+        //Actual game is played here
         status = true;
         while (status) {
 
             //User 1 input
             chipPlacer(p1tag, p1chip, avoidFirstError);
-            
-            //add to display error messages after first error is thrown
-            avoidFirstError++;
+                //add to correctly display error messages after first "error" is thrown
+                avoidFirstError++;
 
             //Update status to continue to reloop untils status = false
             status = checkWin(p1tag, p1chip);
@@ -874,7 +822,6 @@ public class TicTacToe {
 
         clear();
 
-        //Game mode selection
         aiTitle();
         
         //Always prompt the user which player they would like to use
@@ -887,36 +834,31 @@ public class TicTacToe {
 
             switch (playerSelection) {
                 case "Player 1", "P1", "p1", "1": 
-        
+                status = false; //exit loop
                     System.out.println("You have chosen Player 1");
-
+                        playerAssignment = 1;
                     //Check if the player has already been named
                     if ( p1tag.length() != 0 ) {
                         pXtag = p1tag;
                         pXchip = p1chip;
                     }
 
-                    playerAssignment = 1;
-                status = false; //exit loop
                 break;
 
                 case "Player 2", "P2", "p2", "2":
-
+                status = false;
                     System.out.println("You have chosen Player 2");
-
+                        playerAssignment = 2;
                     if ( p2tag.length() != 0 ) {
                         pXtag = p2tag;
                         pXchip = p2chip;
                     }
-
-                    playerAssignment = 2;
-                status = false;
+                
                 break;
 
                 default:
-
-                    System.out.println("Please choose a valid player in the format: Player X, PX, pX or X");
                 status = true; //reloop
+                    System.out.println("Please choose a valid player in the format: Player X, PX, pX or X");
                 break;
             }
         }
@@ -974,13 +916,11 @@ public class TicTacToe {
         //Clear selections out to start the game
         clear();
 
-        //Game mode selection 
         aiTitle();
 
         //First print of the empty user end game board
         for (int r = 0; r < userGameBoard.length; r++) {
             for (int c = 0; c < userGameBoard[0].length; c++) {
-                //+ "(" + r + "," + c + ")" + "\t"
                 System.out.print(userGameBoard[r][c]);
             }
             System.out.println();
@@ -1014,7 +954,7 @@ public class TicTacToe {
                 status = checkWin(p2tag, p2chip);
                     if (status == false) break;
 
-            } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); }
+            } else { System.out.println("We couldn't determine which player was selected, so the result of this game was lost :("); sleep(2000); /* added for catastrophic error */ }
 
             //AI input
             chipPlacer(ai, aiChip, avoidFirstError);
@@ -1045,10 +985,9 @@ public class TicTacToe {
             switch (userAns) {
 
                 case "yes", "y" -> {
-                    status = false;
+                status = false;
 
                     System.out.println("\nOkay, comming right up!");
-
                     sleep(1500);
                     clear();
 
@@ -1058,17 +997,16 @@ public class TicTacToe {
                 }
 
                 case "no", "n" -> {
-                    status = false;
+                status = false;
                     //Thank the user and ends the program
                     System.out.println("\nOkay, thanks for playing!");
-
                     sleep(1500);
                     clear();
                 break;
                 }
 
                 default -> {
-                    status = true;
+                status = true;
                     System.out.println("\nSorry, I didn't catch that. Please try again:");
                 break;
                 }
